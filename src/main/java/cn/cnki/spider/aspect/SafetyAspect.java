@@ -38,7 +38,7 @@ public class SafetyAspect {
      * 匹配
      */
     @Pointcut(value = "execution(public * cn.cnki.spider.sys.*.controller.*.*(..)) || " +
-            "execution(public * cn.cnki.spider.sys.*.controller.*.*(..))")
+            "execution(public * cn.cnki.spider.*.controller.*.*(..))")
     public void safetyAspect() {}
 
     /**
