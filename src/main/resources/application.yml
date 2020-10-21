@@ -45,6 +45,10 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@192.168.3.121:27017/spider
+
 #是否需要输入验证码
 captcha:
   enable: true
