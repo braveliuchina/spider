@@ -1,12 +1,12 @@
 package cn.cnki.spider.sys.syssetting.service;
 
+import cn.cnki.spider.common.pojo.Result;
+import cn.cnki.spider.common.repository.CommonRepository;
+import cn.cnki.spider.common.service.CommonServiceImpl;
 import cn.cnki.spider.sys.syssetting.pojo.SysSetting;
 import cn.cnki.spider.sys.syssetting.repository.SysSettingRepository;
 import cn.cnki.spider.sys.syssetting.vo.SysSettingVo;
-import cn.cnki.spider.common.pojo.Result;
-import cn.cnki.spider.common.service.CommonServiceImpl;
 import cn.cnki.spider.util.SysSettingUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,12 +15,18 @@ import javax.persistence.PersistenceContext;
 
 @Service
 @Transactional
-public class SysSettingServiceImpl extends CommonServiceImpl<SysSettingVo, SysSetting, String> implements SysSettingService{
+public class SysSettingServiceImpl extends CommonServiceImpl<SysSettingVo, SysSetting, String> implements SysSettingService {
 
     @PersistenceContext
     private EntityManager em;
-    @Autowired
-    private SysSettingRepository sysSettingRepository;
+
+    private final SysSettingRepository sysSettingRepository;
+
+    public SysSettingServiceImpl(SysSettingRepository sysSettingRepository,
+                                 CommonRepository<SysSetting, String> commonRepository) {
+        super(commonRepository);
+        this.sysSettingRepository = sysSettingRepository;
+    }
 
     @Override
     public Result<SysSettingVo> save(SysSettingVo entityVo) {

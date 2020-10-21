@@ -38,13 +38,19 @@ public class CommonServiceImpl<V, E, T> implements CommonService<V, E, T> {
 
     private Class<E> entityClass;//实体类
 
-    @Autowired
-    private CommonRepository<E, T> commonRepository;//注入实体类仓库
+    private final CommonRepository<E, T> commonRepository;//注入实体类仓库
 
-    public CommonServiceImpl() {
+//    public CommonServiceImpl() {
+//        Type[] types = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments();
+//        this.entityVoClass = (Class<V>) types[0];
+//        this.entityClass = (Class<E>) types[1];
+//    }
+
+    public CommonServiceImpl(CommonRepository<E, T> commonRepository) {
         Type[] types = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments();
         this.entityVoClass = (Class<V>) types[0];
         this.entityClass = (Class<E>) types[1];
+        this.commonRepository = commonRepository;
     }
 
     @Override

@@ -1,12 +1,12 @@
 package cn.cnki.spider.sys.sysshortcutmenu.service;
 
+import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.sys.sysshortcutmenu.pojo.SysShortcutMenu;
 import cn.cnki.spider.sys.sysshortcutmenu.vo.SysShortcutMenuVo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.common.service.CommonServiceImpl;
 import cn.cnki.spider.sys.sysshortcutmenu.repository.SysShortcutMenuRepository;
 import cn.cnki.spider.util.CopyUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -22,8 +22,15 @@ public class SysShortcutMenuServiceImpl extends CommonServiceImpl<SysShortcutMen
 
     @PersistenceContext
     private EntityManager em;
-    @Autowired
-    private SysShortcutMenuRepository sysShortcutMenuRepository;
+
+    private final SysShortcutMenuRepository sysShortcutMenuRepository;
+
+    public SysShortcutMenuServiceImpl(SysShortcutMenuRepository sysShortcutMenuRepository,
+                                      CommonRepository<SysShortcutMenu, String> commonRepository) {
+        super(commonRepository);
+        this.sysShortcutMenuRepository = sysShortcutMenuRepository;
+    }
+
 
     @Override
     public Result<String> delete(String id) {

@@ -1,21 +1,14 @@
 package cn.cnki.spider.scheduler;
 
-import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
-import cn.cnki.spider.common.service.CommonService;
+import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.common.service.CommonServiceImpl;
-import cn.cnki.spider.sys.sysmenu.repository.SysMenuRepository;
-import cn.cnki.spider.sys.sysmenu.vo.SysMenuVo;
-import cn.cnki.spider.sys.syssetting.repository.SysSettingRepository;
-import lombok.RequiredArgsConstructor;
 import org.quartz.SchedulerException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -26,11 +19,17 @@ public class ScheduleJobServiceImpl
     @PersistenceContext
     private EntityManager em;
 
-    @Autowired
-    private ScheduleJobRepository scheduleJobRepository;
+    private final ScheduleJobRepository scheduleJobRepository;
 
-    @Autowired
-    private QuartzService quartzService;
+    private final QuartzService quartzService;
+
+    public ScheduleJobServiceImpl(ScheduleJobRepository scheduleJobRepository,
+                                  QuartzService quartzService,
+                                  CommonRepository<ScheduleJob, Long> commonRepository) {
+        super(commonRepository);
+        this.scheduleJobRepository = scheduleJobRepository;
+        this.quartzService = quartzService;
+    }
 
     @Override
     public List<ScheduleJob> list() {

@@ -1,5 +1,6 @@
 package cn.cnki.spider.sys.sysuser.service;
 
+import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.sys.sysuser.pojo.SysUser;
 import cn.cnki.spider.sys.sysuser.repository.SysUserRepository;
 import cn.cnki.spider.sys.sysuser.vo.SysUserVo;
@@ -16,7 +17,6 @@ import cn.cnki.spider.util.CopyUtil;
 import cn.cnki.spider.util.MD5Util;
 import cn.cnki.spider.util.SqlUtil;
 import cn.cnki.spider.util.SysSettingUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
@@ -37,23 +37,37 @@ public class SysUserServiceImpl extends CommonServiceImpl<SysUserVo, SysUser, St
     @PersistenceContext
     private EntityManager em;
 
-    @Autowired
-    private SysUserRepository sysUserRepository;
+    private final SysUserRepository sysUserRepository;
 
-    @Autowired
-    private SysSettingService sysSettingService;
+    private final SysSettingService sysSettingService;
 
-    @Autowired
-    private SysUserAuthorityService sysUserAuthorityService;
+    private final SysUserAuthorityService sysUserAuthorityService;
 
-    @Autowired
-    private SysUserMenuService sysUserMenuService;
+    private final SysUserMenuService sysUserMenuService;
 
-    @Autowired
-    private SysShortcutMenuService sysShortcutMenuService;
+    private final SysShortcutMenuService sysShortcutMenuService;
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
+
+    private final CommonRepository<SysUser, String> commonRepository;
+
+    public SysUserServiceImpl(SysUserRepository sysUserRepository,
+                              SysSettingService sysSettingService,
+                              SysUserAuthorityService sysUserAuthorityService,
+                              SysUserMenuService sysUserMenuService,
+                              SysShortcutMenuService sysShortcutMenuService,
+                              DataSource dataSource,
+                              CommonRepository<SysUser, String> commonRepository) {
+        super(commonRepository);
+        this.sysUserRepository = sysUserRepository;
+        this.sysSettingService = sysSettingService;
+        this.sysUserAuthorityService = sysUserAuthorityService;
+        this.sysUserMenuService = sysUserMenuService;
+        this.sysShortcutMenuService = sysShortcutMenuService;
+        this.dataSource = dataSource;
+        this.commonRepository = commonRepository;
+    }
+
 
     @Override
     public Result<String> delete(String id) {

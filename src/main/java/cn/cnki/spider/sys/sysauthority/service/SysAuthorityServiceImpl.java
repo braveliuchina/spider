@@ -1,6 +1,7 @@
 package cn.cnki.spider.sys.sysauthority.service;
 
 import cn.cnki.spider.common.pojo.Result;
+import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.common.service.CommonServiceImpl;
 import cn.cnki.spider.config.security.MyFilterInvocationSecurityMetadataSource;
 import cn.cnki.spider.sys.sysauthority.pojo.SysAuthority;
@@ -8,7 +9,6 @@ import cn.cnki.spider.sys.sysauthority.repository.SysAuthorityRepository;
 import cn.cnki.spider.sys.sysauthority.vo.SysAuthorityVo;
 import cn.cnki.spider.sys.sysuserauthority.service.SysUserAuthorityService;
 import cn.cnki.spider.sys.sysuserauthority.vo.SysUserAuthorityVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,17 +22,23 @@ public class SysAuthorityServiceImpl extends CommonServiceImpl<SysAuthorityVo, S
 
     @PersistenceContext
     private EntityManager em;
-    @Autowired
-    private SysAuthorityRepository sysAuthorityRepository;
 
-    @Autowired
-    private SysAuthorityService sysAuthorityService;
+    private final SysAuthorityRepository sysAuthorityRepository;
 
-    @Autowired
-    private SysUserAuthorityService sysUserAuthorityService;
+    private final SysUserAuthorityService sysUserAuthorityService;
 
-    @Autowired
-    private MyFilterInvocationSecurityMetadataSource myFilterInvocationSecurityMetadataSource;
+    private final MyFilterInvocationSecurityMetadataSource myFilterInvocationSecurityMetadataSource;
+
+    public SysAuthorityServiceImpl(SysAuthorityRepository sysAuthorityRepository,
+                                   SysUserAuthorityService sysUserAuthorityService,
+                                   MyFilterInvocationSecurityMetadataSource myFilterInvocationSecurityMetadataSource,
+                                   CommonRepository<SysAuthority, String> commonRepository) {
+        super(commonRepository);
+        this.sysAuthorityRepository = sysAuthorityRepository;
+        this.sysUserAuthorityService = sysUserAuthorityService;
+        this.myFilterInvocationSecurityMetadataSource = myFilterInvocationSecurityMetadataSource;
+    }
+
 
     /**
      * 重写save方法，当新增、修改权限表后需要去更新权限集合
@@ -42,7 +48,7 @@ public class SysAuthorityServiceImpl extends CommonServiceImpl<SysAuthorityVo, S
         Result<SysAuthorityVo> result = super.save(entityVo);
 
         //更新权限集合
-        List<SysAuthorityVo> authorityVoList = sysAuthorityService.list(new SysAuthorityVo()).getData();
+        List<SysAuthorityVo> authorityVoList = list(new SysAuthorityVo()).getData();
         myFilterInvocationSecurityMetadataSource.setRequestMap(authorityVoList);
         return result;
     }
@@ -63,7 +69,7 @@ public class SysAuthorityServiceImpl extends CommonServiceImpl<SysAuthorityVo, S
         Result<String> result = super.delete(id);
 
         //更新权限集合
-        List<SysAuthorityVo> authorityVoList = sysAuthorityService.list(new SysAuthorityVo()).getData();
+        List<SysAuthorityVo> authorityVoList = list(new SysAuthorityVo()).getData();
         myFilterInvocationSecurityMetadataSource.setRequestMap(authorityVoList);
         return result;
     }
