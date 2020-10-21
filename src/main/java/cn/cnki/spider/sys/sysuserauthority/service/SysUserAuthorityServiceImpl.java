@@ -1,12 +1,13 @@
 package cn.cnki.spider.sys.sysuserauthority.service;
 
+import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.sys.sysuserauthority.pojo.SysUserAuthority;
 import cn.cnki.spider.sys.sysuserauthority.repository.SysUserAuthorityRepository;
 import cn.cnki.spider.sys.sysuserauthority.vo.SysUserAuthorityVo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.common.service.CommonServiceImpl;
 import cn.cnki.spider.util.CopyUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,14 @@ public class SysUserAuthorityServiceImpl extends CommonServiceImpl<SysUserAuthor
 
     @PersistenceContext
     private EntityManager em;
-    @Autowired
-    private SysUserAuthorityRepository sysUserAuthorityRepository;
+
+    private final SysUserAuthorityRepository sysUserAuthorityRepository;
+
+    public SysUserAuthorityServiceImpl(CommonRepository<SysUserAuthority, String> commonRepository,
+                                       SysUserAuthorityRepository sysUserAuthorityRepository) {
+        super(commonRepository);
+        this.sysUserAuthorityRepository = sysUserAuthorityRepository;
+    }
 
     @Override
     public Result<List<SysUserAuthorityVo>> findByUserId(String userId) {

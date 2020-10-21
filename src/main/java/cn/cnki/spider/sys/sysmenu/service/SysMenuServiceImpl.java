@@ -1,5 +1,6 @@
 package cn.cnki.spider.sys.sysmenu.service;
 
+import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.sys.sysmenu.vo.SysMenuVo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.common.service.CommonServiceImpl;
@@ -7,6 +8,7 @@ import cn.cnki.spider.sys.sysmenu.pojo.SysMenu;
 import cn.cnki.spider.sys.sysmenu.repository.SysMenuRepository;
 import cn.cnki.spider.sys.sysusermenu.service.SysUserMenuService;
 import cn.cnki.spider.sys.sysusermenu.vo.SysUserMenuVo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +25,18 @@ public class SysMenuServiceImpl extends CommonServiceImpl<SysMenuVo, SysMenu, St
 
     @PersistenceContext
     private EntityManager em;
-    @Autowired
-    private SysMenuRepository sysMenuRepository;
 
-    @Autowired
-    private SysUserMenuService sysUserMenuService;
+    private final SysMenuRepository sysMenuRepository;
 
+    private final SysUserMenuService sysUserMenuService;
+
+    public SysMenuServiceImpl(SysMenuRepository sysMenuRepository,
+                              SysUserMenuService sysUserMenuService,
+                              CommonRepository<SysMenu, String> commonRepository) {
+        super(commonRepository);
+        this.sysMenuRepository = sysMenuRepository;
+        this.sysUserMenuService = sysUserMenuService;
+    }
     @Override
     public Result<String> delete(String id) {
         //先删除子节点

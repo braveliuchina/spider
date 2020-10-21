@@ -1,5 +1,6 @@
 package cn.cnki.spider.sys.sysusermenu.service;
 
+import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.sys.sysmenu.vo.SysMenuVo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.common.service.CommonServiceImpl;
@@ -7,7 +8,6 @@ import cn.cnki.spider.sys.sysusermenu.pojo.SysUserMenu;
 import cn.cnki.spider.sys.sysusermenu.repository.SysUserMenuRepository;
 import cn.cnki.spider.sys.sysusermenu.vo.SysUserMenuVo;
 import cn.cnki.spider.util.CopyUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -23,8 +23,14 @@ public class SysUserMenuServiceImpl extends CommonServiceImpl<SysUserMenuVo, Sys
 
     @PersistenceContext
     private EntityManager em;
-    @Autowired
-    private SysUserMenuRepository sysUserMenuRepository;
+
+    private final SysUserMenuRepository sysUserMenuRepository;
+
+    public SysUserMenuServiceImpl(SysUserMenuRepository sysUserMenuRepository,
+                                  CommonRepository<SysUserMenu, String> commonRepository) {
+        super(commonRepository);
+        this.sysUserMenuRepository = sysUserMenuRepository;
+    }
 
     @Override
     public Result<List<SysMenuVo>> findByUserId(String userId) {

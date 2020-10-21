@@ -15,144 +15,165 @@
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/JobOperateEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/JobSchedule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzJob.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJob.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/TestJob01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/TestJob02.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysauthority/service/SysAuthorityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysmenu/service/SysMenuService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/syssetting/service/SysSettingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysshortcutmenu/service/SysShortcutMenuService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuserauthority/service/SysUserAuthorityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysusermenu/service/SysUserMenuService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/SpringUtil.java" afterDir="false" />
+    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[add]收款码">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cn_hutool_hutool_all_4_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_25_0_jre.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jcraft_jzlib_1_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_10_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_14_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_dbutils_commons_dbutils_1_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_net_commons_net_3_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dnsjava_dnsjava_2_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_38_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_mail_1_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_lightbody_bmp_browsermob_core_2_1_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_lightbody_bmp_littleproxy_1_1_0_beta_bmp_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_lightbody_bmp_mitm_2_1_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlcleaner_htmlcleaner_2_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlunit_htmlunit_2_33.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlunit_htmlunit_core_js_2_33.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlunit_htmlunit_cssparser_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlunit_neko_htmlunit_2_33.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_javacsv_javacsv_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_exec_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_6_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_58.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_58.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_compat_qual_2_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_mojo_animal_sniffer_annotations_1_14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_client_9_4_19_v20190610.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_http_9_4_19_v20190610.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_io_9_4_19_v20190610.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_util_9_4_19_v20190610.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_xml_9_4_19_v20190610.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_api_9_4_19_v20190610.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_client_9_4_19_v20190610.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_common_9_4_19_v20190610.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_htmlparser_htmllexer_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_htmlparser_htmlparser_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jdom_jdom2_2_0_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_11_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_edge_driver_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_firefox_driver_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_ie_driver_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_java_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_opera_driver_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_remote_driver_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_safari_driver_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_support_3_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_26.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jdbc_2_1_7_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jdbc_1_0_10_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_9_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__us_codecraft_webmagic_extension_0_7_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_serializer_2_7_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_xalan_2_7_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xerces_xercesImpl_2_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/webmagic-core.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CrawlController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/AbstractCrawlService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlServiceFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlServiceInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/ProcessorFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/XmlServiceClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/AACSBDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/CrawlTypeDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/ReddotDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/SpiderArticleDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/SpiderCommonDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/SpiderConfigDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/impl/AACSBDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/impl/CrawlTypeDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/impl/ReddotDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/impl/SpiderArticleDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/impl/SpiderCommonDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/impl/SpiderConfigDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/AACSB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/AjaxArticleContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/AjaxBanContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/AjaxContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/AjaxContentWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/AjaxRequestArticleContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/CommonSpiderItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/Content.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/CrawlType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/DiscoveryContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/NestedContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/Page.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/ReddotItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/ReddotUrl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/RenderHtmlVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/ResponseContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/Site.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderArticle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderBelgium.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderCAS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderCOE.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderCYC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderEmmysPG.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderEmmysPerformer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderFnCAS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderFnCOE.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/SpiderOUZ.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/ArticleDBBatchPageModelPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/ArticleDBSinglePageModelPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/CommonDBBatchPageModelPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/FlashXmlDBPageModelPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/MhtFilePipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/ReddotDBItemBatchPageModelPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/ReddotUrlDBBatchPageModelPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/TyrbJsonFilePageModelPipeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/AbstractNewspaperProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/CommonProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/GithubRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/JJGCRepoProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/MZXSBDetailRepoProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/QXNBDetailRepoProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/RedDotItemRepoProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/RedDotRepoProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/SCJJDetailRepoProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/TyrbRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/TyrbRepoProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/ChromeUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/CommonForkJoinPool.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/Html2MHTCompiler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/SpringContextUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/XmlDescriptorUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/BaseAdminApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/BaseAdminApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/annotation/Between.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/annotation/Between.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/annotation/Decrypt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/annotation/Decrypt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/annotation/Encrypt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/annotation/Encrypt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/annotation/In.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/annotation/In.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/annotation/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/annotation/Like.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/aspect/SafetyAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/aspect/SafetyAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CommonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/pojo/IpVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/IpVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/pojo/MonitorVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/MonitorVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/pojo/PageCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/PageCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/pojo/PageInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/PageInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/pojo/ParameterRequestWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/ParameterRequestWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/pojo/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/repository/CommonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/repository/CommonRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/service/CommonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/common/service/CommonServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/async/AsyncConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/async/AsyncConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/logback/LoggingWSServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/logback/LoggingWSServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/monitor/MonitorWSServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/monitor/MonitorWSServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/CaptchaFilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/CaptchaFilterConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/DynamicallyUrlInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/DynamicallyUrlInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/ErrorPageFilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/ErrorPageFilterConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/LoginFailureHandlerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/LoginFailureHandlerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/LoginSuccessHandlerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/LoginSuccessHandlerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/LogoutHandlerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/LogoutHandlerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/MyAccessDecisionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/MyFilterInvocationSecurityMetadataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyFilterInvocationSecurityMetadataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/MyInvalidSessionStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/PasswordConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/PasswordConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/security/UserConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/UserConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/websocket/MyEndpointConfigure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/websocket/MyEndpointConfigure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/config/websocket/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/websocket/WebSocketConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysauthority/controller/SysAuthorityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysauthority/controller/SysAuthorityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysauthority/pojo/SysAuthority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysauthority/pojo/SysAuthority.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysauthority/repository/SysAuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysauthority/repository/SysAuthorityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysauthority/service/SysAuthorityService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysauthority/service/SysAuthorityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysauthority/service/SysAuthorityServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysauthority/vo/SysAuthorityVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysauthority/vo/SysAuthorityVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysmenu/controller/SysMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysmenu/controller/SysMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysmenu/pojo/SysMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysmenu/pojo/SysMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysmenu/repository/SysMenuRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysmenu/repository/SysMenuRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysmenu/service/SysMenuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysmenu/service/SysMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysmenu/service/SysMenuServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysmenu/vo/SysMenuVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysmenu/vo/SysMenuVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/syssetting/controller/SysSettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/syssetting/controller/SysSettingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/syssetting/pojo/SysSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/syssetting/pojo/SysSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/syssetting/repository/SysSettingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/syssetting/repository/SysSettingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/syssetting/service/SysSettingService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/syssetting/service/SysSettingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/syssetting/service/SysSettingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/syssetting/vo/SysSettingVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/syssetting/vo/SysSettingVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysshortcutmenu/controller/SysShortcutMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysshortcutmenu/controller/SysShortcutMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysshortcutmenu/pojo/SysShortcutMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysshortcutmenu/pojo/SysShortcutMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysshortcutmenu/repository/SysShortcutMenuRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysshortcutmenu/repository/SysShortcutMenuRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysshortcutmenu/service/SysShortcutMenuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysshortcutmenu/service/SysShortcutMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysshortcutmenu/service/SysShortcutMenuServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysshortcutmenu/vo/SysShortcutMenuVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysshortcutmenu/vo/SysShortcutMenuVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuser/controller/SysUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/controller/SysUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuser/pojo/SysUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/pojo/SysUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuser/repository/SysUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/repository/SysUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuser/service/SysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/service/SysUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuser/service/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/service/SysUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuser/vo/SysUserVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/vo/SysUserVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuserauthority/controller/SysUserAuthorityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuserauthority/controller/SysUserAuthorityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuserauthority/pojo/SysUserAuthority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuserauthority/pojo/SysUserAuthority.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuserauthority/repository/SysUserAuthorityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuserauthority/repository/SysUserAuthorityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuserauthority/service/SysUserAuthorityService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuserauthority/service/SysUserAuthorityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuserauthority/service/SysUserAuthorityServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysuserauthority/vo/SysUserAuthorityVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuserauthority/vo/SysUserAuthorityVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysusermenu/controller/SysUserMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysusermenu/controller/SysUserMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysusermenu/pojo/SysUserMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysusermenu/pojo/SysUserMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysusermenu/repository/SysUserMenuRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysusermenu/repository/SysUserMenuRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysusermenu/service/SysUserMenuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysusermenu/service/SysUserMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysusermenu/service/SysUserMenuServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/sys/sysusermenu/vo/SysUserMenuVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysusermenu/vo/SysUserMenuVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/user/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/user/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/AesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/AesUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/ByteUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/ByteUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/CodeDOM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/CodeDOM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/CopyUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/CopyUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/DateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/DateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/ErrorUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/ErrorUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/IpUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/IpUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/MD5Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/MD5Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/RateLimiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/RateLimiter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/RsaUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/RsaUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/SecurityUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/SecurityUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/SqlUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/SqlUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/SysSettingUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/SysSettingUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/SystemMonitorUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/SystemMonitorUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/UUIDUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/UUIDUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/huanzi/qch/baseadmin/util/VerifyCodeImageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/VerifyCodeImageUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysauthority/service/SysAuthorityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysauthority/service/SysAuthorityServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysmenu/service/SysMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysmenu/service/SysMenuServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/syssetting/service/SysSettingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/syssetting/service/SysSettingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysshortcutmenu/service/SysShortcutMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysshortcutmenu/service/SysShortcutMenuServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/service/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/service/SysUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuserauthority/service/SysUserAuthorityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuserauthority/service/SysUserAuthorityServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysusermenu/service/SysUserMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysusermenu/service/SysUserMenuServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/huanzi/qch/baseadmin/BaseAdminApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/cnki/spider/BaseAdminApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/banner.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,16 +212,32 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/cn/cnki/spider" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.jscs" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.jscs" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.jscs" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.selected.configurable" value="Settings.Markdown" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.cnki.spider.common.controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IDE\workSpace\cnki\spider\src\main\java\cn\cnki\spider" />
+      <recent name="E:\IDE\workSpace\cnki\spider" />
+      <recent name="E:\IDE\workSpace\cnki\spider\src\main\java\cn\cnki\spider\util" />
+      <recent name="E:\IDE\workSpace\cnki\spider\src\main\java\cn\cnki\spider\common\service" />
+      <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\static\wiki\scheduler" />
+    </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BaseAdminApplication (1)">
     <configuration name="BaseAdminApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -240,7 +277,25 @@
       <option name="presentableId" value="Default" />
       <updated>1602552479913</updated>
       <workItem from="1602552506176" duration="36455000" />
+      <workItem from="1602641555854" duration="1624000" />
+      <workItem from="1602720993717" duration="10877000" />
+      <workItem from="1602816601031" duration="18239000" />
     </task>
+    <task id="LOCAL-00001" summary="[add]任务增删改查接口md文档">
+      <created>1602726866851</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602726866851</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[add]收款码">
+      <created>1602727740158</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602727740158</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,112 +311,106 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[add]任务增删改查接口md文档" />
+    <MESSAGE value="[add]收款码" />
+    <option name="LAST_COMMIT_MESSAGE" value="[add]收款码" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser" timestamp="1602639262047">
+    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser" timestamp="1603241574329">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602639262047" />
+    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241574329" />
     <state x="-1047" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602560304387">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-1047" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602560304387" />
-    <state width="1037" height="391" key="GridCell.Tab.0.bottom" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.0.bottom" timestamp="1603241761636">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.0.center" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241761636" />
+    <state width="1037" height="699" key="GridCell.Tab.0.center" timestamp="1603241761636">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.0.left" timestamp="1602641483088">
+    <state width="1037" height="699" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241761636" />
+    <state width="1037" height="699" key="GridCell.Tab.0.left" timestamp="1603241761636">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483088" />
-    <state width="1037" height="391" key="GridCell.Tab.0.right" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241761636" />
+    <state width="1037" height="699" key="GridCell.Tab.0.right" timestamp="1603241761636">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.1.bottom" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241761636" />
+    <state width="1037" height="699" key="GridCell.Tab.1.bottom" timestamp="1603241787779">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.1.center" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241787779" />
+    <state width="1037" height="699" key="GridCell.Tab.1.center" timestamp="1603241787779">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.1.left" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241787779" />
+    <state width="1037" height="699" key="GridCell.Tab.1.left" timestamp="1603241787779">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.1.right" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241787779" />
+    <state width="1037" height="699" key="GridCell.Tab.1.right" timestamp="1603241787779">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.2.bottom" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241787779" />
+    <state width="1037" height="699" key="GridCell.Tab.2.bottom" timestamp="1603241620555">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.2.center" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241620555" />
+    <state width="1037" height="699" key="GridCell.Tab.2.center" timestamp="1603241620554">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.2.left" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241620554" />
+    <state width="1037" height="699" key="GridCell.Tab.2.left" timestamp="1603241620554">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
-    <state width="1037" height="391" key="GridCell.Tab.2.right" timestamp="1602641483089">
+    <state width="1037" height="699" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241620554" />
+    <state width="1037" height="699" key="GridCell.Tab.2.right" timestamp="1603241620554">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="391" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602641483089" />
+    <state width="1037" height="699" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241620554" />
+    <state x="-1039" y="584" key="SettingsEditor" timestamp="1602724911816">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-1039" y="584" key="SettingsEditor/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602724911816" />
+    <state x="-948" y="672" key="Vcs.Push.Dialog.v2" timestamp="1602727748576">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-948" y="672" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602727748576" />
     <state width="548" height="948" key="XDebugger.FullValuePopup" timestamp="1602582561135">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state width="548" height="948" key="XDebugger.FullValuePopup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602582561135" />
-    <state x="-839" y="541" width="598" height="798" key="find.popup" timestamp="1602638084509">
+    <state x="-673" y="1082" width="598" height="798" key="find.popup" timestamp="1603182143437">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-839" y="541" width="598" height="798" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602638084509" />
+    <state x="-673" y="1082" width="598" height="798" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603182143437" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1602558189057">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state width="600" height="428" key="javadoc.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602558189057" />
-    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup" timestamp="1602559907912">
+    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup" timestamp="1603185388202">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602559907912" />
+    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603185388202" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>51</line>
+          <line>50</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
-          <line>111</line>
+          <line>117</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -396,12 +445,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>88</line>
+          <line>87</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>89</line>
+          <line>88</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -426,23 +475,46 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>38</line>
+          <line>37</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>39</line>
+          <line>38</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>70</line>
+          <line>69</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CommonController.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/service/SysUserServiceImpl.java</url>
+          <line>94</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="59" />
+          <line>58</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/service/SysUserServiceImpl.java</url>
+          <line>106</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
