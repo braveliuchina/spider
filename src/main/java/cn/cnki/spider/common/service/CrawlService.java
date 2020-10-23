@@ -302,6 +302,30 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
     }
 
     @Override
+    public String seleniumCrawlHtml(String url) {
+        WebDriver webDriver = null;
+        try {
+            File file = new File("C:/spider-app/spider-app/drivers/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+
+            ChromeOptions options = new ChromeOptions();
+            webDriver = new ChromeDriver(options);
+            webDriver.manage().window().setSize(new Dimension(1300, 800));
+            webDriver.get(url);
+            // 等待已确保页面正常加载
+            Thread.sleep(15 * 1000L);
+            return webDriver.getPageSource();
+        } catch (Exception e) {
+            log.warn("AACSB crawl exception err", e);
+        } finally {
+            if (null != webDriver) {
+                webDriver.quit();
+            }
+        }
+        return "";
+    }
+
+    @Override
     public void reddotUrlCrawl(String url, int size, String domain) {
         try {
             List<String> urls = Lists.newArrayList();

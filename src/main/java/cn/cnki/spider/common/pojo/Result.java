@@ -52,7 +52,7 @@ public class Result<T> implements Serializable {
         this.flag = flag;
     }
 
-    private Result(T data, boolean flag, String msg) {
+    public Result(T data, boolean flag, String msg) {
         this.data = data;
         this.flag = flag;
         this.msg = msg;

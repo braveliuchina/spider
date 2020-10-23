@@ -19,9 +19,26 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[add]ceshi">
+    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[add]整理问题">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_bson_3_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_3_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_core_3_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_mongodb_2_1_7_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_mongodb_2_1_10_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/HtmlDO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/HtmlVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/repository/CrawlHtmlRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/wiki/webworkflow/协议库查询接口.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jdbc_2_1_7_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jdbc_1_0_10_RELEASE.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/aspect/SafetyAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/aspect/SafetyAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CrawlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CrawlController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlServiceInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +54,8 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="dev-new" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -68,28 +81,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/cn/cnki/spider" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/wiki/webworkflow" />
     <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.jscs" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.jscs" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.jscs" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="Settings.Markdown" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="cn.cnki.spider.common.controller" />
+      <recent name="cn.cnki.spider.common.repository" />
+      <recent name="cn.cnki.spider.common.pojo" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\IDE\workSpace\cnki\spider\src\main\java\cn\cnki\spider" />
-      <recent name="E:\IDE\workSpace\cnki\spider" />
-      <recent name="E:\IDE\workSpace\cnki\spider\src\main\java\cn\cnki\spider\util" />
-      <recent name="E:\IDE\workSpace\cnki\spider\src\main\java\cn\cnki\spider\common\service" />
-      <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\static\wiki\scheduler" />
+      <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\static\wiki\webworkflow" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BaseAdminApplication (1)">
@@ -116,8 +126,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.BaseAdminApplication (1)" />
-        <item itemvalue="Spring Boot.BaseAdminApplication (1)" />
-        <item itemvalue="Spring Boot.BaseAdminApplication (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -132,25 +140,8 @@
       <option name="presentableId" value="Default" />
       <updated>1602552479913</updated>
       <workItem from="1602552506176" duration="36455000" />
-      <workItem from="1602641555854" duration="1624000" />
-      <workItem from="1602720993717" duration="10877000" />
-      <workItem from="1602816601031" duration="18239000" />
+      <workItem from="1603436803384" duration="1052000" />
     </task>
-    <task id="LOCAL-00001" summary="[add]任务增删改查接口md文档">
-      <created>1602726866851</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1602726866851</updated>
-    </task>
-    <task id="LOCAL-00002" summary="[add]收款码">
-      <created>1602727740158</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1602727740158</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,96 +164,123 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="[add]任务增删改查接口md文档" />
-    <MESSAGE value="[add]收款码" />
-    <option name="LAST_COMMIT_MESSAGE" value="[add]收款码" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser" timestamp="1603241574329">
+    <state x="-793" y="803" key="#Updates" timestamp="1603267813606">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603241574329" />
+    <state x="-793" y="803" key="#Updates/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603267813606" />
+    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser" timestamp="1603257407233">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603257407233" />
     <state x="-1047" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602560304387">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-1047" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602560304387" />
-    <state width="1037" height="586" key="GridCell.Tab.0.bottom" timestamp="1603247438032">
+    <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog" timestamp="1603253283407">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="586" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603247438032" />
-    <state width="1037" height="586" key="GridCell.Tab.0.center" timestamp="1603247438032">
+    <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603253283407" />
+    <state width="1037" height="561" key="GridCell.Tab.0.bottom" timestamp="1603271445042">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="586" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603247438032" />
-    <state width="1037" height="586" key="GridCell.Tab.0.left" timestamp="1603247438032">
+    <state width="1037" height="561" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271445042" />
+    <state width="1037" height="561" key="GridCell.Tab.0.center" timestamp="1603271445042">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="586" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603247438032" />
-    <state width="1037" height="586" key="GridCell.Tab.0.right" timestamp="1603247438032">
+    <state width="1037" height="561" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271445042" />
+    <state width="1037" height="561" key="GridCell.Tab.0.left" timestamp="1603271445041">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="586" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603247438032" />
-    <state width="1037" height="586" key="GridCell.Tab.1.bottom" timestamp="1603247437602">
+    <state width="1037" height="561" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271445041" />
+    <state width="1037" height="561" key="GridCell.Tab.0.right" timestamp="1603271445042">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="586" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603247437602" />
-    <state width="1037" height="586" key="GridCell.Tab.1.center" timestamp="1603247437602">
+    <state width="1037" height="561" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271445042" />
+    <state width="1037" height="561" key="GridCell.Tab.1.bottom" timestamp="1603271439231">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="586" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603247437602" />
-    <state width="1037" height="586" key="GridCell.Tab.1.left" timestamp="1603247437602">
+    <state width="1037" height="561" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271439231" />
+    <state width="1037" height="561" key="GridCell.Tab.1.center" timestamp="1603271439231">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="586" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603247437602" />
-    <state width="1037" height="586" key="GridCell.Tab.1.right" timestamp="1603247437602">
+    <state width="1037" height="561" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271439231" />
+    <state width="1037" height="561" key="GridCell.Tab.1.left" timestamp="1603271439231">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="586" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603247437602" />
-    <state width="1037" height="779" key="GridCell.Tab.2.bottom" timestamp="1603244706434">
+    <state width="1037" height="561" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271439231" />
+    <state width="1037" height="561" key="GridCell.Tab.1.right" timestamp="1603271439231">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="779" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603244706434" />
-    <state width="1037" height="779" key="GridCell.Tab.2.center" timestamp="1603244706434">
+    <state width="1037" height="561" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271439231" />
+    <state width="1037" height="561" key="GridCell.Tab.2.bottom" timestamp="1603271422093">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="779" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603244706434" />
-    <state width="1037" height="779" key="GridCell.Tab.2.left" timestamp="1603244706433">
+    <state width="1037" height="561" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271422093" />
+    <state width="1037" height="561" key="GridCell.Tab.2.center" timestamp="1603271422093">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="779" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603244706433" />
-    <state width="1037" height="779" key="GridCell.Tab.2.right" timestamp="1603244706434">
+    <state width="1037" height="561" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271422093" />
+    <state width="1037" height="561" key="GridCell.Tab.2.left" timestamp="1603271422093">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="779" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603244706434" />
-    <state x="-1039" y="584" key="SettingsEditor" timestamp="1602724911816">
+    <state width="1037" height="561" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271422093" />
+    <state width="1037" height="561" key="GridCell.Tab.2.right" timestamp="1603271422093">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-1039" y="584" key="SettingsEditor/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602724911816" />
-    <state x="-948" y="672" key="Vcs.Push.Dialog.v2" timestamp="1602727748576">
+    <state width="1037" height="561" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271422093" />
+    <state x="-1060" y="514" key="SettingsEditor" timestamp="1603267765539">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-948" y="672" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602727748576" />
-    <state width="548" height="948" key="XDebugger.FullValuePopup" timestamp="1602582561135">
+    <state x="-1060" y="514" key="SettingsEditor/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603267765539" />
+    <state x="-948" y="672" key="Vcs.Push.Dialog.v2" timestamp="1603253105254">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="548" height="948" key="XDebugger.FullValuePopup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602582561135" />
-    <state x="-673" y="1082" width="598" height="798" key="find.popup" timestamp="1603182143437">
+    <state x="-948" y="672" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603253105254" />
+    <state width="548" height="948" key="XDebugger.FullValuePopup" timestamp="1603259467661">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-673" y="1082" width="598" height="798" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603182143437" />
+    <state width="548" height="948" key="XDebugger.FullValuePopup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603259467661" />
+    <state x="-839" y="541" width="598" height="798" key="find.popup" timestamp="1603264890579">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-839" y="541" width="598" height="798" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603264890579" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1602558189057">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state width="600" height="428" key="javadoc.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602558189057" />
-    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup" timestamp="1603185388202">
+    <state x="-884" y="450" key="run.anything.popup" timestamp="1603437859040">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603185388202" />
+    <state x="-884" y="450" key="run.anything.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603437859040" />
+    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup" timestamp="1602559907912">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602559907912" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
           <line>50</line>
@@ -349,64 +367,40 @@
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CommonController.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/service/SysUserServiceImpl.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/sys/sysuser/service/SysUserServiceImpl.java</url>
-          <line>106</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="49" />
+          <line>69</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/aspect/SafetyAspect.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="61" />
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CrawlController.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/aspect/SafetyAspect.java</url>
-          <line>129</line>
-          <option name="timeStamp" value="63" />
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>316</line>
+          <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/aspect/SafetyAspect.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="66" />
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/SecurityConfig.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/aspect/SafetyAspect.java</url>
-          <line>126</line>
-          <option name="timeStamp" value="67" />
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
-        <watch expression="this.entityVoClass" language="JAVA" />
-        <watch expression="requestMap                 .entrySet()" language="JAVA" />
-        <watch expression="field.getType().getName()" language="JAVA" />
-        <watch expression="jobExecutionContext.getMergedJobDataMap()" language="JAVA" />
-        <watch expression="this.list()" language="JAVA" />
-        <watch expression="commonRepository.findAll()" language="JAVA" />
-        <watch expression="object.getClass().getMethod(scheduleJob.getMethodName())" language="JAVA" />
-        <watch expression="JSON.parseObject(scheduleJob.getJobDataMap()" language="JAVA" />
-        <watch expression="JSONArray.parseArray(&quot;[1602580971343, \&quot;刘晓勇\&quot;]&quot;)" language="JAVA" />
-        <watch expression="Example.of(CopyUtil.copy(entityVo, entityClass))" language="JAVA" />
-        <watch expression="SysSettingUtil.getSysSetting().getSysApiEncrypt()" language="JAVA" />
-        <watch expression="this.getClass()" language="JAVA" />
+        <watch expression="webDriver.getPageSource()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

@@ -29,23 +29,23 @@ public class MyInvalidSessionStrategy implements InvalidSessionStrategy {
 
     @Override
     public void onInvalidSessionDetected(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException, ServletException {
-        HttpSession session = httpServletRequest.getSession();
-        String sessionId = httpServletRequest.getRequestedSessionId();
-        if(!session.isNew()){
-            //内部重定向
-            httpServletResponse.sendRedirect("/loginPage");
-        }else{
-            //直接输出js脚本跳转
-            httpServletResponse.setContentType("text/html;charset=UTF-8");
-            httpServletResponse.getWriter().print("<script type='text/javascript'>window.location.href = \"" + contextPath + "/loginPage\"</script>");
-        }
-        SessionInformation sessionInformation = sessionRegistry.getSessionInformation(sessionId);
-        if(sessionInformation != null){
-            User user = (User) sessionInformation.getPrincipal();
-            sessionRegistry.removeSessionInformation(sessionId);
-            log.info("剔除过期用户:"+user.getUsername());
-        }
-        log.info("session失效处理 " + sessionRegistry.getAllPrincipals().size()+"");
-        httpServletResponse.flushBuffer();
+//        HttpSession session = httpServletRequest.getSession();
+//        String sessionId = httpServletRequest.getRequestedSessionId();
+//        if(!session.isNew()){
+//            //内部重定向
+//            httpServletResponse.sendRedirect("/loginPage");
+//        }else{
+//            //直接输出js脚本跳转
+//            httpServletResponse.setContentType("text/html;charset=UTF-8");
+//            httpServletResponse.getWriter().print("<script type='text/javascript'>window.location.href = \"" + contextPath + "/loginPage\"</script>");
+//        }
+//        SessionInformation sessionInformation = sessionRegistry.getSessionInformation(sessionId);
+//        if(sessionInformation != null){
+//            User user = (User) sessionInformation.getPrincipal();
+//            sessionRegistry.removeSessionInformation(sessionId);
+//            log.info("剔除过期用户:"+user.getUsername());
+//        }
+//        log.info("session失效处理 " + sessionRegistry.getAllPrincipals().size()+"");
+//        httpServletResponse.flushBuffer();
     }
 }

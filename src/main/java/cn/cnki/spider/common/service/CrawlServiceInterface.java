@@ -26,6 +26,8 @@ public interface CrawlServiceInterface {
 
     void seleniumCrawl(String url);
 
+    String seleniumCrawlHtml(String url);
+
     void reddotUrlCrawl(String url, int size, String domain);
 
     void reddotItemCrawl(List<ReddotUrl> reddotUrls, String domain);
