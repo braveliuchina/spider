@@ -3,14 +3,20 @@ package cn.cnki.spider.scheduler;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.common.service.CommonServiceImpl;
+import cn.cnki.spider.util.SpringUtil;
+import com.alibaba.fastjson.JSONArray;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.List;
 
+@Slf4j
 @Service
 @Transactional
 public class ScheduleJobServiceImpl
@@ -68,6 +74,42 @@ public class ScheduleJobServiceImpl
 
         //执行job
         quartzService.operateJob(JobOperateEnum.START, job);
+    }
+
+    @Override
+    public void startTemp(long id) throws SchedulerException {
+        Result<ScheduleJob> jobResult = this.get(id);
+        ScheduleJob job = (jobResult.getData());
+
+        //获取对应的Bean
+        Object object = SpringUtil.getBean(job.getBeanClass());
+        try {
+
+            Method[] methods = object.getClass().getDeclaredMethods();
+            String methodName = job.getMethodName();
+            for (int i=0;i< methods.length;i++) {
+                String methodNameIter =methods[i].getName();
+                if (!methodName.equals(methodNameIter)) {
+                    continue;
+                }
+                Parameter[] parameters = methods[i].getParameters();
+
+                if (parameters.length == 0) {
+                    methods[i].invoke(object);
+                    return;
+                }
+                Object[] actualParameters = new Object[parameters.length] ;
+                String jobDataJsonString = job.getJobDataMap();
+                JSONArray json = JSONArray.parseArray(jobDataJsonString);
+                for (int j = 0; j < parameters.length; j++) {
+                    actualParameters[j] = json.get(j);
+                }
+                methods[i].invoke(object, actualParameters);
+            }
+
+        } catch (Exception e) {
+            log.warn("cron job error", e);
+        }
     }
 
     @Override

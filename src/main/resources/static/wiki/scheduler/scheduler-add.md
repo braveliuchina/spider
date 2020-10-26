@@ -16,10 +16,18 @@ POST
 |序号	|名称	|类型	|是否必须	|示例值	|描述|
 |-------|-------|-------|-----------|-------|---|
 |1      | jobName|String|是|任务90|任务名称|
-|2      | cronExpression|String|是|0/5 * * * * ?|任务表达式|
-|1      | beanClass|String|是|testJob02| 任务执行类名,目前先按此参数传递去验证,后续文章爬取应该是固定的值|
-|1      | methodName|String|是|execute|任务执行方法名,目前先按此参数传递去验证,后续爬取应该是确定的值|
-|1      | jobDataMap|String|是|[1602580971343, "刘晓勇"]|方法参数列表 list字符串|
+|2      | cronExpression|String|否|0/5 * * * * ?|任务表达式|
+|1      | beanClass|String|否|crawlService| 任务执行类名,目前先按此参数传递去验证,后续文章爬取应该是固定的值|
+|1      | methodName|String|否|commonCrawl|任务执行方法名,目前先按此参数传递去验证,后续爬取应该是确定的值|
+|1      | jobDataMap|String|是| {'url': 'http://www.baidu.com', 'xpathList': ['//div/a/@href', '//div/span/a/@href']}|方法参数列表 list字符串|
+
+** 示例 **
+
+    {
+        "jobName": "braveliu",
+        "jobDataMap": "{'url': 'http://www.baidu.com', 'xpathList': ['//div/a/@href', '//div/span/a/@href']}"
+    }
+
 
 #六、返回结果
 String

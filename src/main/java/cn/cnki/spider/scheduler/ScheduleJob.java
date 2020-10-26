@@ -25,6 +25,12 @@ public class ScheduleJob implements Serializable {
 	private String jobName;
 
 	/**
+	 * 定时任务: sceduler
+	 * 普通任务 temp
+	 */
+	private String jobType;
+
+	/**
 	 * cron表达式
 	 */
 	private String cronExpression;

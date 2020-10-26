@@ -15,6 +15,8 @@ public interface ScheduleJobService extends CommonService<ScheduleJob, ScheduleJ
 
     void start(long id) throws SchedulerException;
 
+    void startTemp(long id) throws SchedulerException;
+
     void pause(long id) throws SchedulerException;
 
     void delete(long id) throws SchedulerException;

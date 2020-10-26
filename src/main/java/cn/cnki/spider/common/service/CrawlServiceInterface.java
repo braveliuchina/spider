@@ -31,4 +31,6 @@ public interface CrawlServiceInterface {
     void reddotUrlCrawl(String url, int size, String domain);
 
     void reddotItemCrawl(List<ReddotUrl> reddotUrls, String domain);
+
+    void commonCrawl(String url, List<String> xpathList);
 }

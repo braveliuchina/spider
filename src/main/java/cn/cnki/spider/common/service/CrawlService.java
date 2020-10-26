@@ -366,6 +366,11 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
 
     }
 
+    @Override
+    public void commonCrawl(String url, List<String> xpathList) {
+        log.info("url is {}, xpath list is {}", url, xpathList);
+    }
+
     private String buildActualIntMonthOrDay(String dateStr) {
         if (dateStr.startsWith("0")) {
             return dateStr.substring(dateStr.indexOf("0") + 1);

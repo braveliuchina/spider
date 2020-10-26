@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 爬虫Controller
  */
@@ -55,6 +57,25 @@ public class CrawlController {
             crawlHtmlRepository.save(htmlDO);
         }
 
+        return Result.of("html string saved successfully");
+    }
+
+    @PostMapping("common")
+    public Result<String> commonCrawl(@RequestBody HtmlVo enterVO) {
+
+        String url = enterVO.getUrl();
+
+        if (StringUtils.isEmpty(url)) {
+            return new Result("", false, "请传递url");
+        }
+
+        List<String> xpathList = enterVO.getXpathList();
+
+        if (null == xpathList || xpathList.isEmpty()) {
+            return new Result("", false, "请传递爬取规则列表");
+        }
+
+        
         return Result.of("html string saved successfully");
     }
 

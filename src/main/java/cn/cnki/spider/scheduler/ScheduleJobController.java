@@ -1,6 +1,8 @@
 package cn.cnki.spider.scheduler;
 
 import cn.cnki.spider.common.pojo.Result;
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +29,13 @@ public class ScheduleJobController {
         ScheduleJob jobNew = job;
 //        job.setJobName("任务02");
 //        job.setCronExpression("0/2 * * * * ?");
-//        job.setBeanClass("testJob02");
-//        job.setMethodName("execute");
+        job.setBeanClass("crawlService");
+        job.setMethodName("commonCrawl");
+        job.setJobType("temp");
+        String cron = job.getCronExpression();
+        if (StringUtils.isBlank(cron)) {
+            job.setCronExpression("0/2 * * * * ? 2030");
+        }
         jobNew.setCtime(System.currentTimeMillis());
         jobNew.setUtime(System.currentTimeMillis());
         jobService.add(jobNew);
@@ -39,6 +46,12 @@ public class ScheduleJobController {
     public Result<String> start(@PathVariable("id") Long id) throws SchedulerException {
         jobService.start(id);
         return Result.of("启动定时任务成功");
+    }
+
+    @GetMapping("/startTemp/{id}")
+    public Result<String> startTemp(@PathVariable("id") Long id) throws SchedulerException {
+        jobService.startTemp(id);
+        return Result.of("启动任务成功");
     }
 
     @GetMapping("/state/{id}")
