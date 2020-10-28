@@ -3,11 +3,9 @@ package cn.cnki.spider.common.service;
 import cn.cnki.spider.dao.AACSBDao;
 import cn.cnki.spider.dao.SpiderArticleDao;
 import cn.cnki.spider.entity.*;
-import cn.cnki.spider.pipeline.ArticleDBBatchPageModelPipeline;
-import cn.cnki.spider.pipeline.MhtFilePipeline;
-import cn.cnki.spider.pipeline.ReddotDBItemBatchPageModelPipeline;
-import cn.cnki.spider.pipeline.ReddotUrlDBBatchPageModelPipeline;
+import cn.cnki.spider.pipeline.*;
 import cn.cnki.spider.spider.AbstractNewspaperProcessor;
+import cn.cnki.spider.spider.CommonRepoProcessor;
 import cn.cnki.spider.spider.RedDotItemRepoProcessor;
 import cn.cnki.spider.spider.RedDotRepoProcessor;
 import cn.cnki.spider.util.ChromeUtil;
@@ -62,6 +60,10 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
 
     private final RedDotItemRepoProcessor redDotItemRepoProcessor;
 
+    private final CommonRepoProcessor commonRepoProcessor;
+
+    private final CommonPageModelPipeline commonPageModelPipeline;
+
     private final ChromeUtil chromeUtil;
 
     private final AACSBDao aacsbDao;
@@ -80,6 +82,8 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                         ReddotUrlDBBatchPageModelPipeline reddotUrlDBBatchPageModelPipeline,
                         RedDotItemRepoProcessor redDotItemRepoProcessor,
                         ReddotDBItemBatchPageModelPipeline reddotDBItemBatchPageModelPipeline,
+                        CommonRepoProcessor commonRepoProcessor,
+                        CommonPageModelPipeline commonPageModelPipeline,
                         AACSBDao aacsbDao) {
         super(spiderArticleDao, xmlDescriptor);
         this.chromeUtil = chromeUtil;
@@ -88,6 +92,8 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         this.reddotUrlDBBatchPageModelPipeline = reddotUrlDBBatchPageModelPipeline;
         this.redDotItemRepoProcessor = redDotItemRepoProcessor;
         this.reddotDBItemBatchPageModelPipeline = reddotDBItemBatchPageModelPipeline;
+        this.commonRepoProcessor = commonRepoProcessor;
+        this.commonPageModelPipeline = commonPageModelPipeline;
         this.aacsbDao = aacsbDao;
     }
 
@@ -369,6 +375,29 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
     @Override
     public void commonCrawl(String url, List<String> xpathList) {
         log.info("url is {}, xpath list is {}", url, xpathList);
+        if (StringUtils.isBlank(url) || null == xpathList || xpathList.isEmpty()) {
+            log.warn("param is null");
+            return;
+        }
+        commonRepoProcessor.setXpathList(xpathList);
+        Spider spider = Spider.create(commonRepoProcessor);
+        spider.addUrl(url).addPipeline(commonPageModelPipeline)
+                .thread(1).run();
+    }
+
+    @Override
+    public void commonCrawlV2(long jobId, String type, String url, List<String> xpathList) {
+        log.info("url is {}, xpath list is {}", url, xpathList);
+        if (StringUtils.isBlank(url) || null == xpathList || xpathList.isEmpty()) {
+            log.warn("param is null");
+            return;
+        }
+        commonRepoProcessor.setXpathList(xpathList);
+        commonRepoProcessor.setJobId(jobId);
+        commonRepoProcessor.setType(type);
+        Spider spider = Spider.create(commonRepoProcessor);
+        spider.addUrl(url).addPipeline(commonPageModelPipeline)
+                .thread(1).run();
     }
 
     private String buildActualIntMonthOrDay(String dateStr) {

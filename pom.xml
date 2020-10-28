@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cn.huanzi.qch</groupId>
-    <artifactId>base-admin</artifactId>
-    <version>0.0.1</version>
-    <name>base-admin</name>
-    <description>Base Admin一套简单通用的后台管理系统</description>
-
+    <groupId>cn.cnki.spider</groupId>
+    <artifactId>spider</artifactId>
+    <version>1.0</version>
+    <name>spider</name>
+    <description>一套简单通用的后台springboot系统爬虫系统</description>
+    <properties>
+        <start-class>cn.cnki.spider.SpiderApplication</start-class>
+    </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -53,7 +55,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>2.2.2</version>
+        </dependency>
         <!--热部署工具dev-tools-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -258,10 +264,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <finalName>${project.artifactId}</finalName>
-                    <outputDirectory>../package</outputDirectory>
-                </configuration>
+<!--                <configuration>-->
+<!--                    <finalName>${project.artifactId}</finalName>-->
+<!--                    <outputDirectory>../package</outputDirectory>-->
+<!--                    <mainClass>${start-class}</mainClass>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>repackage</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
             </plugin>
             <!-- 跳过启动测试 -->
             <plugin>
@@ -272,6 +286,28 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.exe</include>
+                    <include>**/*.html</include>
+                    <include>**/*.js</include>
+                    <include>**/*.css</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

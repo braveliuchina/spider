@@ -48,10 +48,10 @@ public class CrawlController {
         HtmlDO newHtmlDO = crawlHtmlRepository.findByUrl(url);
         if (null != newHtmlDO) {
             Query query = new Query();
-            query.addCriteria(Criteria.where("url").is(url));
+            query.addCriteria(Criteria.where(HtmlDO.Fields.url).is(url));
             Update update = new Update();
-            update.set("html", htmlContent);
-            update.set("utime", now);
+            update.set(HtmlDO.Fields.html, htmlContent);
+            update.set(HtmlDO.Fields.utime, now);
             mongoTemplate.upsert(query, update, HtmlDO.class);
         } else {
             crawlHtmlRepository.save(htmlDO);
@@ -75,7 +75,6 @@ public class CrawlController {
             return new Result("", false, "请传递爬取规则列表");
         }
 
-        
         return Result.of("html string saved successfully");
     }
 

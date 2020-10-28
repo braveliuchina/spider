@@ -3,12 +3,11 @@ package cn.cnki.spider.common.service;
 import cn.cnki.spider.dao.AACSBDao;
 import cn.cnki.spider.dao.SpiderArticleDao;
 import cn.cnki.spider.pipeline.ArticleDBBatchPageModelPipeline;
+import cn.cnki.spider.pipeline.CommonPageModelPipeline;
 import cn.cnki.spider.pipeline.ReddotDBItemBatchPageModelPipeline;
 import cn.cnki.spider.pipeline.ReddotUrlDBBatchPageModelPipeline;
+import cn.cnki.spider.spider.*;
 import cn.cnki.spider.spider.AbstractNewspaperProcessor;
-import cn.cnki.spider.spider.AbstractNewspaperProcessor;
-import cn.cnki.spider.spider.RedDotItemRepoProcessor;
-import cn.cnki.spider.spider.RedDotRepoProcessor;
 import cn.cnki.spider.spider.RedDotRepoProcessor;
 import cn.cnki.spider.util.ChromeUtil;
 import cn.cnki.spider.util.XmlDescriptorUtil;
@@ -39,12 +38,18 @@ public class CrawlServiceFactory {
 
     private final ReddotDBItemBatchPageModelPipeline reddotDBItemBatchPageModelPipeline;
 
+    private final CommonRepoProcessor commonRepoProcessor;
+
+    private final CommonPageModelPipeline commonPageModelPipeline;
+
     public cn.cnki.spider.common.service.CrawlService buildCrawlService(AbstractNewspaperProcessor processor) {
         cn.cnki.spider.common.service.CrawlService service = new cn.cnki.spider.common.service.CrawlService(chromeUtil, dbPageModelPipeline,
                 spiderArticleDao, xmlDescriptor, redDotRepoProcessor,
                 reddotUrlDBBatchPageModelPipeline,
                 redDotItemRepoProcessor,
                 reddotDBItemBatchPageModelPipeline,
+                commonRepoProcessor,
+                commonPageModelPipeline,
                 aacsbDao);
         service.setProcessor(processor);
         return service;

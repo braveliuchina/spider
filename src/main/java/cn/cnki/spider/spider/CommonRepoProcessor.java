@@ -1,16 +1,22 @@
 package cn.cnki.spider.spider;
 
+import cn.cnki.spider.common.pojo.CommonHtmlDO;
 import cn.cnki.spider.entity.Content;
-import cn.cnki.spider.entity.ReddotItem;
+import cn.cnki.spider.util.BeanAddPropertiesUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.google.common.collect.Maps;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.util.Lists;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Data
 @Component
@@ -19,6 +25,12 @@ public class CommonRepoProcessor implements PageProcessor {
     private String domain;
 
     private Site site;
+
+    private List<String> xpathList;
+
+    private long jobId;
+
+    private String type;
 
     private final TypeReference typeReference = new TypeReference<HashMap<String, Content>>() {
     };
@@ -34,48 +46,41 @@ public class CommonRepoProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-        ReddotItem item = new ReddotItem();
-        try {
-            String itemType = page.getHtml().xpath("//div[@class='row']/div/span[@class='subtitle']/text()").toString();
+        CommonHtmlDO item = new CommonHtmlDO();
 
-            String itemName = page.getHtml().xpath("//div[@class='row']/div/h1[@class='h2']/text()").toString();
-
-            String img = page.getHtml().xpath("//div[@class='row']/div/p[@class='awards']/img/@src").toString();
-
-            String manufacturer = page.getHtml().xpath("//div[@class='credits']/ul//li[1]//div[@class='value']/text()").toString();
-
-            String label = page.getHtml().xpath("//div[@class='credits']/ul//li[2]/div[@class='label']/text()").toString();
-
-            String inHouseDesignOrDesign = page.getHtml().xpath("//div[@class='credits']/ul//li[2]/div[@class='value']/text()").toString();
-
-            String year = img.substring(img.lastIndexOf("/") + 1).replaceAll("(.*)_(\\d\\d\\d\\d)_(.*)", "$2");
-
-            item.setDomain(domain);
-            item.setItemType(itemType);
-            item.setItemName(itemName);
-            item.setManufacturer(manufacturer);
-            item.setAwardYear(year);
-            item.setAwardType(img);
-
-            item.setUrl(page.getUrl().toString());
-
-            if (!StringUtils.isBlank(label)) {
-                if (label.contains("house")) {
-                    item.setInHouseDesign(inHouseDesignOrDesign);
-                } else {
-                    item.setDesign(inHouseDesignOrDesign);
-                }
-            } else {
-                item.setDesign(inHouseDesignOrDesign);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (null == xpathList || xpathList.isEmpty()) {
+            return;
         }
+
+        List<JSONObject> jsonList = Lists.newArrayList();
+        Map<String, List<String>> map = Maps.newHashMap();
+        for (int i = 0; i < xpathList.size(); i++) {
+
+            String xpath = xpathList.get(i);
+            List<String> field = page.getHtml().xpath(xpath).all();
+            map.put("field" + (i+1), field);
+
+        }
+        List<String> fields = map.get("field1");
+        for (int i = 0; i<fields.size(); i++) {
+            JSONObject json = new JSONObject();
+            int j = 1;
+
+            for (String key: map.keySet()) {
+
+                List<String> newList = map.get(key);
+                json.put("field" +  j, newList.get(i));
+                j++;
+            }
+            jsonList.add(json);
+        }
+
         long now = System.currentTimeMillis();
+        item.setJobId(jobId);
+        item.setType(type);
         item.setCtime(now);
         item.setUtime(now);
-
-        page.putField("items", item);
+        item.setContent(jsonList);
+        page.putField("item", item);
     }
 }

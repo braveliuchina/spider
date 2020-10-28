@@ -37,10 +37,10 @@ import java.util.List;
 
 @EnableAsync//开启异步调用
 @SpringBootApplication
-public class BaseAdminApplication {
+public class SpiderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BaseAdminApplication.class, args);
+        SpringApplication.run(SpiderApplication.class, args);
     }
 
     /**

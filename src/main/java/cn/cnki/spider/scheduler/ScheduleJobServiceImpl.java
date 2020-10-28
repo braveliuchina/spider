@@ -101,8 +101,12 @@ public class ScheduleJobServiceImpl
                 Object[] actualParameters = new Object[parameters.length] ;
                 String jobDataJsonString = job.getJobDataMap();
                 JSONArray json = JSONArray.parseArray(jobDataJsonString);
-                for (int j = 0; j < parameters.length; j++) {
-                    actualParameters[j] = json.get(j);
+
+                actualParameters[0] = job.getId();
+                actualParameters[1] = "temp";
+                int start = 2;
+                for (int j = 0; j < parameters.length - 2; j++) {
+                    actualParameters[start + j] = json.get(j);
                 }
                 methods[i].invoke(object, actualParameters);
             }
