@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class ScheduleJobVo extends PageCondition implements Serializable {
@@ -45,6 +46,11 @@ public class ScheduleJobVo extends PageCondition implements Serializable {
      * 参数
      */
     private String jobDataMap;
+
+
+    private String url;
+
+    private List<String> xpathList;
 
     /**
      * 下一次执行时间

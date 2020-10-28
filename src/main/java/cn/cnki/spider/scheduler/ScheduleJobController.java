@@ -1,7 +1,9 @@
 package cn.cnki.spider.scheduler;
 
 import cn.cnki.spider.common.pojo.Result;
+import cn.hutool.json.JSONString;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +27,36 @@ public class ScheduleJobController {
     }
 
     @PostMapping("/add")
-    public Result<String> add(@RequestBody ScheduleJob job) {
-        ScheduleJob jobNew = job;
+    public Result<String> add(@RequestBody ScheduleJobVo jobVO) {
+        String name = jobVO.getJobName();
+        String url = jobVO.getUrl();
+        List<String> xpathList = jobVO.getXpathList();
+        if (StringUtils.isBlank(url) || null == xpathList || xpathList.isEmpty()) {
+            return new Result(null, false, "param invalid");
+        }
+        ScheduleJob job = new ScheduleJob();
 //        job.setJobName("任务02");
 //        job.setCronExpression("0/2 * * * * ?");
+        job.setJobName(name);
         job.setBeanClass("crawlService");
-        job.setMethodName("commonCrawl");
+        job.setMethodName("commonCrawlV2");
         job.setJobType("temp");
         String cron = job.getCronExpression();
         if (StringUtils.isBlank(cron)) {
             job.setCronExpression("0/2 * * * * ? 2030");
         }
-        jobNew.setCtime(System.currentTimeMillis());
-        jobNew.setUtime(System.currentTimeMillis());
-        jobService.add(jobNew);
-        return Result.of("新增定时任务成功");
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(url);
+        JSONArray jsonArray2 = new JSONArray();
+        for (int i =0; i< xpathList.size(); i++) {
+            jsonArray2.add(xpathList.get(i));
+        }
+        jsonArray.add(jsonArray2);
+        job.setJobDataMap(JSON.toJSONString(jsonArray));
+        job.setCtime(System.currentTimeMillis());
+        job.setUtime(System.currentTimeMillis());
+        jobService.add(job);
+        return Result.of("job add successfully");
     }
 
     @GetMapping("/start/{id}")
