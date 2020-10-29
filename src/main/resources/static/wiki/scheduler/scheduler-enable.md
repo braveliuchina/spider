@@ -5,9 +5,9 @@
 1、任务启用接口
 
 #三、接口地址
-1、开发环境：http://dev.com:8080/spidert/job/start/{id}    
-2、测试环境：http://test.com:8080/spidert/job/start/{id}    
-3、生产环境：http://pro.com:8080/spidert/job/start/{id}    
+1、开发环境：http://dev.com:8080/spider/job/start/{id}    
+2、测试环境：http://test.com:8080/spider/job/start/{id}    
+3、生产环境：http://pro.com:8080/spider/job/start/{id}    
 
 #四、HTTP请求方式
 GET

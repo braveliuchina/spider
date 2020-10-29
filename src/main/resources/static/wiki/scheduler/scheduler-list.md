@@ -5,9 +5,9 @@
 1、查询任务列表
 
 #三、接口地址
-1、开发环境：http://dev.com:8080/spidert/job/list  
-2、测试环境：http://test.com:8080/spidert/job/list  
-3、生产环境：http://pro.com:8080/spidert/job/list  
+1、开发环境：http://dev.com:8080/spider/job/list  
+2、测试环境：http://test.com:8080/spider/job/list  
+3、生产环境：http://pro.com:8080/spider/job/list  
 
 #四、HTTP请求方式
 GET

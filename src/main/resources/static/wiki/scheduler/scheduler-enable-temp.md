@@ -5,9 +5,9 @@
 1、任务临时执行接口
 
 #三、接口地址
-1、开发环境：http://dev.com:8080/spidert/job/startTemp/{id}    
-2、测试环境：http://test.com:8080/spidert/job/startTemp/{id}    
-3、生产环境：http://pro.com:8080/spidert/job/startTemp/{id}    
+1、开发环境：http://dev.com:8080/spider/job/startTemp/{id}    
+2、测试环境：http://test.com:8080/spider/job/startTemp/{id}    
+3、生产环境：http://pro.com:8080/spider/job/startTemp/{id}    
 
 #四、HTTP请求方式
 GET

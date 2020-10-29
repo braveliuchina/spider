@@ -5,9 +5,9 @@
 1、新增任务  
 
 **三、接口地址**
-1、开发环境：http://192.168.3.11:8888/spidert/job/add  
-2、测试环境：http://192.168.3.11:8888/spidert/job/add  
-3、生产环境：http://pro.com:8080/spidert/job/add  
+1、开发环境：http://192.168.3.11:8888/spider/job/add  
+2、测试环境：http://192.168.3.11:8888/spider/job/add  
+3、生产环境：http://pro.com:8080/spider/job/add  
 
 **四、HTTP请求方式**
 POST

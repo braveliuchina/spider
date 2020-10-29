@@ -5,9 +5,9 @@
 1、禁用任务接口
 
 #三、接口地址
-1、开发环境：http://dev.com:8080/spidert/job/pause/{id}    
-2、测试环境：http://test.com:8080/spidert/job/pause/{id}    
-3、生产环境：http://pro.com:8080/spidert/job/pause/{id}    
+1、开发环境：http://dev.com:8080/spider/job/pause/{id}    
+2、测试环境：http://test.com:8080/spider/job/pause/{id}    
+3、生产环境：http://pro.com:8080/spider/job/pause/{id}    
 
 #四、HTTP请求方式
 GET
