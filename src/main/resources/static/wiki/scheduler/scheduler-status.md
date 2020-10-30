@@ -5,9 +5,9 @@
 1、查询任务状态
 
 #三、接口地址
-1、开发环境：http://dev.com:8080/spider/job/state/{id}    
-2、测试环境：http://test.com:8080/spider/job/state/{id}   
-3、生产环境：http://pro.com:8080/spider/job/state/{id}   
+1、开发环境：http://dev.com:8080/spider/job/status/{id}    
+2、测试环境：http://test.com:8080/spider/job/status/{id}   
+3、生产环境：http://pro.com:8080/spider/job/status/{id}   
 
 #四、HTTP请求方式
 GET
@@ -17,19 +17,18 @@ GET
 
 
 #六、返回结果
-String
-NONE,  无此任务
-NORMAL,  正常状态
-PAUSED,  暂停状态(禁用状态)
-COMPLETE, 完成状态
-ERROR,    调用错误
-BLOCKED;  阻塞状态
+
+int  
+0 未启用或未执行(如定时任务)  
+1 正在执行   
+2 执行完成(临时任务)  
+
 #七、返回示例
 JSON示例  
 
   
     {
-        "data": "NORMAL",
+        "data": 1,
         "flag": true,
         "msg": "操作成功"
     }

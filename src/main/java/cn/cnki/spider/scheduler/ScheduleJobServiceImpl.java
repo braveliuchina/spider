@@ -1,26 +1,35 @@
 package cn.cnki.spider.scheduler;
 
+import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.common.repository.CommonRepository;
 import cn.cnki.spider.common.service.CommonServiceImpl;
+import cn.cnki.spider.sys.sysuser.pojo.SysUser;
+import cn.cnki.spider.sys.sysuser.vo.SysUserVo;
+import cn.cnki.spider.util.CommonForkJoinPool;
 import cn.cnki.spider.util.SpringUtil;
+import cn.cnki.spider.util.SqlUtil;
 import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
 @Transactional
 public class ScheduleJobServiceImpl
-        extends CommonServiceImpl<ScheduleJob, ScheduleJob, Long> implements ScheduleJobService {
+        extends CommonServiceImpl<ScheduleJobVo, ScheduleJob, Long> implements ScheduleJobService {
 
     @PersistenceContext
     private EntityManager em;
@@ -28,6 +37,8 @@ public class ScheduleJobServiceImpl
     private final ScheduleJobRepository scheduleJobRepository;
 
     private final QuartzService quartzService;
+
+    private final CommonForkJoinPool forkJoinPool = new CommonForkJoinPool(16, "crawlPool");
 
     public ScheduleJobServiceImpl(ScheduleJobRepository scheduleJobRepository,
                                   QuartzService quartzService,
@@ -38,10 +49,26 @@ public class ScheduleJobServiceImpl
     }
 
     @Override
-    public List<ScheduleJob> list() {
-        ScheduleJob job = new ScheduleJob();
-        job.setJobStatus("1");
-        Result<List<ScheduleJob>> listResult = this.list(job);
+    public Result<PageInfo<ScheduleJobVo>> page(ScheduleJobVo entityVo) {
+        //根据实体、Vo直接拼接全部SQL
+        StringBuilder sql = SqlUtil.joinSqlByEntityAndVo(ScheduleJob.class,entityVo);
+
+        //设置SQL、映射实体，以及设置值，返回一个Query对象
+        Query query = em.createNativeQuery(sql.toString(), ScheduleJob.class);
+
+        //分页设置，page从0开始
+        PageRequest pageRequest = PageRequest.of(entityVo.getPage() - 1, entityVo.getRows());
+
+        //获取最终分页结果
+        Result<PageInfo<ScheduleJobVo>> result = Result.of(PageInfo.of(PageInfo.getJPAPage(query,pageRequest,em), ScheduleJobVo.class));
+
+        return result;
+    }
+
+    @Override
+    public List<ScheduleJobVo> list() {
+        ScheduleJobVo job = new ScheduleJobVo();
+        Result<List<ScheduleJobVo>> listResult = this.list(job);
         return listResult.getData();
     }
 
@@ -51,7 +78,7 @@ public class ScheduleJobServiceImpl
     }
 
     @Override
-    public void add(ScheduleJob job) {
+    public void add(ScheduleJobVo job) {
 
         //此处省去数据验证
         this.save(job);
@@ -67,8 +94,8 @@ public class ScheduleJobServiceImpl
     @Override
     public void start(long id) throws SchedulerException {
         //此处省去数据验证
-        Result<ScheduleJob> jobResult = this.get(id);
-        ScheduleJob job = (jobResult.getData());
+        Result<ScheduleJobVo> jobResult = this.get(id);
+        ScheduleJobVo job = (jobResult.getData());
         job.setJobStatus("1");
         this.save(job);
 
@@ -77,10 +104,15 @@ public class ScheduleJobServiceImpl
     }
 
     @Override
-    public void startTemp(long id) throws SchedulerException {
-        Result<ScheduleJob> jobResult = this.get(id);
-        ScheduleJob job = (jobResult.getData());
-
+    public void startTemp(long id) throws Exception {
+        Optional<ScheduleJob> jobOptional = scheduleJobRepository.findById(id);
+        if (!jobOptional.isPresent()) {
+            throw new Exception("there is no job with this id");
+        }
+        ScheduleJob job = jobOptional.get();
+        job.setUtime(System.currentTimeMillis());
+        job.setJobStatus("1");
+        scheduleJobRepository.saveAndFlush(job);
         //获取对应的Bean
         Object object = SpringUtil.getBean(job.getBeanClass());
         try {
@@ -108,7 +140,9 @@ public class ScheduleJobServiceImpl
                 for (int j = 0; j < parameters.length - 2; j++) {
                     actualParameters[start + j] = json.get(j);
                 }
-                methods[i].invoke(object, actualParameters);
+                int finalI = i;
+                forkJoinPool.submit(() -> methods[finalI].invoke(object, actualParameters));
+
             }
 
         } catch (Exception e) {
@@ -119,8 +153,8 @@ public class ScheduleJobServiceImpl
     @Override
     public void pause(long id) throws SchedulerException {
         //此处省去数据验证
-        Result<ScheduleJob> jobResult = this.get(id);
-        ScheduleJob job = (jobResult.getData());
+        Result<ScheduleJobVo> jobResult = this.get(id);
+        ScheduleJobVo job = (jobResult.getData());
         job.setJobStatus("2");
         this.save(job);
 
@@ -131,8 +165,8 @@ public class ScheduleJobServiceImpl
     @Override
     public void delete(long id) throws SchedulerException {
         //此处省去数据验证
-        Result<ScheduleJob> jobResult = this.get(id);
-        ScheduleJob job = (jobResult.getData());
+        Result<ScheduleJobVo> jobResult = this.get(id);
+        ScheduleJobVo job = (jobResult.getData());
         this.delete(id);
 
         //执行job
@@ -141,9 +175,17 @@ public class ScheduleJobServiceImpl
 
     @Override
     public String status(long id) throws SchedulerException {
-        Result<ScheduleJob> jobResult = this.get(id);
-        ScheduleJob job = (jobResult.getData());
+        Result<ScheduleJobVo> jobResult = this.get(id);
+        ScheduleJobVo job = (jobResult.getData());
         return quartzService.fetchStatus(job);
+    }
+
+    @Override
+    public int fetchStatus(long id) {
+        Result<ScheduleJobVo> jobResult = this.get(id);
+        ScheduleJobVo job = (jobResult.getData());
+        String status = job.getJobStatus();
+        return StringUtils.isBlank(status)? 0 : Integer.parseInt(status);
     }
 
     @Override

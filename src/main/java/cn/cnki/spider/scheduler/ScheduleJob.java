@@ -1,5 +1,6 @@
 package cn.cnki.spider.scheduler;
 
+import cn.cnki.spider.common.pojo.PageCondition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,8 +13,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "crawl_job")
 public class ScheduleJob implements Serializable {
-
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

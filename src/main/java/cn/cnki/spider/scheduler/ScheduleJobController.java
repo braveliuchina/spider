@@ -1,5 +1,6 @@
 package cn.cnki.spider.scheduler;
 
+import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.hutool.json.JSONString;
 import com.alibaba.fastjson.JSON;
@@ -20,9 +21,9 @@ public class ScheduleJobController {
     private ScheduleJobService jobService;
 
     @GetMapping(value = "/list")
-    public Result<List<ScheduleJob>> list() {
+    public Result<PageInfo<ScheduleJobVo>> list(@RequestBody ScheduleJobVo vo) {
 
-        return jobService.listAll();
+        return jobService.page(vo);
 
     }
 
@@ -34,7 +35,7 @@ public class ScheduleJobController {
         if (StringUtils.isBlank(url) || null == xpathList || xpathList.isEmpty()) {
             return new Result(null, false, "param invalid");
         }
-        ScheduleJob job = new ScheduleJob();
+        ScheduleJobVo job = new ScheduleJobVo();
 //        job.setJobName("任务02");
 //        job.setCronExpression("0/2 * * * * ?");
         job.setJobName(name);
@@ -66,7 +67,7 @@ public class ScheduleJobController {
     }
 
     @GetMapping("/startTemp/{id}")
-    public Result<String> startTemp(@PathVariable("id") Long id) throws SchedulerException {
+    public Result<String> startTemp(@PathVariable("id") Long id) throws Exception {
         jobService.startTemp(id);
         return Result.of("启动任务成功");
     }
@@ -74,6 +75,12 @@ public class ScheduleJobController {
     @GetMapping("/state/{id}")
     public Result<String> state(@PathVariable("id") Long id) throws SchedulerException {
         return Result.of(jobService.status(id));
+    }
+
+
+    @GetMapping("/status/{id}")
+    public Result<Integer> status(@PathVariable("id") Long id) throws SchedulerException {
+        return Result.of(jobService.fetchStatus(id));
     }
 
     @GetMapping("/startWithParam/{id}")

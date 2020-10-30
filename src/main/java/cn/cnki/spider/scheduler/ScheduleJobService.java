@@ -5,23 +5,25 @@ import org.quartz.SchedulerException;
 
 import java.util.List;
 
-public interface ScheduleJobService extends CommonService<ScheduleJob, ScheduleJob, Long> {
+public interface ScheduleJobService extends CommonService<ScheduleJobVo, ScheduleJob, Long> {
 
-    List<ScheduleJob> list();
+    List<ScheduleJobVo> list();
 
     List<ScheduleJob> listByJobStatus(String status);
 
-    void add(ScheduleJob job);
+    void add(ScheduleJobVo job);
 
     void start(long id) throws SchedulerException;
 
-    void startTemp(long id) throws SchedulerException;
+    void startTemp(long id) throws Exception;
 
     void pause(long id) throws SchedulerException;
 
     void delete(long id) throws SchedulerException;
 
     String status(long id) throws SchedulerException;
+
+    int fetchStatus(long id);
 
     void startAllJob();
 

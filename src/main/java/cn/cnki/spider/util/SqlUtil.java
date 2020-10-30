@@ -101,7 +101,7 @@ public class SqlUtil {
                 String column = SqlUtil.translate(fieldName);
 
                 //值是否为空
-                if (!StringUtils.isEmpty(fieldValue)) {
+                if (!StringUtils.isEmpty(fieldValue) && !skip(fieldName)) {
                     //映射关系：对象属性(驼峰)->数据库字段(下划线)
                     if (!ignoreList1.contains(fieldName) && !ignoreList2.contains(fieldName)) {
                         //开启模糊查询
@@ -182,6 +182,9 @@ public class SqlUtil {
         }
     }
 
+    private static boolean skip(String fieldName) {
+        return "ctime".equals(fieldName) || "utime".equals(fieldName);
+    }
     /**
      *
      * @param entityClass 自动拼接实体类

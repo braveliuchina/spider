@@ -1,22 +1,32 @@
-#一、接口名称
+**一、接口名称**
 任务列表查询接口
 
-#二、接口详情
+**二、接口详情**
 1、查询任务列表
 
-#三、接口地址
+**三、接口地址**
 1、开发环境：http://dev.com:8080/spider/job/list  
 2、测试环境：http://test.com:8080/spider/job/list  
 3、生产环境：http://pro.com:8080/spider/job/list  
 
-#四、HTTP请求方式
+**四、HTTP请求方式**
 GET
 
-#五、接口参数
+**五、接口参数**
 序号	名称	类型	是否必须	示例值	描述
+|-------|-------------------|-----------------|---------|-----------------------|----|
+|1	|page	            |int             | 是	        |1	                    |页码从1开始 |
+|2	|rows	     |int          | 是	        |2                    |记录数
+
+**六、参数示例**
 
 
-#六、返回结果
+    {
+        "page": 2,
+        "rows": 2
+    }
+
+**七、返回结果**
 |序号	|名称	            |类型              |是否必须	|示例值	                |描述 |
 |-------|-------------------|-----------------|---------|-----------------------|----|
 |1	|id	            |long             | 是	        |2	                    |任务主键id |
@@ -30,56 +40,92 @@ GET
 |9  |utime           |Long            | 是         |1602583926868             |任务修改时间毫秒时间戳 |
 |10 |jobDesc         |String          | 否          |                        |任务描述 |
 
-#七、返回示例
+**八、返回示例**
 JSON示例  
 
   
     {
-        "data": [  
-            {  
-                "id": 1,  
-                "jobName": "任务88",
-                "cronExpression": "0/2 * * * * ?",
-                "beanClass": "testJob01",
-                "methodName": "execute",
-                "jobStatus": "1",
-                "jobDataMap": "[1602580971343, \"刘晓勇\"]",
-                "ctime": 1602583926868,
-                "utime": 1602583926868,
-                "jobDesc": null
-            },
-            {
-                "id": 2,
-                "jobName": "任务89",
-                "cronExpression": "0/2 * * * * ?",
-                "beanClass": "testJob02",
-                "methodName": "execute",
-                "jobStatus": "2",
-                "jobDataMap": "[1602580971343, \"刘晓勇\"]",
-                "ctime": 1602637955838,
-                "utime": 1602637955838,
-                "jobDesc": null
-            },
-            {
-                "id": 3,
-                "jobName": "任务90",
-                "cronExpression": "0/5 * * * * ?",
-                "beanClass": "testJob02",
-                "methodName": "execute",
-                "jobStatus": null,
-                "jobDataMap": "[1602580971343, \"刘晓勇\"]",
-                "ctime": 1602640418078,
-                "utime": 1602640418078,
-                "jobDesc": null
-            }
-        ],
+        "data": {
+            "page": 2,
+            "pageSize": 2,
+            "sidx": null,
+            "sord": null,
+            "rows": [
+                {
+                    "page": 1,
+                    "rows": 10,
+                    "sidx": null,
+                    "sord": null,
+                    "id": 14,
+                    "jobName": "braveliu2",
+                    "jobType": "temp",
+                    "cronExpression": "0/2 * * * * ? 2030",
+                    "beanClass": "crawlService",
+                    "methodName": "commonCrawlV2",
+                    "jobStatus": "2",
+                    "jobDataMap": "[\"https://www.aacsb.edu/accreditation/accredited-schools\",[\"//div[@class='modContent']/table/tbody//tr//td/p/b/text()\",\"//div[@class='modContent']/table/tbody//tr//td/p/span/text()\",\"//div[@class='modContent']/table/tbody//tr//td/p/text()\"]]",
+                    "ctime": 1603875507719,
+                    "utime": 1603875507719,
+                    "jobDesc": null,
+                    "url": null,
+                    "xpathList": null,
+                    "pageable": {
+                        "sort": {
+                            "sorted": false,
+                            "unsorted": true,
+                            "empty": true
+                        },
+                        "offset": 0,
+                        "pageNumber": 0,
+                        "pageSize": 10,
+                        "unpaged": false,
+                        "paged": true
+                    }
+                },
+                {
+                    "page": 1,
+                    "rows": 10,
+                    "sidx": null,
+                    "sord": null,
+                    "id": 18,
+                    "jobName": "测试1",
+                    "jobType": "temp",
+                    "cronExpression": "0/2 * * * * ? 2030",
+                    "beanClass": "crawlService",
+                    "methodName": "commonCrawlV2",
+                    "jobStatus": null,
+                    "jobDataMap": "[\"https://www.baidu.com/\",[\"//div[@class='modContent']/table/tbody//tr//td/p/b/text()\",\"//div[@class='modContent']/table/tbody//tr//td/p/span/text()\"]]",
+                    "ctime": 1603951997167,
+                    "utime": 1603951997167,
+                    "jobDesc": null,
+                    "url": null,
+                    "xpathList": null,
+                    "pageable": {
+                        "sort": {
+                            "sorted": false,
+                            "unsorted": true,
+                            "empty": true
+                        },
+                        "offset": 0,
+                        "pageNumber": 0,
+                        "pageSize": 10,
+                        "unpaged": false,
+                        "paged": true
+                    }
+                }
+            ],
+            "records": 4,
+            "total": 2
+        },
         "flag": true,
         "msg": "操作成功"
     }
+    
+records 为总记录条数    
 
-#八、结果代码
+**九、结果代码**
 flag 为true 证明成功
 
-#九、注意事项
+**十、注意事项**
 
-#十、备注说明
+**十、备注说明**

@@ -27,14 +27,14 @@ public class QuartzServiceImpl implements QuartzService {
     public void timingTask() {
 
         //查询数据库是否存在需要定时的任务
-        List<ScheduleJob> scheduleJobs = jobService.listAll().getData();
+        List<ScheduleJobVo> scheduleJobs = jobService.listAll().getData();
         if (scheduleJobs != null) {
             scheduleJobs.forEach(this::addJob);
         }
     }
 
     @Override
-    public void addJob(ScheduleJob job) {
+    public void addJob(ScheduleJobVo job) {
         try {
             //创建触发器
             Trigger trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobName())
@@ -58,7 +58,7 @@ public class QuartzServiceImpl implements QuartzService {
     }
 
     @Override
-    public void operateJob(JobOperateEnum jobOperateEnum, ScheduleJob job) throws SchedulerException {
+    public void operateJob(JobOperateEnum jobOperateEnum, ScheduleJobVo job) throws SchedulerException {
         JobKey jobKey = new JobKey(job.getJobName());
         JobDetail jobDetail = scheduler.getJobDetail(jobKey);
         if (jobDetail == null) {
@@ -89,7 +89,7 @@ public class QuartzServiceImpl implements QuartzService {
     }
 
     @Override
-    public String fetchStatus(ScheduleJob job) throws SchedulerException {
+    public String fetchStatus(ScheduleJobVo job) throws SchedulerException {
         JobKey jobKey = new JobKey(job.getJobName());
         TriggerKey triggerKey = TriggerKey.triggerKey(jobKey.getName(), jobKey.getGroup());
         return String.valueOf(scheduler.getTriggerState(triggerKey));

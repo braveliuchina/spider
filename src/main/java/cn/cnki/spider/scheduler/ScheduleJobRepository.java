@@ -7,5 +7,7 @@ import java.util.List;
 
 @Repository
 public interface ScheduleJobRepository extends CommonRepository<ScheduleJob, Long> {
+
     List<ScheduleJob> findByJobStatus(String jobStatus);
+
 }
