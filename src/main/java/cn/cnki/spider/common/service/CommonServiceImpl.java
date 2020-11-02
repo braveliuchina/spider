@@ -165,6 +165,7 @@ public class CommonServiceImpl<V, E, T> implements CommonService<V, E, T> {
         }
 
         E e = commonRepository.save(entityFull);
+        commonRepository.flush();
         return Result.of(CopyUtil.copy(e, entityVoClass));
     }
 

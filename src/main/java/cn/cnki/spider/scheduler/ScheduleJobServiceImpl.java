@@ -92,6 +92,11 @@ public class ScheduleJobServiceImpl
     }
 
     @Override
+    public Result<ScheduleJobVo> edit(ScheduleJobVo job) {
+        return this.save(job);
+    }
+
+    @Override
     public void start(long id) throws SchedulerException {
         //此处省去数据验证
         Result<ScheduleJobVo> jobResult = this.get(id);

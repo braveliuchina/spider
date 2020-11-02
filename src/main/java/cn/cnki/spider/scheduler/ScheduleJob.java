@@ -58,12 +58,12 @@ public class ScheduleJob implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private long ctime;
+	private Long ctime;
 
 	/**
 	 * 更新时间
 	 */
-	private long utime;
+	private Long utime;
 
 	/**
 	 * 描述

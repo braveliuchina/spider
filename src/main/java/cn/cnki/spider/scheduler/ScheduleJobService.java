@@ -1,5 +1,6 @@
 package cn.cnki.spider.scheduler;
 
+import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.common.service.CommonService;
 import org.quartz.SchedulerException;
 
@@ -12,6 +13,8 @@ public interface ScheduleJobService extends CommonService<ScheduleJobVo, Schedul
     List<ScheduleJob> listByJobStatus(String status);
 
     void add(ScheduleJobVo job);
+
+    Result<ScheduleJobVo> edit(ScheduleJobVo job);
 
     void start(long id) throws SchedulerException;
 

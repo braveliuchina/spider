@@ -1,13 +1,17 @@
 package cn.cnki.spider.scheduler;
 
+import cn.cnki.spider.common.pojo.CommonHtmlDO;
 import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
-import cn.hutool.json.JSONString;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,10 +19,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/job")
+@RequiredArgsConstructor
 public class ScheduleJobController {
 
-    @Autowired
-    private ScheduleJobService jobService;
+    private final ScheduleJobService jobService;
+
+    private final MongoTemplate mongoTemplate;
 
     @GetMapping(value = "/list")
     public Result<PageInfo<ScheduleJobVo>> list(@RequestBody ScheduleJobVo vo) {
@@ -27,9 +33,22 @@ public class ScheduleJobController {
 
     }
 
+    @GetMapping(value = "/query/{id}")
+    public Result<List<JSONObject>> list(@PathVariable("id") Long id) {
+
+        Query query = new Query();
+        Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.jobId).is(id);
+        Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is("temp");
+        query.addCriteria(criteria1.andOperator(criteria2));
+        CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
+        return Result.of(commonHtmlDO.getContent());
+
+    }
+
     @PostMapping("/add")
     public Result<String> add(@RequestBody ScheduleJobVo jobVO) {
         String name = jobVO.getJobName();
+        String jobDesc = jobVO.getJobDesc();
         String url = jobVO.getUrl();
         List<String> xpathList = jobVO.getXpathList();
         if (StringUtils.isBlank(url) || null == xpathList || xpathList.isEmpty()) {
@@ -49,15 +68,55 @@ public class ScheduleJobController {
         JSONArray jsonArray = new JSONArray();
         jsonArray.add(url);
         JSONArray jsonArray2 = new JSONArray();
-        for (int i =0; i< xpathList.size(); i++) {
+        for (int i = 0; i < xpathList.size(); i++) {
             jsonArray2.add(xpathList.get(i));
         }
         jsonArray.add(jsonArray2);
         job.setJobDataMap(JSON.toJSONString(jsonArray));
+        job.setJobDesc(jobDesc);
         job.setCtime(System.currentTimeMillis());
         job.setUtime(System.currentTimeMillis());
         jobService.add(job);
         return Result.of("job add successfully");
+    }
+
+    @PostMapping("/edit")
+    public Result<ScheduleJobVo> edit(@RequestBody ScheduleJobVo jobVO) {
+        String name = jobVO.getJobName();
+        String jobDesc = jobVO.getJobDesc();
+        Long id = jobVO.getId();
+
+        if (null == id) {
+            return new Result<>(new ScheduleJobVo(), false, "id should be passed when update");
+        }
+        String url = jobVO.getUrl();
+        List<String> xpathList = jobVO.getXpathList();
+        if (StringUtils.isBlank(url) || null == xpathList || xpathList.isEmpty()) {
+            return new Result(null, false, "param invalid");
+        }
+        ScheduleJobVo job = new ScheduleJobVo();
+//        job.setJobName("任务02");
+//        job.setCronExpression("0/2 * * * * ?");
+        job.setJobName(name);
+        job.setBeanClass("crawlService");
+        job.setMethodName("commonCrawlV2");
+        job.setJobType("temp");
+        String cron = job.getCronExpression();
+        if (StringUtils.isBlank(cron)) {
+            job.setCronExpression("0/2 * * * * ? 2030");
+        }
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(url);
+        JSONArray jsonArray2 = new JSONArray();
+        for (int i = 0; i < xpathList.size(); i++) {
+            jsonArray2.add(xpathList.get(i));
+        }
+        jsonArray.add(jsonArray2);
+        job.setJobDataMap(JSON.toJSONString(jsonArray));
+        job.setId(id);
+        job.setJobDesc(jobDesc);
+        job.setUtime(System.currentTimeMillis());
+        return jobService.edit(job);
     }
 
     @GetMapping("/start/{id}")
@@ -77,7 +136,6 @@ public class ScheduleJobController {
         return Result.of(jobService.status(id));
     }
 
-
     @GetMapping("/status/{id}")
     public Result<Integer> status(@PathVariable("id") Long id) throws SchedulerException {
         return Result.of(jobService.fetchStatus(id));
@@ -85,7 +143,7 @@ public class ScheduleJobController {
 
     @GetMapping("/startWithParam/{id}")
     public Result<String> start(@PathVariable("id") Long id,
-                        @RequestBody Map<String, Object> requestMap) throws SchedulerException {
+                                @RequestBody Map<String, Object> requestMap) throws SchedulerException {
 
         jobService.start(id);
         return Result.of("启动定时任务成功");

@@ -22,7 +22,7 @@ POST
 |5      | jobDataMap|String|否| {'url': 'http://www.baidu.com', 'xpathList': ['//div/a/@href', '//div/span/a/@href']}|方法参数列表 list字符串|
 |6      | url|String|是|http://www.baidu.com|爬取url|
 |7      | xpathList|list|是|["//div[@class='modContent']/table/tbody//tr//td/p/b/text()","//div[@class='modContent']/table/tbody//tr//td/p/span/text()"]|爬取规则列表|
-
+|8      | jobDesc|String|否| 刘晓勇任务备注|任务备注字段|
 
 
 ** 示例 **
