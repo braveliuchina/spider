@@ -12,9 +12,9 @@ public interface ScheduleJobService extends CommonService<ScheduleJobVo, Schedul
 
     List<ScheduleJob> listByJobStatus(String status);
 
-    void add(ScheduleJobVo job);
+    void add(ScheduleJobVo job) throws Exception;
 
-    Result<ScheduleJobVo> edit(ScheduleJobVo job);
+    Result<ScheduleJobVo> edit(ScheduleJobVo job) throws Exception;
 
     void start(long id) throws SchedulerException;
 

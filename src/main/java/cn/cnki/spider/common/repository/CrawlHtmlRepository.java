@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CrawlHtmlRepository extends MongoRepository<HtmlDO, ObjectId> {
     public HtmlDO findByUrl(String url);
+
+    public HtmlDO findByJobIdAndType(Long jobId, String type);
 }

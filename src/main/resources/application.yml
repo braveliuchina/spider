@@ -27,6 +27,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
+  resources:
+    static-locations: file:F:/dev/dist,classpath:/META-INF/resources/,classpath:/resources/,classpath:/resources/static/,classpath:/static/,classpath:/public/
+
   #打印SQL
   jpa:
     show-sql: true
@@ -34,6 +37,8 @@ spring:
 #是否需要输入验证码
 captcha:
   enable: true
+
+
 
 ---
 ##### dev 配置 #######

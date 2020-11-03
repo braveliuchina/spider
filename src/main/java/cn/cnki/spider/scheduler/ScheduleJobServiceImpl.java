@@ -78,8 +78,12 @@ public class ScheduleJobServiceImpl
     }
 
     @Override
-    public void add(ScheduleJobVo job) {
+    public void add(ScheduleJobVo job) throws Exception {
 
+        List<ScheduleJob> jobs = scheduleJobRepository.findByJobName(job.getJobName());
+        if (null != jobs && !jobs.isEmpty()) {
+            throw new Exception("duplicated job name, enter new one please");
+        }
         //此处省去数据验证
         this.save(job);
 
@@ -92,7 +96,14 @@ public class ScheduleJobServiceImpl
     }
 
     @Override
-    public Result<ScheduleJobVo> edit(ScheduleJobVo job) {
+    public Result<ScheduleJobVo> edit(ScheduleJobVo job) throws Exception {
+        List<ScheduleJob> jobs = scheduleJobRepository.findByJobName(job.getJobName());
+        if (null != jobs && !jobs.isEmpty()) {
+            Long id = job.getId();
+            if (!jobs.get(0).getId().equals(id)) {
+                throw new Exception("duplicated job name, enter new one please");
+            }
+        }
         return this.save(job);
     }
 

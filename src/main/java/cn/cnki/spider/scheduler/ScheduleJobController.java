@@ -1,6 +1,7 @@
 package cn.cnki.spider.scheduler;
 
 import cn.cnki.spider.common.pojo.CommonHtmlDO;
+import cn.cnki.spider.common.pojo.HtmlDO;
 import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
 import com.alibaba.fastjson.JSON;
@@ -42,15 +43,24 @@ public class ScheduleJobController {
     }
 
     @GetMapping(value = "/query/{id}")
-    public Result<List<JSONObject>> list(@PathVariable("id") Long id) {
+    public Result<Object> list(@PathVariable("id") Long id) {
 
         Query query = new Query();
-        Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.jobId).is(id);
-        Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is("temp");
+        ScheduleJobVo jobVo = jobService.get(id).getData();
+        String dataMap = jobVo.getJobDataMap();
+        JSONArray json = JSONArray.parseArray(dataMap);
+        if (json.size() > 1) {
+            Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.jobId).is(id);
+            Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is("temp");
+            query.addCriteria(criteria1.andOperator(criteria2));
+            CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
+            return Result.of(commonHtmlDO.getContent());
+        }
+        Criteria criteria1 = Criteria.where(HtmlDO.Fields.jobId).is(id);
+        Criteria criteria2 = Criteria.where(HtmlDO.Fields.type).is("temp");
         query.addCriteria(criteria1.andOperator(criteria2));
-        CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
-        return Result.of(commonHtmlDO.getContent());
-
+        HtmlDO htmlDO = mongoTemplate.findOne(query, HtmlDO.class);
+        return Result.of(htmlDO.getHtml());
     }
 
     @PostMapping("/add")
@@ -84,7 +94,48 @@ public class ScheduleJobController {
         job.setJobDesc(jobDesc);
         job.setCtime(System.currentTimeMillis());
         job.setUtime(System.currentTimeMillis());
-        jobService.add(job);
+        try {
+            jobService.add(job);
+        } catch (Exception e) {
+            return new Result("", false, e.getMessage());
+        }
+        return Result.of("job add successfully");
+    }
+
+    @PostMapping("/add/v2")
+    public Result<String> addV2(@RequestBody ScheduleJobVo jobVO) {
+        String name = jobVO.getJobName();
+        String jobDesc = jobVO.getJobDesc();
+        String url = jobVO.getUrl();
+        List<String> xpathList = jobVO.getXpathList();
+        if (StringUtils.isBlank(url)) {
+            return new Result(null, false, "param invalid");
+        }
+
+        // 爬取html源码
+        if (null != xpathList && !xpathList.isEmpty()) {
+            return add(jobVO);
+        }
+        ScheduleJobVo job = new ScheduleJobVo();
+        job.setJobName(name);
+        job.setBeanClass("crawlService");
+        job.setMethodName("seleniumCrawlHtmlAndSave");
+        job.setJobType("temp");
+        String cron = job.getCronExpression();
+        if (StringUtils.isBlank(cron)) {
+            job.setCronExpression("0/2 * * * * ? 2030");
+        }
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(url);
+        job.setJobDataMap(JSON.toJSONString(jsonArray));
+        job.setJobDesc(jobDesc);
+        job.setCtime(System.currentTimeMillis());
+        job.setUtime(System.currentTimeMillis());
+        try {
+            jobService.add(job);
+        } catch (Exception e) {
+            return new Result("", false, e.getMessage());
+        }
         return Result.of("job add successfully");
     }
 
@@ -124,7 +175,55 @@ public class ScheduleJobController {
         job.setId(id);
         job.setJobDesc(jobDesc);
         job.setUtime(System.currentTimeMillis());
-        return jobService.edit(job);
+        try {
+            return jobService.edit(job);
+        } catch (Exception e) {
+            return new Result("", false, e.getMessage());
+        }
+    }
+
+    @PostMapping("/edit/v2")
+    public Result<ScheduleJobVo> editV2(@RequestBody ScheduleJobVo jobVO) {
+        String name = jobVO.getJobName();
+        String jobDesc = jobVO.getJobDesc();
+        Long id = jobVO.getId();
+
+        if (null == id) {
+            return new Result<>(new ScheduleJobVo(), false, "id should be passed when update");
+        }
+
+        String url = jobVO.getUrl();
+        List<String> xpathList = jobVO.getXpathList();
+        if (StringUtils.isBlank(url)) {
+            return new Result(null, false, "param invalid");
+        }
+        if (null != xpathList && !xpathList.isEmpty()) {
+            return edit(jobVO);
+        }
+        ScheduleJobVo job = new ScheduleJobVo();
+        job.setJobName(name);
+        job.setBeanClass("crawlService");
+        job.setMethodName("seleniumCrawlHtmlAndSave");
+        job.setJobType("temp");
+        String cron = job.getCronExpression();
+        if (StringUtils.isBlank(cron)) {
+            job.setCronExpression("0/2 * * * * ? 2030");
+        }
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(url);
+        job.setId(id);
+        job.setJobDataMap(JSON.toJSONString(jsonArray));
+        job.setJobDesc(jobDesc);
+        job.setCtime(System.currentTimeMillis());
+        job.setUtime(System.currentTimeMillis());
+        Result result;
+        try {
+            result = jobService.edit(job);
+        } catch (Exception e) {
+            return new Result("", false, e.getMessage());
+        }
+        return result;
+
     }
 
     @GetMapping("/start/{id}")

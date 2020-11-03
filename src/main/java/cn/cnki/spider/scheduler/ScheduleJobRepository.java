@@ -10,4 +10,6 @@ public interface ScheduleJobRepository extends CommonRepository<ScheduleJob, Lon
 
     List<ScheduleJob> findByJobStatus(String jobStatus);
 
+    List<ScheduleJob> findByJobName(String name);
+
 }

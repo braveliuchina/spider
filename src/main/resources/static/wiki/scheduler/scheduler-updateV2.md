@@ -1,13 +1,13 @@
 **一、接口名称**
-任务修改接口  
+任务修改接口V2  
 
 **二、接口详情**
-1、修改任务  
+1、修改任务V2  
 
 **三、接口地址**
-1、开发环境：http://192.168.3.11:8888/spider/job/edit  
-2、测试环境：http://192.168.3.11:8888/spider/job/edit  
-3、生产环境：http://pro.com:8080/spider/job/edit  
+1、开发环境：http://192.168.3.11:8888/spider/job/edit/v2  
+2、测试环境：http://192.168.3.11:8888/spider/job/edit/v2  
+3、生产环境：http://pro.com:8080/spider/job/edit/v2  
 
 **四、HTTP请求方式**
 POST
@@ -18,12 +18,13 @@ POST
 |1      | id|long|是|10|任务id|
 |2      | jobName|String|否|任务90|任务名称|
 |3      | url|String|否|http://www.baidu.com|爬取url|
-|4      | xpathList|list|否|["//div[@class='modContent']/table/tbody//tr//td/p/b/text()","//div[@class='modContent']/table/tbody//tr//td/p/span/text()"]|爬取规则列表|
+|4      | xpathList|list|否|["//div[@class='modContent']/table/tbody//tr//td/p/b/text()","//div[@class='modContent']/table/tbody//tr//td/p/span/text()"]|爬取规则列表,如不传则会将此任务改为爬取网页源码而非按规则爬取网页内容|
 |5      | jobDesc|String|否| 刘晓勇任务备注|爬取规则列表|
 
 
 ** 示例 **
 
+    // 改为按规则爬取
     {
          "id": 18,
          "jobName": "张慧芳测试2",
@@ -34,6 +35,16 @@ POST
              "//div[@class='modContent']/table/tbody//tr//td/p/span/text()",
              "//div[@class='modContent']/table/tbody//tr//td/p/text()"
          ]
+     }
+     
+     //////    
+     
+     // 改为按url爬取网页源码
+     {
+              "id": 18,
+              "jobName": "张慧芳测试2",
+              "jobDesc": "张慧芳的测试",
+              "url": "https://www.aacsb.edu/accreditation/accredited-schools"
      }
 
 

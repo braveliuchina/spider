@@ -1,13 +1,13 @@
 **一、接口名称**
-任务新增接口  
+任务新增接口V2  
 
 **二、接口详情**
-1、新增任务  
+1、新增任务V2  
 
 **三、接口地址**
-1、开发环境：http://192.168.3.11:8888/spider/job/add  
-2、测试环境：http://192.168.3.11:8888/spider/job/add  
-3、生产环境：http://pro.com:8080/spider/job/add  
+1、开发环境：http://192.168.3.11:8888/spider/job/add/v2  
+2、测试环境：http://192.168.3.11:8888/spider/job/add/v2  
+3、生产环境：http://pro.com:8080/spider/job/add/v2  
 
 **四、HTTP请求方式**
 POST
@@ -21,12 +21,13 @@ POST
 |4      | methodName|String|否|commonCrawl|任务执行方法名,目前先按此参数传递去验证,后续爬取应该是确定的值|
 |5      | jobDataMap|String|否| {'url': 'http://www.baidu.com', 'xpathList': ['//div/a/@href', '//div/span/a/@href']}|方法参数列表 list字符串|
 |6      | url|String|是|http://www.baidu.com|爬取url|
-|7      | xpathList|list|是|["//div[@class='modContent']/table/tbody//tr//td/p/b/text()","//div[@class='modContent']/table/tbody//tr//td/p/span/text()"]|爬取规则列表|
+|7      | xpathList|list|否|["//div[@class='modContent']/table/tbody//tr//td/p/b/text()","//div[@class='modContent']/table/tbody//tr//td/p/span/text()"]|选择按指定规则爬取,则传此爬取规则列表字段,如不传,后台默认为爬取网页源码|
 |8      | jobDesc|String|否| 刘晓勇任务备注|任务备注字段|
 
 
 ** 示例 **
 
+    // 按指定规则爬取内容
     {
         "jobName": "braveliu1",
         "url": "https://www.aacsb.edu/accreditation/accredited-schools",
@@ -34,7 +35,16 @@ POST
             "//div[@class='modContent']/table/tbody//tr//td/p/b/text()",
             "//div[@class='modContent']/table/tbody//tr//td/p/span/text()",
             "//div[@class='modContent']/table/tbody//tr//td/p/text()"
-        ]
+        ],
+        "jobDesc": "按xpath规则爬取网页内容"
+    }   
+    
+    // 爬取网页源码  
+    
+    {
+            "jobName": "braveliu1",
+            "url": "https://www.aacsb.edu/accreditation/accredited-schools",
+            "jobDesc": "爬取网页源码"
     }
 
 

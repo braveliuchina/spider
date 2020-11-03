@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @FieldNameConstants
 @Document(collection = "crawl_html")
-@CompoundIndex(name = "idx_url", def = "{'url': 1}",
+@CompoundIndex(name = "idx_jobId_type", def = "{'jobId': 1, 'type': 1}",
         unique = true, background = true)
 public class HtmlDO {
 
@@ -17,6 +17,10 @@ public class HtmlDO {
     private String id;
 
     private String url;
+
+    private long jobId;
+
+    private String type;
 
     private String html;
 

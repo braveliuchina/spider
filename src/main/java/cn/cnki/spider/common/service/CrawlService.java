@@ -1,9 +1,13 @@
 package cn.cnki.spider.common.service;
 
+import cn.cnki.spider.common.pojo.HtmlDO;
+import cn.cnki.spider.common.repository.CrawlHtmlRepository;
 import cn.cnki.spider.dao.AACSBDao;
 import cn.cnki.spider.dao.SpiderArticleDao;
 import cn.cnki.spider.entity.*;
 import cn.cnki.spider.pipeline.*;
+import cn.cnki.spider.scheduler.ScheduleJob;
+import cn.cnki.spider.scheduler.ScheduleJobRepository;
 import cn.cnki.spider.spider.AbstractNewspaperProcessor;
 import cn.cnki.spider.spider.CommonRepoProcessor;
 import cn.cnki.spider.spider.RedDotItemRepoProcessor;
@@ -29,6 +33,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -73,6 +81,12 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
     private final TypeReference typeReference = new TypeReference<HashMap<String, Content>>() {
     };
 
+    private final CrawlHtmlRepository crawlHtmlRepository;
+
+    private final MongoTemplate mongoTemplate;
+
+    private final ScheduleJobRepository scheduleJobRepository;
+
     private final CommonForkJoinPool forkJoinPool = new CommonForkJoinPool(16, "crawlPool");
 
     public CrawlService(ChromeUtil chromeUtil,
@@ -84,6 +98,9 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                         ReddotDBItemBatchPageModelPipeline reddotDBItemBatchPageModelPipeline,
                         CommonRepoProcessor commonRepoProcessor,
                         CommonPageModelPipeline commonPageModelPipeline,
+                        CrawlHtmlRepository crawlHtmlRepository,
+                        MongoTemplate mongoTemplate,
+                        ScheduleJobRepository scheduleJobRepository,
                         AACSBDao aacsbDao) {
         super(spiderArticleDao, xmlDescriptor);
         this.chromeUtil = chromeUtil;
@@ -94,6 +111,9 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         this.reddotDBItemBatchPageModelPipeline = reddotDBItemBatchPageModelPipeline;
         this.commonRepoProcessor = commonRepoProcessor;
         this.commonPageModelPipeline = commonPageModelPipeline;
+        this.crawlHtmlRepository = crawlHtmlRepository;
+        this.mongoTemplate = mongoTemplate;
+        this.scheduleJobRepository = scheduleJobRepository;
         this.aacsbDao = aacsbDao;
     }
 
@@ -329,6 +349,45 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
             }
         }
         return "";
+    }
+
+    @Override
+    public void seleniumCrawlHtmlAndSave(long jobId, String type, String url) {
+        String htmlContent = seleniumCrawlHtml(url);
+        long now = System.currentTimeMillis();
+        HtmlDO htmlDO = new HtmlDO();
+        htmlDO.setUrl(url);
+        htmlDO.setType("temp");
+        htmlDO.setHtml(htmlContent);
+        htmlDO.setJobId(jobId);
+        htmlDO.setCtime(now);
+        htmlDO.setUtime(now);
+        HtmlDO newHtmlDO = crawlHtmlRepository.findByJobIdAndType(jobId, type);
+        if (null != newHtmlDO) {
+            Query query = new Query();
+            query.addCriteria(Criteria.where(HtmlDO.Fields.jobId).is(jobId)
+                    .andOperator(Criteria.where(HtmlDO.Fields.type).is(type)));
+            Update update = new Update();
+            update.set(HtmlDO.Fields.type, "temp");
+            update.set(HtmlDO.Fields.url, url);
+            update.set(HtmlDO.Fields.html, htmlContent);
+            update.set(HtmlDO.Fields.utime, now);
+            mongoTemplate.upsert(query, update, HtmlDO.class);
+        } else {
+            crawlHtmlRepository.save(htmlDO);
+        }
+        Optional<ScheduleJob> jobOptional = scheduleJobRepository.findById(jobId);
+        if (!jobOptional.isPresent()) {
+            try {
+                throw new Exception("there is no job with this id");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        ScheduleJob job = jobOptional.get();
+        job.setUtime(System.currentTimeMillis());
+        job.setJobStatus("2");
+        scheduleJobRepository.saveAndFlush(job);
     }
 
     @Override
