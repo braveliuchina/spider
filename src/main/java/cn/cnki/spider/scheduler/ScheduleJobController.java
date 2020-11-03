@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,15 @@ public class ScheduleJobController {
     private final MongoTemplate mongoTemplate;
 
     @GetMapping(value = "/list")
-    public Result<PageInfo<ScheduleJobVo>> list(@RequestBody ScheduleJobVo vo) {
-
+    public Result<PageInfo<ScheduleJobVo>> list(HttpServletRequest request) {
+        String page = request.getParameter("page");
+        String rows = request.getParameter("rows");
+        if (StringUtils.isBlank(page) || StringUtils.isBlank(rows)) {
+            return new Result("", false, "paginition parameter should be passed");
+        }
+        ScheduleJobVo vo = new ScheduleJobVo();
+        vo.setPage(Integer.parseInt(page));
+        vo.setRows(Integer.parseInt(rows));
         return jobService.page(vo);
 
     }

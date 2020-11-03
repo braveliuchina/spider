@@ -25,14 +25,16 @@ POST
 ** 示例 **
 
     {
-        "jobName": "braveliu1",
-        "url": "https://www.aacsb.edu/accreditation/accredited-schools",
-        "xpathList": [
-            "//div[@class='modContent']/table/tbody//tr//td/p/b/text()",
-            "//div[@class='modContent']/table/tbody//tr//td/p/span/text()",
-            "//div[@class='modContent']/table/tbody//tr//td/p/text()"
-        ]
-    }
+         "id": 18,
+         "jobName": "张慧芳测试2",
+         "jobDesc": "张慧芳的测试",
+         "url": "https://www.aacsb.edu/accreditation/accredited-schools",
+         "xpathList": [
+             "//div[@class='modContent']/table/tbody//tr//td/p/b/text()",
+             "//div[@class='modContent']/table/tbody//tr//td/p/span/text()",
+             "//div[@class='modContent']/table/tbody//tr//td/p/text()"
+         ]
+     }
 
 
 **六、返回结果**
