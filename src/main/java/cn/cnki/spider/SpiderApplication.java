@@ -125,7 +125,7 @@ class IndexController {
     public void index1(HttpServletResponse response){
         //内部重定向
         try {
-            response.sendRedirect("/index");
+            response.sendRedirect(contextPath + "/index");
         } catch (IOException e) {
             //输出到日志文件中
             log.error(ErrorUtil.errorInfoToString(e));
@@ -157,6 +157,16 @@ class IndexController {
         modelAndView.addObject("publicKey", publicKey);
 
         return modelAndView;
+    }
+
+    @GetMapping("front-end")
+    public void frontEnd(HttpServletResponse response){
+        try {
+            response.sendRedirect(contextPath + "/index.html");
+        } catch (IOException e) {
+            //输出到日志文件中
+            log.error(ErrorUtil.errorInfoToString(e));
+        }
     }
 
     /**

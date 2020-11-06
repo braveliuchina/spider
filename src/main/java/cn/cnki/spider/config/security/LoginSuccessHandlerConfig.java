@@ -61,7 +61,8 @@ public class LoginSuccessHandlerConfig implements AuthenticationSuccessHandler {
         SysUserVo sysUserVo = sysUserService.findByLoginName(user.getUsername()).getData();
 
         //默认登陆成功
-        String msg = "{\"code\":\"300\",\"msg\":\"登录成功\",\"url\":\"/index\"}";
+//        String msg = "{\"code\":\"300\",\"msg\":\"登录成功\",\"url\":\"/index\"}";
+        String msg = "{\"code\":\"300\",\"msg\":\"登录成功\",\"url\":\"/front-end\"}";
         boolean flag = false;
 
         //登陆IP不在白名单

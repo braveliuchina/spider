@@ -75,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginProcessingUrl("/login")
                 //未登录时默认跳转页面
-                .loginPage("/loginPage")
+                .loginPage("/loginPage/")
                 .failureHandler(loginFailureHandlerConfig)
                 .successHandler(loginSuccessHandlerConfig)
                 .permitAll()
@@ -84,8 +84,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //登出处理
                 .logout()
                 .addLogoutHandler(logoutHandlerConfig)
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/loginPage")
+                .logoutUrl("/logout/")
+                .logoutSuccessUrl("/loginPage/")
                 .permitAll()
                 .and();
         http
