@@ -19,26 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[add]整理问题">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_bson_3_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_3_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_core_3_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_mongodb_2_1_7_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_mongodb_2_1_10_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/HtmlDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/HtmlVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/repository/CrawlHtmlRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/wiki/webworkflow/协议库查询接口.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jdbc_2_1_7_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jdbc_1_0_10_RELEASE.xml" beforeDir="false" />
+    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[add]主页权限融合">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CrawlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CrawlController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlServiceInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +54,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="LombokPluginEnabledInProject" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -81,13 +64,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/wiki/webworkflow" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/wiki/scheduler" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -95,27 +79,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.cnki.spider.scheduler" />
       <recent name="cn.cnki.spider.common.repository" />
-      <recent name="cn.cnki.spider.common.pojo" />
+      <recent name="cn.cnki.spider.dao.impl" />
+      <recent name="cn.cnki.spider.dao" />
+      <recent name="cn.cnki.spider.pipeline" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\static\wiki\scheduler" />
       <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\static\wiki\webworkflow" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.BaseAdminApplication (1)">
-    <configuration name="BaseAdminApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="spider" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.cnki.spider.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.cnki.spider.BaseAdminApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Spring Boot.SpiderApplication">
     <configuration name="BaseAdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="spider" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="cn.huanzi.qch.baseadmin.BaseAdminApplication" />
@@ -123,9 +98,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SpiderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="spider" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.cnki.spider.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.cnki.spider.SpiderApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.BaseAdminApplication (1)" />
+        <item itemvalue="Spring Boot.SpiderApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -140,8 +128,133 @@
       <option name="presentableId" value="Default" />
       <updated>1602552479913</updated>
       <workItem from="1602552506176" duration="36455000" />
-      <workItem from="1603436803384" duration="1052000" />
+      <workItem from="1603436803384" duration="3559000" />
+      <workItem from="1603676619908" duration="12944000" />
+      <workItem from="1603760076492" duration="17022000" />
+      <workItem from="1603846194633" duration="10020000" />
+      <workItem from="1603937993809" duration="2282000" />
+      <workItem from="1604023822243" duration="15296000" />
+      <workItem from="1604283960634" duration="8651000" />
+      <workItem from="1604307110359" duration="691000" />
+      <workItem from="1604362488118" duration="181000" />
+      <workItem from="1604364822403" duration="5307000" />
+      <workItem from="1604375975629" duration="15349000" />
+      <workItem from="1604450089313" duration="1509000" />
+      <workItem from="1604631445287" duration="8586000" />
     </task>
+    <task id="LOCAL-00001" summary="[add]协议库查询接口 + mongo 存入html片段">
+      <created>1603437920632</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603437920632</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[add]协议库查询接口 + mongo 存入html片段">
+      <created>1603438162956</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1603438162956</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[add]协议库查询接口wiki">
+      <created>1603438213498</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603438213498</updated>
+    </task>
+    <task id="LOCAL-00004" summary="[add]协议库查询接口wiki">
+      <created>1603438821392</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1603438821392</updated>
+    </task>
+    <task id="LOCAL-00005" summary="[add]协议库查询接口wiki">
+      <created>1603444297629</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603444297629</updated>
+    </task>
+    <task id="LOCAL-00006" summary="[add]临时任务issue">
+      <created>1603692024393</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1603692024394</updated>
+    </task>
+    <task id="LOCAL-00007" summary="[add]论文查询接口">
+      <created>1603709753741</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1603709753741</updated>
+    </task>
+    <task id="LOCAL-00008" summary="[add]任务管理完善 + 临时执行入口">
+      <created>1603866517238</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1603866517238</updated>
+    </task>
+    <task id="LOCAL-00009" summary="[add]临时任务新增接口wiki">
+      <created>1603875300581</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1603875300581</updated>
+    </task>
+    <task id="LOCAL-00010" summary="[add]cors跨域 + wiki web context修改">
+      <created>1603938907992</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1603938907992</updated>
+    </task>
+    <task id="LOCAL-00011" summary="[add]临时执行任务接口">
+      <created>1604041533802</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1604041533802</updated>
+    </task>
+    <task id="LOCAL-00012" summary="[add]列表wiki 更新">
+      <created>1604042205995</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1604042205995</updated>
+    </task>
+    <task id="LOCAL-00013" summary="[add]任务修改 + 任务结果查询">
+      <created>1604288854142</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1604288854142</updated>
+    </task>
+    <task id="LOCAL-00014" summary="[add]任务修改 + 任务列表分页方式修改">
+      <created>1604362736022</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1604362736022</updated>
+    </task>
+    <task id="LOCAL-00015" summary="[add]任务新增V2 修改V2 + 与前端融合">
+      <created>1604386884647</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1604386884647</updated>
+    </task>
+    <task id="LOCAL-00016" summary="[add]主页权限融合">
+      <created>1604643711349</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1604643711349</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,126 +277,141 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="[add]协议库查询接口 + mongo 存入html片段" />
+    <MESSAGE value="[add]协议库查询接口wiki" />
+    <MESSAGE value="[add]临时任务issue" />
+    <MESSAGE value="[add]论文查询接口" />
+    <MESSAGE value="[add]任务管理完善 + 临时执行入口" />
+    <MESSAGE value="[add]临时任务新增接口wiki" />
+    <MESSAGE value="[add]cors跨域 + wiki web context修改" />
+    <MESSAGE value="[add]临时执行任务接口" />
+    <MESSAGE value="[add]列表wiki 更新" />
+    <MESSAGE value="[add]任务修改 + 任务结果查询" />
+    <MESSAGE value="[add]任务修改 + 任务列表分页方式修改" />
+    <MESSAGE value="[add]任务新增V2 修改V2 + 与前端融合" />
+    <MESSAGE value="[add]主页权限融合" />
+    <option name="LAST_COMMIT_MESSAGE" value="[add]主页权限融合" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="-793" y="803" key="#Updates" timestamp="1603267813606">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-793" y="803" key="#Updates/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603267813606" />
-    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser" timestamp="1603257407233">
+    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser" timestamp="1604376904803">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603257407233" />
-    <state x="-1047" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602560304387">
+    <state x="-735" y="645" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604376904803" />
+    <state x="-764" y="806" width="447" height="274" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1604041667380">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-1047" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602560304387" />
+    <state x="-764" y="806" width="447" height="274" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604041667380" />
+    <state x="-1047" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603846967599">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-1047" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603846967599" />
+    <state x="-810" y="686" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603779847256">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-810" y="686" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603779847256" />
     <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog" timestamp="1603253283407">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603253283407" />
-    <state width="1037" height="561" key="GridCell.Tab.0.bottom" timestamp="1603271445042">
+    <state x="-760" y="680" key="FileChooserDialogImpl" timestamp="1604643652229">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271445042" />
-    <state width="1037" height="561" key="GridCell.Tab.0.center" timestamp="1603271445042">
+    <state x="-760" y="680" key="FileChooserDialogImpl/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643652229" />
+    <state width="1037" height="819" key="GridCell.Tab.0.bottom" timestamp="1604643207269">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271445042" />
-    <state width="1037" height="561" key="GridCell.Tab.0.left" timestamp="1603271445041">
+    <state width="1037" height="819" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
+    <state width="1037" height="819" key="GridCell.Tab.0.center" timestamp="1604643207268">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271445041" />
-    <state width="1037" height="561" key="GridCell.Tab.0.right" timestamp="1603271445042">
+    <state width="1037" height="819" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207268" />
+    <state width="1037" height="819" key="GridCell.Tab.0.left" timestamp="1604643207265">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271445042" />
-    <state width="1037" height="561" key="GridCell.Tab.1.bottom" timestamp="1603271439231">
+    <state width="1037" height="819" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207265" />
+    <state width="1037" height="819" key="GridCell.Tab.0.right" timestamp="1604643207268">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271439231" />
-    <state width="1037" height="561" key="GridCell.Tab.1.center" timestamp="1603271439231">
+    <state width="1037" height="819" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207268" />
+    <state width="1037" height="819" key="GridCell.Tab.1.bottom" timestamp="1604643207269">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271439231" />
-    <state width="1037" height="561" key="GridCell.Tab.1.left" timestamp="1603271439231">
+    <state width="1037" height="819" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
+    <state width="1037" height="819" key="GridCell.Tab.1.center" timestamp="1604643207269">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271439231" />
-    <state width="1037" height="561" key="GridCell.Tab.1.right" timestamp="1603271439231">
+    <state width="1037" height="819" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
+    <state width="1037" height="819" key="GridCell.Tab.1.left" timestamp="1604643207269">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271439231" />
-    <state width="1037" height="561" key="GridCell.Tab.2.bottom" timestamp="1603271422093">
+    <state width="1037" height="819" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
+    <state width="1037" height="819" key="GridCell.Tab.1.right" timestamp="1604643207269">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271422093" />
-    <state width="1037" height="561" key="GridCell.Tab.2.center" timestamp="1603271422093">
+    <state width="1037" height="819" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
+    <state width="1037" height="819" key="GridCell.Tab.2.bottom" timestamp="1604643207269">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271422093" />
-    <state width="1037" height="561" key="GridCell.Tab.2.left" timestamp="1603271422093">
+    <state width="1037" height="819" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
+    <state width="1037" height="819" key="GridCell.Tab.2.center" timestamp="1604643207269">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271422093" />
-    <state width="1037" height="561" key="GridCell.Tab.2.right" timestamp="1603271422093">
+    <state width="1037" height="819" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
+    <state width="1037" height="819" key="GridCell.Tab.2.left" timestamp="1604643207269">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="1037" height="561" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603271422093" />
+    <state width="1037" height="819" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
+    <state width="1037" height="819" key="GridCell.Tab.2.right" timestamp="1604643207269">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state width="1037" height="819" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643207269" />
     <state x="-1060" y="514" key="SettingsEditor" timestamp="1603267765539">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-1060" y="514" key="SettingsEditor/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603267765539" />
-    <state x="-948" y="672" key="Vcs.Push.Dialog.v2" timestamp="1603253105254">
+    <state x="-948" y="672" key="Vcs.Push.Dialog.v2" timestamp="1604643720251">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-948" y="672" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603253105254" />
-    <state width="548" height="948" key="XDebugger.FullValuePopup" timestamp="1603259467661">
+    <state x="-948" y="672" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643720251" />
+    <state width="548" height="948" key="XDebugger.FullValuePopup" timestamp="1604034584051">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state width="548" height="948" key="XDebugger.FullValuePopup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603259467661" />
-    <state x="-839" y="541" width="598" height="798" key="find.popup" timestamp="1603264890579">
+    <state width="548" height="948" key="XDebugger.FullValuePopup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604034584051" />
+    <state x="-673" y="1082" width="620" height="798" key="find.popup" timestamp="1604642974747">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-839" y="541" width="598" height="798" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603264890579" />
+    <state x="-673" y="1082" width="620" height="798" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604642974747" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1602558189057">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state width="600" height="428" key="javadoc.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602558189057" />
-    <state x="-884" y="450" key="run.anything.popup" timestamp="1603437859040">
+    <state x="-884" y="450" key="run.anything.popup" timestamp="1603691709957">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-884" y="450" key="run.anything.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603437859040" />
-    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup" timestamp="1602559907912">
+    <state x="-884" y="450" key="run.anything.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603691709957" />
+    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup" timestamp="1604288542010">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1602559907912" />
+    <state x="-877" y="435" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604288542010" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java</url>
           <line>32</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>50</line>
+          <line>87</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -307,11 +435,6 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzFactory.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-context-support/5.1.9.RELEASE/spring-context-support-5.1.9.RELEASE.jar!/org/springframework/scheduling/quartz/AdaptableJobFactory.class</url>
           <line>36</line>
           <option name="timeStamp" value="26" />
@@ -323,12 +446,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>87</line>
+          <line>183</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>88</line>
+          <line>184</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -347,44 +470,24 @@
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/JobSchedule.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>37</line>
+          <line>70</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>38</line>
+          <line>71</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
-          <line>69</line>
+          <line>118</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/CrawlController.java</url>
-          <line>57</line>
+          <line>59</line>
           <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
-          <line>316</line>
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/SecurityConfig.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyInvalidSessionStrategy.java</url>
@@ -396,11 +499,266 @@
           <line>38</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzFactory.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>435</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/CommonPageModelPipeline.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/CommonRepoProcessor.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>449</line>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
+          <line>160</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>456</line>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/spider/CommonRepoProcessor.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/PageInfo.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/SqlUtil.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/PageInfo.java</url>
+          <line>56</line>
+          <properties>
+            <option name="lambda-ordinal" value="1" />
+          </properties>
+          <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/PageInfo.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
+          <line>132</line>
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/CommonPageModelPipeline.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/CommonPageModelPipeline.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/pipeline/CommonPageModelPipeline.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>119</line>
+          <option name="timeStamp" value="119" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>136</line>
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>166</line>
+          <option name="timeStamp" value="123" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CommonServiceImpl.java</url>
+          <line>160</line>
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>389</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>379</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>374</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>365</line>
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>356</line>
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>355</line>
+          <option name="timeStamp" value="133" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>350</line>
+          <option name="timeStamp" value="134" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>364</line>
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java</url>
+          <line>376</line>
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="138" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/MyAccessDecisionManager.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/LogoutHandlerConfig.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="156" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/security/CaptchaFilterConfig.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="160" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/SpiderApplication.java</url>
+          <line>135</line>
+          <option name="timeStamp" value="164" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/SpiderApplication.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="165" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo typeName="java.lang.String" fieldName="value" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
-        <watch expression="webDriver.getPageSource()" language="JAVA" />
+        <watch expression="response.getStatus()" language="JAVA" />
+        <watch expression="SecurityContextHolder.getContext().getAuthentication()" language="JAVA" />
+        <watch expression="session.getAttribute(&quot;verifyCode&quot;).toString()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
