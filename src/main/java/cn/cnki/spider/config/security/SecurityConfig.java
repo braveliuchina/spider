@@ -96,7 +96,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //无需权限访问
                 .antMatchers("/favicon.ico","/common/**",
                         "/webjars/**", "/getVerifyCodeImage","/error/*", "/job/**",
-                        "/crawl/**", "/index.html", "/css/**", "/js/**").permitAll()
+                        "/crawl/**", "/css/**", "/js/**").permitAll()
 
                 //其他接口需要登录后才能访问
                 .anyRequest().authenticated()

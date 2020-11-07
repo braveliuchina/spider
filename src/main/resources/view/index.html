@@ -41,7 +41,7 @@
                     <dd><a class="huanzi-menu" th:data-url="${#request.getContextPath()} + '/user/shortcMenu'" data-id="shortcMenu" href="javascript:;">个性菜单</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a th:href="@{/logout}">退出</a></li>
+            <li class="layui-nav-item"><a th:href="@{/logout/}">退出</a></li>
         </ul>
     </div>
 
@@ -84,14 +84,10 @@
                                     欢迎你，<span th:text="${loginUser.userName}"></span>
                                     <br/>
                                     <br/>
-                                    <p>Base Admin是一套简单通用的后台管理系统，主要功能有：权限管理、菜单管理、用户管理，系统设置、实时日志，实时监控，API加密，以及登录用户修改密码、配置个性菜单等</p>
+                                    <p>太行云采集系统</p>
                                     <br/>
                                     <br/>
-                                    <p>作者：huanzi-qch</p>
-                                    <p>博客：https://www.cnblogs.com/huanzi-qch</p>
-                                    <p>github：https://github.com/huanzi-qch</p>
-                                    <p>gitee：https://gitee.com/huanzi-qch</p>
-                                    <p>QQ交流群：1015379123</p>
+                                    <p>author: braveliu</p>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +106,7 @@
     </div>
     <!-- 底部固定区域 -->
     <div class="layui-footer" th:utext="${sys.sysBottomText}">
-        © XXX系统
+        © 太行云采集系统
     </div>
 </div>
 <script th:inline="javascript">

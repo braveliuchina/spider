@@ -4,11 +4,16 @@ import cn.cnki.spider.common.pojo.CommonHtmlDO;
 import cn.cnki.spider.common.pojo.HtmlDO;
 import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
+import cn.cnki.spider.util.ExcelExport;
+import cn.cnki.spider.util.ExcelUtil;
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.util.Lists;
 import org.quartz.SchedulerException;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,8 +21,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/job")
@@ -61,6 +69,41 @@ public class ScheduleJobController {
         query.addCriteria(criteria1.andOperator(criteria2));
         HtmlDO htmlDO = mongoTemplate.findOne(query, HtmlDO.class);
         return Result.of(htmlDO.getHtml());
+    }
+
+    @GetMapping(value = "/export/{id}")
+    public void export(@PathVariable("id") Long id, HttpServletResponse response) throws Exception {
+
+        Query query = new Query();
+        ScheduleJobVo jobVo = jobService.get(id).getData();
+        String dataMap = jobVo.getJobDataMap();
+        JSONArray json = JSONArray.parseArray(dataMap);
+        if (json.size() > 1) {
+            Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.jobId).is(id);
+            Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is("temp");
+            query.addCriteria(criteria1.andOperator(criteria2));
+            CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
+            ExcelExport excelExport = new ExcelExport(response, "导出结果", "导出结果");
+            List<JSONObject> jsonArr = commonHtmlDO.getContent();
+            JSONObject newJson = jsonArr.get(0);
+            Set<String> head = newJson.keySet();
+            List<String> newList = Lists.newArrayList(head);
+            excelExport.writeExcel(newList.toArray(new String [head.size()]),
+                    newList.toArray(new String [head.size()]), jsonArr);
+            return;
+        }
+        Criteria criteria1 = Criteria.where(HtmlDO.Fields.jobId).is(id);
+        Criteria criteria2 = Criteria.where(HtmlDO.Fields.type).is("temp");
+        query.addCriteria(criteria1.andOperator(criteria2));
+        HtmlDO htmlDO = mongoTemplate.findOne(query, HtmlDO.class);
+        if (null == htmlDO) {
+            response.getWriter().write("there's no data for this job");
+            return;
+        }
+        response.setContentType("application/txt");// 设置文本内省
+        response.setCharacterEncoding("utf-8");// 设置字符编码
+        response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode("导出结果","UTF-8") + ".txt"); // 设置响应头
+        response.getWriter().write(htmlDO.getHtml());
     }
 
     @PostMapping("/add")
