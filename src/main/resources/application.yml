@@ -21,6 +21,7 @@ spring:
   #mvc接收参数时对日期进行格式化
   mvc:
     date-format: yyyy-MM-dd HH:mm:ss
+    throw-exception-if-no-handler-found: true
 
   #jackson对响应回去的日期参数进行格式化
   jackson:

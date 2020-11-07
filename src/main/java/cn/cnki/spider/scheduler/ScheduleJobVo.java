@@ -29,6 +29,8 @@ public class ScheduleJobVo extends PageCondition {
      */
     private String jobType;
 
+    private String loginName;
+
     /**
      * cron表达式
      */

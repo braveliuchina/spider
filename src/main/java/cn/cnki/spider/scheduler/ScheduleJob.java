@@ -29,6 +29,8 @@ public class ScheduleJob implements Serializable {
 	 */
 	private String jobType;
 
+	private String loginName;
+
 	/**
 	 * cron表达式
 	 */

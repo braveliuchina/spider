@@ -37,7 +37,7 @@ function updatePassword() {
         "    $.post(ctx + '/user/updatePassword', $('#updatePassword').serializeObject(), function (data) {\n" +
         "        if (data.flag) {\n" +
         "            layer.msg('修改密码成功，请重新登录系统！', {icon: 1, time: 2000}, function () {\n" +
-        "                window.parent.location.href = ctx + '/logout';\n" +
+        "                window.parent.location.href = ctx + '/logout/';\n" +
         "            });\n" +
         "        }else{\n" +
         "            layer.msg(data.msg, {icon: 2, time: 2000}, function () {});\n" +

@@ -56,7 +56,7 @@ public class CaptchaFilterConfig implements Filter {
         if(sessionInformation == null && session.getAttribute("SPRING_SECURITY_CONTEXT") != null){
             //直接输出js脚本跳转强制用户下线
             response.setContentType("text/html;charset=UTF-8");
-            response.getWriter().print("<script type='text/javascript'>window.location.href = '" + contextPath + "/logout'</script>");
+            response.getWriter().print("<script type='text/javascript'>window.location.href = '" + contextPath + "/logout/'</script>");
         }
 
         //只拦截登录请求，且开发环境下不拦截

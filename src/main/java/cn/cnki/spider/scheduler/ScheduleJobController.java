@@ -6,11 +6,13 @@ import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.util.ExcelExport;
 import cn.cnki.spider.util.ExcelUtil;
+import cn.cnki.spider.util.SecurityUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
@@ -18,6 +20,7 @@ import org.quartz.SchedulerException;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Slf4j
 @RestController
 @RequestMapping("/job")
 @RequiredArgsConstructor
@@ -44,6 +48,12 @@ public class ScheduleJobController {
             return new Result("", false, "paginition parameter should be passed");
         }
         ScheduleJobVo vo = new ScheduleJobVo();
+        User user = SecurityUtil.getLoginUser();
+        if (null == user) {
+            vo.setLoginName("sa");
+        } else {
+            vo.setLoginName(user.getUsername());
+        }
         vo.setPage(Integer.parseInt(page));
         vo.setRows(Integer.parseInt(rows));
         return jobService.page(vo);
@@ -135,6 +145,12 @@ public class ScheduleJobController {
         jsonArray.add(jsonArray2);
         job.setJobDataMap(JSON.toJSONString(jsonArray));
         job.setJobDesc(jobDesc);
+        User user = SecurityUtil.getLoginUser();
+        if (null == user) {
+            job.setLoginName("sa");
+        } else {
+            job.setLoginName(user.getUsername());
+        }
         job.setCtime(System.currentTimeMillis());
         job.setUtime(System.currentTimeMillis());
         try {
@@ -171,6 +187,12 @@ public class ScheduleJobController {
         JSONArray jsonArray = new JSONArray();
         jsonArray.add(url);
         job.setJobDataMap(JSON.toJSONString(jsonArray));
+        User user = SecurityUtil.getLoginUser();
+        if (null == user) {
+            job.setLoginName("sa");
+        } else {
+            job.setLoginName(user.getUsername());
+        }
         job.setJobDesc(jobDesc);
         job.setCtime(System.currentTimeMillis());
         job.setUtime(System.currentTimeMillis());
@@ -217,6 +239,12 @@ public class ScheduleJobController {
         job.setJobDataMap(JSON.toJSONString(jsonArray));
         job.setId(id);
         job.setJobDesc(jobDesc);
+        User user = SecurityUtil.getLoginUser();
+        if (null == user) {
+            job.setLoginName("sa");
+        } else {
+            job.setLoginName(user.getUsername());
+        }
         job.setUtime(System.currentTimeMillis());
         try {
             return jobService.edit(job);
@@ -257,6 +285,12 @@ public class ScheduleJobController {
         job.setId(id);
         job.setJobDataMap(JSON.toJSONString(jsonArray));
         job.setJobDesc(jobDesc);
+        User user = SecurityUtil.getLoginUser();
+        if (null == user) {
+            job.setLoginName("sa");
+        } else {
+            job.setLoginName(user.getUsername());
+        }
         job.setCtime(System.currentTimeMillis());
         job.setUtime(System.currentTimeMillis());
         Result result;

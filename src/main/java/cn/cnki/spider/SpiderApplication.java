@@ -103,7 +103,7 @@ class IndexController {
     /**
      * 跳转登录页面
      */
-    @GetMapping("loginPage")
+    @GetMapping("loginPage/")
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView("login");
 
