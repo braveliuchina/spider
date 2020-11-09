@@ -1,16 +1,9 @@
 package cn.cnki.spider.common.pojo;
 
 import lombok.Data;
-import lombok.experimental.FieldNameConstants;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@FieldNameConstants
-@Document(collection = "crawl_html")
-@CompoundIndex(name = "idx_jobId_type", def = "{'jobId': 1, 'type': 1}",
-        unique = true, background = true)
 public class HtmlDO {
 
     @Id
