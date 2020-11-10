@@ -57,6 +57,14 @@ public class ScheduleJob implements Serializable {
 	 */
 	private String jobDataMap;
 
+	private String jobDesc;
+	// 定时任务是否启用
+	private Integer enable;
+	// 定时任务执行结果数量
+	private Integer result;
+	// 最近一次执行错误信息
+	private String err;
+
 	/**
 	 * 创建时间
 	 */
@@ -67,9 +75,5 @@ public class ScheduleJob implements Serializable {
 	 */
 	private Long utime;
 
-	/**
-	 * 描述
-	 */
-	private String jobDesc;
 
 }

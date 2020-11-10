@@ -1,13 +1,13 @@
 **一、接口名称**
-任务列表查询接口
+任务列表查询V2接口
 
 **二、接口详情**
-1、查询任务列表
+1、任务列表查询V2接口
 
 **三、接口地址**
-1、开发环境：http://dev.com:8080/spider/job/list  
-2、测试环境：http://test.com:8080/spider/job/list  
-3、生产环境：http://pro.com:8080/spider/job/list  
+1、开发环境：http://dev.com:8080/spider/job/list/v2  
+2、测试环境：http://test.com:8080/spider/job/list/v2  
+3、生产环境：http://pro.com:8080/spider/job/list/v2  
 
 **四、HTTP请求方式**
 GET
@@ -42,7 +42,6 @@ GET
 |11 |category        |String          | 是          | 按模板                       |直接此字段展示即可 |
 |12 |err             |String          | 是          |  暂无异常信息                      |直接展示此字段即可 |
 |13 |jobType         |String          | 是          |  temp或scheduler                      |temp启动执行 scheduler定时执行|
-|14 |result         |int          | 否          |  1                      |可能为空,为空或者为0 证明 无结果,没有查看结果也没有查看历史记录按钮,如大于等于1,查看结果+查看历史记录按钮均有|
 
 
 **八、返回示例**

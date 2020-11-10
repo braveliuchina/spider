@@ -55,11 +55,11 @@ public class CommonPageModelPipeline implements Pipeline {
 		job.setUtime(System.currentTimeMillis());
 		job.setJobStatus("2");
 		scheduleJobRepository.saveAndFlush(job);
-		Criteria criteria = Criteria.where(CommonHtmlDO.Fields.jobId).is(id).and(CommonHtmlDO.Fields.type).is("temp");
-		List<CommonHtmlDO> entityList = mongoTemplate.find(new Query().addCriteria(criteria), CommonHtmlDO.class);
-		if (!entityList.isEmpty()) {
-			mongoTemplate.remove(new Query().addCriteria(criteria), CommonHtmlDO.class);
-		}
+//		Criteria criteria = Criteria.where(CommonHtmlDO.Fields.jobId).is(id).and(CommonHtmlDO.Fields.type).is("temp");
+//		List<CommonHtmlDO> entityList = mongoTemplate.find(new Query().addCriteria(criteria), CommonHtmlDO.class);
+//		if (!entityList.isEmpty()) {
+//			mongoTemplate.remove(new Query().addCriteria(criteria), CommonHtmlDO.class);
+//		}
 		commonCrawlHtmlRepository.save(item);
 	}
 

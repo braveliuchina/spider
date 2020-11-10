@@ -105,6 +105,7 @@ class IndexController {
      */
     @GetMapping("loginPage/")
     public ModelAndView login(){
+        log.info("braveliu *************************");
         ModelAndView modelAndView = new ModelAndView("login");
 
         //系统信息
@@ -131,6 +132,21 @@ class IndexController {
             log.error(ErrorUtil.errorInfoToString(e));
         }
     }
+
+    /**
+     * redirect 登录页
+     */
+    @GetMapping("redirectLogin/")
+    public void redirectIndex(HttpServletResponse response){
+        //内部重定向
+        try {
+            response.sendRedirect(contextPath + "/loginPage/");
+        } catch (IOException e) {
+            //输出到日志文件中
+            log.error(ErrorUtil.errorInfoToString(e));
+        }
+    }
+
     @GetMapping("index")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");

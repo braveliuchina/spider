@@ -1,20 +1,15 @@
 package cn.cnki.spider.scheduler;
 
-import cn.cnki.spider.common.pojo.PageCondition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Transient;
-import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class ScheduleJobVo extends PageCondition {
+public class ScheduleJobVoNew {
 
     private Long id;
 
@@ -29,12 +24,19 @@ public class ScheduleJobVo extends PageCondition {
      */
     private String jobType;
 
+    /**
+     * 按模板 按规则 按源码
+     */
+    private String category;
+
     private String loginName;
 
     /**
      * cron表达式
      */
     private String cronExpression;
+
+    private String strategyDesc;
 
     /**
      * 任务执行类（包名+类名）
@@ -80,6 +82,12 @@ public class ScheduleJobVo extends PageCondition {
     private String err;
 
     private String url;
+
+    private Long templateId;
+
+    private boolean templateByDate;
+
+    private boolean skipOnErr;
 
     private List<String> xpathList;
 

@@ -112,7 +112,7 @@ public class ScheduleJobServiceImpl
         //此处省去数据验证
         Result<ScheduleJobVo> jobResult = this.get(id);
         ScheduleJobVo job = (jobResult.getData());
-        job.setJobStatus("1");
+        job.setEnable(1);
         this.save(job);
 
         //执行job
@@ -171,7 +171,7 @@ public class ScheduleJobServiceImpl
         //此处省去数据验证
         Result<ScheduleJobVo> jobResult = this.get(id);
         ScheduleJobVo job = (jobResult.getData());
-        job.setJobStatus("2");
+        job.setEnable(0);
         this.save(job);
 
         //执行job
