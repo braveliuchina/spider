@@ -5,9 +5,9 @@
 1、任务列表查询V2接口
 
 **三、接口地址**
-1、开发环境：http://dev.com:8080/spider/job/list/v2  
-2、测试环境：http://test.com:8080/spider/job/list/v2  
-3、生产环境：http://pro.com:8080/spider/job/list/v2  
+1、开发环境：http://dev.com:8080/spider/job/list/v2?page=1&rows=12&type=3    
+2、测试环境：http://test.com:8080/spider/job/list/v2?page=1&rows=12&type=3    
+3、生产环境：http://pro.com:8080/spider/job/list/v2?page=1&rows=12&type=3    
 
 **四、HTTP请求方式**
 GET
@@ -17,6 +17,8 @@ GET
 |-------|-------------------|-----------------|---------|-----------------------|----|  
 |1	|page	            |int             | 是	        |1	                    |页码从1开始 |  
 |2	|rows	     |int          | 是	        |2                    |记录数 |  
+|3	|type	     |int          | 否	        |2                    |任务类型  type不传 我的任务, 任务筛选 云行中1 已停止2 已完成 3|  
+
 
 **六、参数示例**
 
