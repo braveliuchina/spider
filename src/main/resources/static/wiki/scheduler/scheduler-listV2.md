@@ -41,7 +41,11 @@ GET
 |11 |category        |String          | 是          | 按模板                       |直接此字段展示即可 |
 |12 |err             |String          | 是          |  暂无异常信息                      |直接展示此字段即可 |
 |13 |jobType         |String          | 是          |  temp或scheduler                      |temp启动执行 scheduler定时执行|
-|14 |result         |int          | 是          |  1                      |是否有执行结果 如>1 查看结果和查看历史记录按钮都有|  
+|14 |result          |int          | 是          |  1                      |是否有执行结果 如>1 查看结果和查看历史记录按钮都有|  
+|15 |strategyDesc    |int          | 是          |  执行一次                      |执行策略字段|
+|16 |enable          |int          | 否          |  1或null 或0                      |0或null未启用 1 启用|
+  
+
 
 **八、返回示例**
 JSON示例  

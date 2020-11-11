@@ -43,6 +43,8 @@ public class ScheduleJobController {
 
     private final ScheduleJobService jobService;
 
+    private final TemplateService templateService;
+
     private final MongoTemplate mongoTemplate;
 
     @GetMapping(value = "/list")
@@ -156,6 +158,20 @@ public class ScheduleJobController {
         }).collect(Collectors.toList());
         jobNewPage.setRows(newVOS);
         return Result.of(jobNewPage);
+    }
+
+    @GetMapping(value = "/template/list")
+    public Result<PageInfo<TemplateVO>> listTemplate(HttpServletRequest request) {
+        String page = request.getParameter("page");
+        String rows = request.getParameter("rows");
+        if (StringUtils.isBlank(page) || StringUtils.isBlank(rows)) {
+            return new Result("", false, "paginition parameter should be passed");
+        }
+        TemplateVO vo = new TemplateVO();
+        vo.setPage(Integer.parseInt(page));
+        vo.setRows(Integer.parseInt(rows));
+        Result<PageInfo<TemplateVO>> pages = templateService.page(vo);
+        return pages;
     }
 
     @GetMapping(value = "/query/{id}")
