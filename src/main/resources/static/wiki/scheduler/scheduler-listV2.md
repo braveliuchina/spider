@@ -43,7 +43,7 @@ GET
 |13 |jobType         |String          | 是          |  temp或scheduler                      |temp启动执行 scheduler定时执行|
 |14 |result          |int          | 是          |  1                      |是否有执行结果 如>1 查看结果和查看历史记录按钮都有|  
 |15 |strategyDesc    |int          | 是          |  执行一次                      |执行策略字段|
-|16 |enable          |int          | 否          |  1或null 或0                      |0或null未启用 1 启用|
+|16 |enable          |int          | 否          |  1或null 或0                      |0或null未启用 1 启用 (针对定时任务,临时任务此字段不起作用,参照jobStatus字段)|
   
 
 
