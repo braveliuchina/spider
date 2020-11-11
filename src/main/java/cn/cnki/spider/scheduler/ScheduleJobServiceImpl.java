@@ -171,6 +171,10 @@ public class ScheduleJobServiceImpl
         //此处省去数据验证
         Result<ScheduleJobVo> jobResult = this.get(id);
         ScheduleJobVo job = (jobResult.getData());
+
+        if ("temp".equals(job.getJobType())) {
+            return;
+        }
         job.setEnable(0);
         this.save(job);
 

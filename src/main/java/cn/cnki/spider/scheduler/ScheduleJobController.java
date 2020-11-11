@@ -6,16 +6,12 @@ import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.util.CronUtil;
 import cn.cnki.spider.util.ExcelExport;
-import cn.cnki.spider.util.ExcelUtil;
 import cn.cnki.spider.util.SecurityUtil;
-import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONPObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.quartz.SchedulerException;
@@ -61,7 +57,7 @@ public class ScheduleJobController {
         User user = SecurityUtil.getLoginUser();
         if (null == user) {
             vo.setLoginName("sa");
-        } else if (!"admin".equals(user.getUsername())){
+        } else if (!"admin".equals(user.getUsername())) {
             vo.setLoginName(user.getUsername());
         }
         vo.setPage(Integer.parseInt(page));
@@ -76,7 +72,7 @@ public class ScheduleJobController {
         }
         List<ScheduleJobVoNew> newVOS = vos.stream().map(srcVO -> {
             ScheduleJobVoNew scheduleJobVoNew = new ScheduleJobVoNew();
-            BeanUtils.copyProperties(srcVO,  scheduleJobVoNew);
+            BeanUtils.copyProperties(srcVO, scheduleJobVoNew);
             if ("seleniumCrawlHtmlAndSave".equals(scheduleJobVoNew.getMethodName())) {
                 scheduleJobVoNew.setCategory("按源码");
             }
@@ -121,7 +117,7 @@ public class ScheduleJobController {
         User user = SecurityUtil.getLoginUser();
         if (null == user) {
             vo.setLoginName("sa");
-        } else if (!"admin".equals(user.getUsername())){
+        } else if (!"admin".equals(user.getUsername())) {
             vo.setLoginName(user.getUsername());
         }
         vo.setPage(Integer.parseInt(page));
@@ -136,7 +132,7 @@ public class ScheduleJobController {
         }
         List<ScheduleJobVoNew> newVOS = vos.stream().map(srcVO -> {
             ScheduleJobVoNew scheduleJobVoNew = new ScheduleJobVoNew();
-            BeanUtils.copyProperties(srcVO,  scheduleJobVoNew);
+            BeanUtils.copyProperties(srcVO, scheduleJobVoNew);
             if ("seleniumCrawlHtmlAndSave".equals(scheduleJobVoNew.getMethodName())) {
                 scheduleJobVoNew.setCategory("按源码");
             }
@@ -265,7 +261,7 @@ public class ScheduleJobController {
         HtmlDO htmlDO = mongoTemplate.findOne(query2, HtmlDO.class);
 //        List<String> htmlStrings = htmlDOList.stream().map(HtmlDO::getHtml).collect(Collectors.toList());
         if (null == htmlDO) {
-            return new Result("",false, "数据不存在");
+            return new Result("", false, "数据不存在");
         }
         return Result.of(htmlDO.getHtml());
     }
@@ -286,8 +282,8 @@ public class ScheduleJobController {
             JSONObject newJson = jsonArr.get(0);
             Set<String> head = newJson.keySet();
             List<String> newList = Lists.newArrayList(head);
-            excelExport.writeExcel(newList.toArray(new String [head.size()]),
-                    newList.toArray(new String [head.size()]), jsonArr);
+            excelExport.writeExcel(newList.toArray(new String[head.size()]),
+                    newList.toArray(new String[head.size()]), jsonArr);
             return;
         }
         Query query2 = new Query();
@@ -300,7 +296,7 @@ public class ScheduleJobController {
         }
         response.setContentType("application/txt");// 设置文本内省
         response.setCharacterEncoding("utf-8");// 设置字符编码
-        response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode("导出结果","UTF-8") + ".txt"); // 设置响应头
+        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("导出结果", "UTF-8") + ".txt"); // 设置响应头
         response.getWriter().write(htmlDO.getHtml());
     }
 
@@ -321,8 +317,8 @@ public class ScheduleJobController {
             JSONObject newJson = jsonArr.get(0);
             Set<String> head = newJson.keySet();
             List<String> newList = Lists.newArrayList(head);
-            excelExport.writeExcel(newList.toArray(new String [head.size()]),
-                    newList.toArray(new String [head.size()]), jsonArr);
+            excelExport.writeExcel(newList.toArray(new String[head.size()]),
+                    newList.toArray(new String[head.size()]), jsonArr);
             return;
         }
         Criteria criteria1 = Criteria.where(HtmlDO.Fields.jobId).is(id);
@@ -335,7 +331,7 @@ public class ScheduleJobController {
         }
         response.setContentType("application/txt");// 设置文本内省
         response.setCharacterEncoding("utf-8");// 设置字符编码
-        response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode("导出结果","UTF-8") + ".txt"); // 设置响应头
+        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("导出结果", "UTF-8") + ".txt"); // 设置响应头
         response.getWriter().write(htmlDO.getHtml());
     }
 
