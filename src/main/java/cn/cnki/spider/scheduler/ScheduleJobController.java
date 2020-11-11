@@ -12,6 +12,7 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.List;
@@ -200,8 +203,14 @@ public class ScheduleJobController {
     }
 
     @GetMapping(value = "/queryHis/{id}")
-    public Result<Object> listHis(@PathVariable("id") Long id) {
-
+    public Result<Object> listHis(@PathVariable("id") Long id, HttpServletRequest request) {
+        String page = request.getParameter("page");
+        String rows = request.getParameter("rows");
+        if (StringUtils.isAnyBlank(page, rows)) {
+            return new Result("", false, "paginition parameter should be passed");
+        }
+        int pageNo = Integer.parseInt(page);
+        int pageSize = Integer.parseInt(rows);
         Query query = new Query();
         ScheduleJobVo jobVo = jobService.get(id).getData();
         String dataMap = jobVo.getJobDataMap();
@@ -211,16 +220,33 @@ public class ScheduleJobController {
             Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is(jobVo.getJobType());
             query.addCriteria(criteria1.andOperator(criteria2));
             query.with(Sort.by(Sort.Order.desc(CommonHtmlDO.Fields.utime)));
+            query.skip(pageSize * (pageNo - 1));
+            query.limit(pageSize);
             List<CommonHtmlDO> commonHtmlDOList = mongoTemplate.find(query, CommonHtmlDO.class);
+            Query query2 = new Query();
+            query2.addCriteria(criteria1);
+            long count = mongoTemplate.count(query2, CommonHtmlDO.class);
 //            List<List<JSONObject>> results = commonHtmlDOList.stream().map(CommonHtmlDO::getContent).collect(Collectors.toList());
-            return Result.of(commonHtmlDOList);
+            JSONObject result = new JSONObject();
+            result.put("rows", commonHtmlDOList);
+            result.put("records", count);
+            return Result.of(result);
         }
         Criteria criteria1 = Criteria.where(HtmlDO.Fields.jobId).is(id);
         Criteria criteria2 = Criteria.where(HtmlDO.Fields.type).is("temp");
         query.addCriteria(criteria1.andOperator(criteria2));
+        query.with(Sort.by(Sort.Order.desc(CommonHtmlDO.Fields.utime)));
+        query.skip(pageSize * (pageNo - 1));
+        query.limit(pageSize);
         List<HtmlDO> htmlDOList = mongoTemplate.find(query, HtmlDO.class);
 //        List<String> htmlStrings = htmlDOList.stream().map(HtmlDO::getHtml).collect(Collectors.toList());
-        return Result.of(htmlDOList);
+        Query query3 = new Query();
+        query3.addCriteria(criteria1);
+        long count = mongoTemplate.count(query3, HtmlDO.class);
+        JSONObject result = new JSONObject();
+        result.put("rows", htmlDOList);
+        result.put("records", count);
+        return Result.of(result);
     }
 
     @GetMapping(value = "/queryHis/show/{id}")
@@ -242,6 +268,40 @@ public class ScheduleJobController {
             return new Result("",false, "数据不存在");
         }
         return Result.of(htmlDO.getHtml());
+    }
+
+
+    @GetMapping(value = "/queryHis/export/{id}")
+    public void listHisExport(@PathVariable("id") String id, HttpServletResponse response)
+            throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+
+        Query query = new Query();
+        Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.id).is(id);
+        query.addCriteria(criteria1);
+        CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
+
+        if (commonHtmlDO != null) {
+            ExcelExport excelExport = new ExcelExport(response, "导出结果", "导出结果");
+            List<JSONObject> jsonArr = commonHtmlDO.getContent();
+            JSONObject newJson = jsonArr.get(0);
+            Set<String> head = newJson.keySet();
+            List<String> newList = Lists.newArrayList(head);
+            excelExport.writeExcel(newList.toArray(new String [head.size()]),
+                    newList.toArray(new String [head.size()]), jsonArr);
+            return;
+        }
+        Query query2 = new Query();
+        Criteria criteria2 = Criteria.where(HtmlDO.Fields.id).is(id);
+        query2.addCriteria(criteria2);
+        HtmlDO htmlDO = mongoTemplate.findOne(query2, HtmlDO.class);
+        if (null == htmlDO) {
+            response.getWriter().write("there's no data for this job");
+            return;
+        }
+        response.setContentType("application/txt");// 设置文本内省
+        response.setCharacterEncoding("utf-8");// 设置字符编码
+        response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode("导出结果","UTF-8") + ".txt"); // 设置响应头
+        response.getWriter().write(htmlDO.getHtml());
     }
 
     @GetMapping(value = "/export/{id}")

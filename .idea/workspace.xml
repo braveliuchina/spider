@@ -19,15 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[add]启动定时任务接口">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobService2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobServiceImpl2.java" afterDir="false" />
+    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[add]wiki加模板列表接口">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/wiki/scheduler/历史记录列表接口.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/CommonHtmlDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/CommonHtmlDO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/HtmlDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/pojo/HtmlDO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/QuartzServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/wiki/scheduler/模板列表接口.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/wiki/scheduler/模板列表接口.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +149,7 @@
       <workItem from="1604991751536" duration="11221000" />
       <workItem from="1605061133837" duration="4617000" />
       <workItem from="1605081661673" duration="87000" />
-      <workItem from="1605082435221" duration="480000" />
+      <workItem from="1605082435221" duration="2632000" />
     </task>
     <task id="LOCAL-00001" summary="[add]协议库查询接口 + mongo 存入html片段">
       <created>1603437920632</created>
@@ -359,7 +354,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605077774132</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="[add]wiki加模板列表接口">
+      <created>1605083139073</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1605083139073</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,7 +408,8 @@
     <MESSAGE value="[add]模板列表接口wiki" />
     <MESSAGE value="[add]新增任务接口" />
     <MESSAGE value="[add]启动定时任务接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="[add]启动定时任务接口" />
+    <MESSAGE value="[add]wiki加模板列表接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="[add]wiki加模板列表接口" />
   </component>
   <component name="WindowStateProjectService">
     <state x="724" y="52" key="#Auto_Import" timestamp="1604717404205">
@@ -441,66 +444,66 @@
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-760" y="680" key="FileChooserDialogImpl/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1604643652229" />
-    <state width="1877" height="517" key="GridCell.Tab.0.bottom" timestamp="1605082647223">
+    <state width="1877" height="385" key="GridCell.Tab.0.bottom" timestamp="1605084717944">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
-    <state width="1877" height="517" key="GridCell.Tab.0.center" timestamp="1605082647222">
+    <state width="1877" height="385" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084717944" />
+    <state width="1877" height="385" key="GridCell.Tab.0.center" timestamp="1605084717944">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325505" />
-    <state width="1877" height="517" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647222" />
-    <state width="1877" height="517" key="GridCell.Tab.0.left" timestamp="1605082647222">
+    <state width="1877" height="385" key="GridCell.Tab.0.center/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084717944" />
+    <state width="1877" height="385" key="GridCell.Tab.0.left" timestamp="1605084717944">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325505" />
-    <state width="1877" height="517" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647222" />
-    <state width="1877" height="517" key="GridCell.Tab.0.right" timestamp="1605082647222">
+    <state width="1877" height="385" key="GridCell.Tab.0.left/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084717944" />
+    <state width="1877" height="385" key="GridCell.Tab.0.right" timestamp="1605084717944">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647222" />
-    <state width="1877" height="517" key="GridCell.Tab.1.bottom" timestamp="1605082647223">
+    <state width="1877" height="385" key="GridCell.Tab.0.right/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084717944" />
+    <state width="1877" height="484" key="GridCell.Tab.1.bottom" timestamp="1605084734478">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
-    <state width="1877" height="517" key="GridCell.Tab.1.center" timestamp="1605082647223">
+    <state width="1877" height="484" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084734478" />
+    <state width="1877" height="484" key="GridCell.Tab.1.center" timestamp="1605084734478">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
-    <state width="1877" height="517" key="GridCell.Tab.1.left" timestamp="1605082647223">
+    <state width="1877" height="484" key="GridCell.Tab.1.center/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084734478" />
+    <state width="1877" height="484" key="GridCell.Tab.1.left" timestamp="1605084734478">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
-    <state width="1877" height="517" key="GridCell.Tab.1.right" timestamp="1605082647223">
+    <state width="1877" height="484" key="GridCell.Tab.1.left/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084734478" />
+    <state width="1877" height="484" key="GridCell.Tab.1.right" timestamp="1605084734478">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
-    <state width="1877" height="517" key="GridCell.Tab.2.bottom" timestamp="1605082647223">
+    <state width="1877" height="484" key="GridCell.Tab.1.right/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084734478" />
+    <state width="1877" height="385" key="GridCell.Tab.2.bottom" timestamp="1605084717779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
-    <state width="1877" height="517" key="GridCell.Tab.2.center" timestamp="1605082647223">
+    <state width="1877" height="385" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084717779" />
+    <state width="1877" height="385" key="GridCell.Tab.2.center" timestamp="1605084717779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
-    <state width="1877" height="517" key="GridCell.Tab.2.left" timestamp="1605082647223">
+    <state width="1877" height="385" key="GridCell.Tab.2.center/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084717779" />
+    <state width="1877" height="385" key="GridCell.Tab.2.left" timestamp="1605084717779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
-    <state width="1877" height="517" key="GridCell.Tab.2.right" timestamp="1605082647223">
+    <state width="1877" height="385" key="GridCell.Tab.2.left/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084717779" />
+    <state width="1877" height="385" key="GridCell.Tab.2.right" timestamp="1605084717779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1037" height="879" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059325506" />
-    <state width="1877" height="517" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605082647223" />
+    <state width="1877" height="385" key="GridCell.Tab.2.right/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605084717779" />
     <state x="275" y="0" key="MergeDialog" timestamp="1604718695845">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -513,11 +516,11 @@
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-1060" y="514" key="SettingsEditor/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1603267765539" />
-    <state x="235" y="372" key="Vcs.Push.Dialog.v2" timestamp="1605077778644">
+    <state x="235" y="372" key="Vcs.Push.Dialog.v2" timestamp="1605083143714">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-948" y="672" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605059159366" />
-    <state x="235" y="372" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605077778644" />
+    <state x="235" y="372" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605083143714" />
     <state width="548" height="948" key="XDebugger.FullValuePopup" timestamp="1604034584051">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
@@ -629,7 +632,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>326</line>
+          <line>386</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -679,7 +682,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>51</line>
+          <line>54</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -804,12 +807,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>182</line>
+          <line>185</line>
           <option name="timeStamp" value="137" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>186</line>
+          <line>189</line>
           <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -844,12 +847,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>248</line>
+          <line>308</line>
           <option name="timeStamp" value="168" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>263</line>
+          <line>323</line>
           <option name="timeStamp" value="169" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -884,23 +887,43 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>389</line>
+          <line>449</line>
           <option name="timeStamp" value="177" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>414</line>
+          <line>474</line>
           <option name="timeStamp" value="178" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>192</line>
+          <line>195</line>
           <option name="timeStamp" value="179" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
-          <line>214</line>
+          <line>228</line>
           <option name="timeStamp" value="180" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
+          <line>234</line>
+          <option name="timeStamp" value="181" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
+          <line>219</line>
+          <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="183" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java</url>
+          <line>227</line>
+          <option name="timeStamp" value="184" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -909,5 +932,10 @@
         <PinnedItemInfo typeName="java.lang.String" fieldName="value" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="mongoTemplate.count(query2, CommonHtmlDO.class)" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
