@@ -16,7 +16,7 @@ POST
 |序号	|名称	|类型	|是否必须	|示例值	|描述|
 |-------|-------|-------|-----------|-------|---|
 |1      | jobName|String|是|任务90|任务名称|
-|2      | cronExpression|String|否|0/5 * * * * ?|任务表达式|
+|2      | cronExpression|String|否|0 0 23 * * ?|任务表达式 此值为 每日23点0分0秒|
 |3      | beanClass|String|否|crawlService| 任务执行类名,目前先按此参数传递去验证,后续文章爬取应该是固定的值|
 |4      | methodName|String|否|commonCrawl|任务执行方法名,目前先按此参数传递去验证,后续爬取应该是确定的值|
 |5      | jobDataMap|String|否| {'url': 'http://www.baidu.com', 'xpathList': ['//div/a/@href', '//div/span/a/@href']}|方法参数列表 list字符串|
@@ -26,6 +26,7 @@ POST
 |9      | templateId|String|否| 4|模板id字段,数值型|
 |10      | templateByDate|boolean|否| 传入日期爬取|传入日期爬取 true传入日期false否|
 |11      | skipOnErr|boolean|否| 异常时跳过|true 异常时跳过|
+|12      | jobType |String|否| temp|temp临时(不传此字段默认为临时)scheduler 按周期;设为scheduler时,cronExpression 字段必传 |
 
 
 ** 示例 **
@@ -40,14 +41,19 @@ POST
             "//div[@class='modContent']/table/tbody//tr//td/p/text()"
         ],
         "jobDesc": "按xpath规则爬取网页内容"
-    }   
+        "skipOnErr": true,
+        "jobType": "temp"
+    }  
     
     // 爬取网页源码  
     
     {
             "jobName": "braveliu1",
             "url": "https://www.aacsb.edu/accreditation/accredited-schools",
-            "jobDesc": "爬取网页源码"
+            "jobDesc": "爬取网页源码",
+            "skipOnErr": true,
+            "jobType": "scheduler",
+            "cronExpression": "0 0 23 * * ?"
     }
     
     // 按模板爬取  
