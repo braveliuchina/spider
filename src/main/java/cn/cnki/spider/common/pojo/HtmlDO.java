@@ -23,6 +23,8 @@ public class HtmlDO {
 
     private String html;
 
+    private String err = "运行过程中无异常信息";
+
     private long ctime;
 
     private long utime;

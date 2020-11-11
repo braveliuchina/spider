@@ -21,7 +21,7 @@ public class QuartzServiceImpl implements QuartzService {
     private Scheduler scheduler;
 
     @Autowired
-    private ScheduleJobService jobService;
+    private ScheduleJobService2 jobService;
 
     @Override
     public void timingTask() {

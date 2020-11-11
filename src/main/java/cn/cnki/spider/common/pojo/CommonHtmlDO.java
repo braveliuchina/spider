@@ -25,6 +25,8 @@ public class CommonHtmlDO extends CommonManagerProperty {
 
     private List<JSONObject> content;
 
+    private String err = "运行过程中无异常信息";
+
     private long ctime;
 
     private long utime;

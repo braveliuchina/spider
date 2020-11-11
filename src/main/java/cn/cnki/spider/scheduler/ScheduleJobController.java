@@ -210,16 +210,38 @@ public class ScheduleJobController {
             Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.jobId).is(id);
             Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is(jobVo.getJobType());
             query.addCriteria(criteria1.andOperator(criteria2));
+            query.with(Sort.by(Sort.Order.desc(CommonHtmlDO.Fields.utime)));
             List<CommonHtmlDO> commonHtmlDOList = mongoTemplate.find(query, CommonHtmlDO.class);
-            List<List<JSONObject>> results = commonHtmlDOList.stream().map(CommonHtmlDO::getContent).collect(Collectors.toList());
-            return Result.of(results);
+//            List<List<JSONObject>> results = commonHtmlDOList.stream().map(CommonHtmlDO::getContent).collect(Collectors.toList());
+            return Result.of(commonHtmlDOList);
         }
         Criteria criteria1 = Criteria.where(HtmlDO.Fields.jobId).is(id);
         Criteria criteria2 = Criteria.where(HtmlDO.Fields.type).is("temp");
         query.addCriteria(criteria1.andOperator(criteria2));
         List<HtmlDO> htmlDOList = mongoTemplate.find(query, HtmlDO.class);
-        List<String> htmlStrings = htmlDOList.stream().map(HtmlDO::getHtml).collect(Collectors.toList());
-        return Result.of(htmlStrings);
+//        List<String> htmlStrings = htmlDOList.stream().map(HtmlDO::getHtml).collect(Collectors.toList());
+        return Result.of(htmlDOList);
+    }
+
+    @GetMapping(value = "/queryHis/show/{id}")
+    public Result<Object> listHisShow(@PathVariable("id") String id) {
+
+        Query query = new Query();
+        Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.id).is(id);
+        query.addCriteria(criteria1);
+        CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
+        if (null != commonHtmlDO) {
+            return Result.of(commonHtmlDO.getContent());
+        }
+        Query query2 = new Query();
+        Criteria criteria2 = Criteria.where(HtmlDO.Fields.id).is(id);
+        query2.addCriteria(criteria2);
+        HtmlDO htmlDO = mongoTemplate.findOne(query2, HtmlDO.class);
+//        List<String> htmlStrings = htmlDOList.stream().map(HtmlDO::getHtml).collect(Collectors.toList());
+        if (null == htmlDO) {
+            return new Result("",false, "数据不存在");
+        }
+        return Result.of(htmlDO.getHtml());
     }
 
     @GetMapping(value = "/export/{id}")
