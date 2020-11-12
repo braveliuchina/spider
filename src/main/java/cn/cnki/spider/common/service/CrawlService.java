@@ -1,9 +1,11 @@
 package cn.cnki.spider.common.service;
 
+import cn.cnki.spider.common.pojo.HistoryDO;
 import cn.cnki.spider.common.pojo.HtmlDO;
 import cn.cnki.spider.common.repository.CrawlHtmlRepository;
 import cn.cnki.spider.dao.AACSBDao;
 import cn.cnki.spider.dao.SpiderArticleDao;
+import cn.cnki.spider.dao.SpiderConfigDao;
 import cn.cnki.spider.entity.*;
 import cn.cnki.spider.pipeline.*;
 import cn.cnki.spider.scheduler.ScheduleJob;
@@ -80,12 +82,13 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
 
     private final TypeReference typeReference = new TypeReference<HashMap<String, Content>>() {
     };
-
     private final CrawlHtmlRepository crawlHtmlRepository;
 
     private final MongoTemplate mongoTemplate;
 
     private final ScheduleJobRepository scheduleJobRepository;
+
+    private final SpiderConfigDao spiderConfigDao;
 
     private final CommonForkJoinPool forkJoinPool = new CommonForkJoinPool(16, "crawlPool");
 
@@ -101,6 +104,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                         CrawlHtmlRepository crawlHtmlRepository,
                         MongoTemplate mongoTemplate,
                         ScheduleJobRepository scheduleJobRepository,
+                        SpiderConfigDao spiderConfigDao,
                         AACSBDao aacsbDao) {
         super(spiderArticleDao, xmlDescriptor);
         this.chromeUtil = chromeUtil;
@@ -114,6 +118,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         this.crawlHtmlRepository = crawlHtmlRepository;
         this.mongoTemplate = mongoTemplate;
         this.scheduleJobRepository = scheduleJobRepository;
+        this.spiderConfigDao = spiderConfigDao;
         this.aacsbDao = aacsbDao;
     }
 
@@ -352,42 +357,31 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
     }
 
     @Override
-    public void seleniumCrawlHtmlAndSave(long jobId, String type, String url) {
-        String htmlContent = seleniumCrawlHtml(url);
+    public void seleniumCrawlHtmlAndSave(long jobId, String type, String hisId, String url) {
+        String htmlContent = "";
+        String err = "";
+        try {
+            htmlContent = seleniumCrawlHtml(url);
+        } catch (Exception e) {
+            err = e.getMessage();
+        }
         long now = System.currentTimeMillis();
-        HtmlDO htmlDO = new HtmlDO();
-        htmlDO.setUrl(url);
-        htmlDO.setType("temp");
-        htmlDO.setHtml(htmlContent);
-        htmlDO.setJobId(jobId);
-        htmlDO.setCtime(now);
-        htmlDO.setUtime(now);
-        HtmlDO newHtmlDO = crawlHtmlRepository.findByJobIdAndType(jobId, type);
-        if (null != newHtmlDO) {
-            Query query = new Query();
-            query.addCriteria(Criteria.where(HtmlDO.Fields.jobId).is(jobId)
-                    .andOperator(Criteria.where(HtmlDO.Fields.type).is(type)));
-            Update update = new Update();
-            update.set(HtmlDO.Fields.type, "temp");
-            update.set(HtmlDO.Fields.url, url);
-            update.set(HtmlDO.Fields.html, htmlContent);
-            update.set(HtmlDO.Fields.utime, now);
-            mongoTemplate.upsert(query, update, HtmlDO.class);
-        } else {
+        ScheduleJob job = saveAndUpdateJobAndHis(jobId, err, hisId);
+        // 执行成功需要保存执行结果
+        if ("2".equals(job.getJobStatus())) {
+            HtmlDO htmlDO = new HtmlDO();
+            htmlDO.setUrl(url);
+            htmlDO.setType(job.getJobType());
+            htmlDO.setHisId(hisId);
+            htmlDO.setHtml(htmlContent);
+            htmlDO.setJobId(jobId);
+            htmlDO.setErr(err);
+            htmlDO.setCtime(now);
+            htmlDO.setUtime(now);
+            // 任务执行结果表
             crawlHtmlRepository.save(htmlDO);
         }
-        Optional<ScheduleJob> jobOptional = scheduleJobRepository.findById(jobId);
-        if (!jobOptional.isPresent()) {
-            try {
-                throw new Exception("there is no job with this id");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        ScheduleJob job = jobOptional.get();
-        job.setUtime(System.currentTimeMillis());
-        job.setJobStatus("2");
-        scheduleJobRepository.saveAndFlush(job);
+
     }
 
     @Override
@@ -445,7 +439,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
     }
 
     @Override
-    public void commonCrawlV2(long jobId, String type, String url, List<String> xpathList) {
+    public void commonCrawlV2(long jobId, String type, String hisId, String url, List<String> xpathList) {
         log.info("url is {}, xpath list is {}", url, xpathList);
         if (StringUtils.isBlank(url) || null == xpathList || xpathList.isEmpty()) {
             log.warn("param is null");
@@ -454,9 +448,88 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         commonRepoProcessor.setXpathList(xpathList);
         commonRepoProcessor.setJobId(jobId);
         commonRepoProcessor.setType(type);
+        commonRepoProcessor.setHisId(hisId);
         Spider spider = Spider.create(commonRepoProcessor);
         spider.addUrl(url).addPipeline(commonPageModelPipeline)
                 .thread(1).run();
+    }
+
+    @Override
+    public void templateCrawl(long jobId, String type, String hisId, long templateId) {
+        String err = "";
+        SpiderConfig config = spiderConfigDao.getConfigById(templateId);
+
+        if (config == null) {
+            log.info("fail to get config");
+            err = "无此模板";
+            saveAndUpdateJobAndHis(jobId, err, hisId);
+        }
+
+        String code = config.getCode();
+        String name = config.getName();
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String monthStr = String.valueOf(month);
+        String dayStr = String.valueOf(day);
+        if (month < 10) {
+            monthStr = "0" + monthStr;
+        }
+        if (day < 10) {
+            dayStr = "0" + dayStr;
+        }
+        try {
+            crawlByDate(String.valueOf(year), monthStr, dayStr, code, name);
+        } catch (Exception e) {
+            log.error("爬取失败,{}", e);
+            err = e.getMessage();
+        }
+        saveAndUpdateJobAndHis(jobId, err, hisId);
+    }
+
+    private ScheduleJob saveAndUpdateJobAndHis(long jobId, String err, String hisId) {
+        long now = System.currentTimeMillis();
+        Optional<ScheduleJob> jobOptional = scheduleJobRepository.findById(jobId);
+        if (!jobOptional.isPresent()) {
+            try {
+                throw new Exception("there is no job with this id");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        ScheduleJob job = jobOptional.get();
+
+        // 异常情况
+        if (StringUtils.isNotBlank(err)) {
+            // 停止但执行失败
+            job.setJobStatus("0");
+            job.setErr(err);
+        } else {
+            // 停止但执行成功
+            job.setJobStatus("2");
+            Integer result = job.getResult();
+            if (null == result) {
+                job.setResult(1);
+            } else {
+                job.setResult(++result);
+            }
+        }
+        job.setUtime(System.currentTimeMillis());
+        // 任务表
+        scheduleJobRepository.saveAndFlush(job);
+
+        // 更新任务执行记录表状态
+        HistoryDO historyDO = new HistoryDO();
+        historyDO.setId(hisId);
+        historyDO.setJobId(job.getId());
+        historyDO.setStatus(Integer.parseInt(job.getJobStatus()));
+        historyDO.setErr(err);
+        historyDO.setCtime(now);
+        historyDO.setUtime(now);
+        mongoTemplate.save(historyDO);
+        return job;
     }
 
     private String buildActualIntMonthOrDay(String dateStr) {
@@ -568,6 +641,64 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         spiderArticle.setContent(content.getContent());
         spiderArticle.setContentAll(content.getContent());
         return spiderArticle;
+    }
+
+    public SpiderConfig crawlByDateInnerMongoDB(String year, String month, String day,
+                                         String code, String configName) throws Exception {
+        log.info("{}, {}  ...>>cron.... started", configName, year + month + day);
+        processor.getSite();
+        SpiderConfig config = processor.getSpiderConfig();
+        String type = config.getType();
+        Site siteRule = processor.getSiteRule();
+
+        // flash的情况尝试获取xml文件读取文章内容
+        if ("flashXml".equals(type)) {
+            return buildFlashXmlTypeUrlAndCrawl(siteRule, config, year, month, day);
+        }
+        // ajax请求拿到响应读取文章内容
+        if ("ajax".equals(type)) {
+            String judgeExistsUrl = siteRule.getJudgeExistsUrl();
+            String pageUrl = siteRule.getDiscoverPageUrl();
+            String articleIdUrl = siteRule.getDiscoverArticleId();
+            String dayResponse = simplePlainGetRequest(buildUrl(judgeExistsUrl, year, month, day));
+            boolean containsDay = existsDay(dayResponse, year, month, day);
+            if (!containsDay) {
+                throw new Exception("there is no newspaper for this day found, please check");
+            }
+            String pageResponse = simplePlainGetRequest(buildUrl(pageUrl, year, month, day));
+            String articleIdResponse = simplePlainGetRequest(buildUrl(articleIdUrl, year, month, day));
+            Map<String, List<String>> articleIdListMap = buildArticleIdContent(articleIdResponse);
+            if (null == articleIdListMap || articleIdListMap.isEmpty()) {
+                throw new Exception("there is no article for this day, please check");
+            }
+            String pageNameUrl = siteRule.getDiscoverPageNameUrl();
+            String contentUrl = siteRule.getDiscoverArticleContentUrl();
+            List<SpiderArticle> articles = Lists.newArrayList();
+            for (String pageNo : articleIdListMap.keySet()) {
+                String url = buildUrl(pageNameUrl, year, month, day).replace("${pageNo}", pageNo);
+                String response = simplePlainGetRequest(url);
+                String banName = buildPageName(response);
+                Integer id = buildPageId(pageResponse);
+                contentUrl = contentUrl.replace("${id}", String.valueOf(id));
+                List<String> articleIds = articleIdListMap.get(pageNo);
+                for (String articleId : articleIds) {
+                    String newContentUrl = contentUrl.replace("${articleId}", articleId);
+                    String contentResponse = simplePlainGetRequest(newContentUrl);
+                    SpiderArticle article = buildArticle(articleId, config.getId(), year + month + day,
+                            pageNo, banName, contentResponse);
+                    articles.add(article);
+                }
+            }
+            crawl(articles);
+            return config;
+        }
+        // ajax请求拿到响应读取文章内容
+        if ("discoveryAjax".equals(type)) {
+            // 由url发现id并用id发送ajax请求的情况
+            return buildAjaxRequestAndCrawl(type, configName, siteRule, year, month, day, config);
+        }
+        // 普通html类型的网页文章内容抓取
+        return buildCommonTypeUrlAndCrawl(type, configName, siteRule, year, month, day, config);
     }
 
     public SpiderConfig crawlByDateInner(String year, String month, String day,

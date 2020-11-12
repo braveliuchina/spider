@@ -32,6 +32,8 @@ public class CommonRepoProcessor implements PageProcessor {
 
     private String type;
 
+    private String hisId;
+
     private final TypeReference typeReference = new TypeReference<HashMap<String, Content>>() {
     };
 
@@ -48,31 +50,36 @@ public class CommonRepoProcessor implements PageProcessor {
     public void process(Page page) {
         CommonHtmlDO item = new CommonHtmlDO();
 
-        if (null == xpathList || xpathList.isEmpty()) {
-            return;
-        }
-
-        List<JSONObject> jsonList = Lists.newArrayList();
-        Map<String, List<String>> map = Maps.newHashMap();
-        for (int i = 0; i < xpathList.size(); i++) {
-
-            String xpath = xpathList.get(i);
-            List<String> field = page.getHtml().xpath(xpath).all();
-            map.put("field" + (i+1), field);
-
-        }
-        List<String> fields = map.get("field1");
-        for (int i = 0; i<fields.size(); i++) {
-            JSONObject json = new JSONObject();
-            int j = 1;
-
-            for (String key: map.keySet()) {
-
-                List<String> newList = map.get(key);
-                json.put("field" +  j, newList.get(i));
-                j++;
+        try {
+            if (null == xpathList || xpathList.isEmpty()) {
+                return;
             }
-            jsonList.add(json);
+
+            List<JSONObject> jsonList = Lists.newArrayList();
+            Map<String, List<String>> map = Maps.newHashMap();
+            for (int i = 0; i < xpathList.size(); i++) {
+
+                String xpath = xpathList.get(i);
+                List<String> field = page.getHtml().xpath(xpath).all();
+                map.put("field" + (i + 1), field);
+
+            }
+            List<String> fields = map.get("field1");
+            for (int i = 0; i < fields.size(); i++) {
+                JSONObject json = new JSONObject();
+                int j = 1;
+
+                for (String key : map.keySet()) {
+
+                    List<String> newList = map.get(key);
+                    json.put("field" + j, newList.get(i));
+                    j++;
+                }
+                jsonList.add(json);
+            }
+            item.setContent(jsonList);
+        } catch (Exception e) {
+            item.setErr(e.getMessage());
         }
 
         long now = System.currentTimeMillis();
@@ -80,7 +87,8 @@ public class CommonRepoProcessor implements PageProcessor {
         item.setType(type);
         item.setCtime(now);
         item.setUtime(now);
-        item.setContent(jsonList);
+        item.setHisId(hisId);
+
         page.putField("item", item);
     }
 }

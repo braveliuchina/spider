@@ -3,6 +3,7 @@ package cn.cnki.spider.common.service;
 import cn.cnki.spider.common.repository.CrawlHtmlRepository;
 import cn.cnki.spider.dao.AACSBDao;
 import cn.cnki.spider.dao.SpiderArticleDao;
+import cn.cnki.spider.dao.SpiderConfigDao;
 import cn.cnki.spider.pipeline.ArticleDBBatchPageModelPipeline;
 import cn.cnki.spider.pipeline.CommonPageModelPipeline;
 import cn.cnki.spider.pipeline.ReddotDBItemBatchPageModelPipeline;
@@ -51,6 +52,8 @@ public class CrawlServiceFactory {
 
     private final MongoTemplate mongoTemplate;
 
+    private final SpiderConfigDao spiderConfigDao;
+
     public cn.cnki.spider.common.service.CrawlService buildCrawlService(AbstractNewspaperProcessor processor) {
         cn.cnki.spider.common.service.CrawlService service = new cn.cnki.spider.common.service.CrawlService(chromeUtil, dbPageModelPipeline,
                 spiderArticleDao, xmlDescriptor, redDotRepoProcessor,
@@ -62,6 +65,7 @@ public class CrawlServiceFactory {
                 crawlHtmlRepository,
                 mongoTemplate,
                 scheduleJobRepository,
+                spiderConfigDao,
                 aacsbDao);
         service.setProcessor(processor);
         return service;

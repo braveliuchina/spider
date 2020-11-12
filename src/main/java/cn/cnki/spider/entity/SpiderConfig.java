@@ -6,7 +6,9 @@ import lombok.Data;
 public class SpiderConfig {
 	
 	private long id;
-	
+
+	private String code;
+
 	private String name;
 	
 	private String site;

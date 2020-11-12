@@ -1,9 +1,6 @@
 package cn.cnki.spider.scheduler;
 
-import cn.cnki.spider.common.pojo.CommonHtmlDO;
-import cn.cnki.spider.common.pojo.HtmlDO;
-import cn.cnki.spider.common.pojo.PageInfo;
-import cn.cnki.spider.common.pojo.Result;
+import cn.cnki.spider.common.pojo.*;
 import cn.cnki.spider.util.CronUtil;
 import cn.cnki.spider.util.ExcelExport;
 import cn.cnki.spider.util.SecurityUtil;
@@ -133,13 +130,17 @@ public class ScheduleJobController {
         List<ScheduleJobVoNew> newVOS = vos.stream().map(srcVO -> {
             ScheduleJobVoNew scheduleJobVoNew = new ScheduleJobVoNew();
             BeanUtils.copyProperties(srcVO, scheduleJobVoNew);
-            if ("seleniumCrawlHtmlAndSave".equals(scheduleJobVoNew.getMethodName())) {
-                scheduleJobVoNew.setCategory("按源码");
+            if ("commonCrawlV2".equals(scheduleJobVoNew.getMethodName())) {
+                scheduleJobVoNew.setCategory("按规则");
             }
             if ("seleniumCrawlHtmlAndSave".equals(scheduleJobVoNew.getMethodName())) {
                 scheduleJobVoNew.setCategory("按源码");
             }
             if ("templateCrawl".equals(scheduleJobVoNew.getMethodName())) {
+                String jobDataMap = scheduleJobVoNew.getJobDataMap();
+                JSONArray templateJSON = JSONArray.parseArray(jobDataMap);
+                Long id = Long.parseLong(templateJSON.getString(1));
+                scheduleJobVoNew.setTemplateId(id);
                 scheduleJobVoNew.setCategory("按模板");
             }
             String newType = scheduleJobVoNew.getJobType();
@@ -180,14 +181,20 @@ public class ScheduleJobController {
         ScheduleJobVo jobVo = jobService.get(id).getData();
         String dataMap = jobVo.getJobDataMap();
         JSONArray json = JSONArray.parseArray(dataMap);
-        if (json.size() > 1) {
+        String methodName = jobVo.getMethodName();
+
+        if (json.size() > 1 || "templateCrawl".equals(methodName) ) {
             Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.jobId).is(id);
             Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is(jobVo.getJobType());
             query.addCriteria(criteria1.andOperator(criteria2));
             query.with(Sort.by(Sort.Order.desc(CommonHtmlDO.Fields.ctime)));
             CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
             if (null == commonHtmlDO) {
-                return Result.of(Collections.EMPTY_LIST);
+                return new Result<>("", false, "最近一次的执行记录已被删除,请考虑重新执行");
+            }
+            List<JSONObject> resultJSON = commonHtmlDO.getContent();
+            if (null == resultJSON || resultJSON.isEmpty()) {
+                return new Result<>("", false, "最近一次的执行依据设置的规则或入参未抓取到任何结果,请尝试修改任务再次执行");
             }
             return Result.of(commonHtmlDO.getContent());
         }
@@ -195,10 +202,17 @@ public class ScheduleJobController {
         Criteria criteria2 = Criteria.where(HtmlDO.Fields.type).is("temp");
         query.addCriteria(criteria1.andOperator(criteria2));
         HtmlDO htmlDO = mongoTemplate.findOne(query, HtmlDO.class);
+        if (null == htmlDO) {
+            return new Result<>("", false, "最近一次的执行记录已被删除,请考虑重新执行");
+        }
+        String html = htmlDO.getHtml();
+        if (StringUtils.isBlank(html)) {
+            return new Result<>("", false, "最近一次的执行依据设置的规则或入参未抓取到任何结果,请尝试修改任务再次执行");
+        }
         return Result.of(htmlDO.getHtml());
     }
 
-    @GetMapping(value = "/queryHis/{id}")
+    /*@GetMapping(value = "/queryHis/{id}")
     public Result<Object> listHis(@PathVariable("id") Long id, HttpServletRequest request) {
         String page = request.getParameter("page");
         String rows = request.getParameter("rows");
@@ -243,9 +257,44 @@ public class ScheduleJobController {
         result.put("rows", htmlDOList);
         result.put("records", count);
         return Result.of(result);
+    }*/
+
+    @GetMapping(value = "/queryHis/{id}")
+    public Result<Object> listHisV2(@PathVariable("id") Long id, HttpServletRequest request) {
+        String page = request.getParameter("page");
+        String rows = request.getParameter("rows");
+        if (StringUtils.isAnyBlank(page, rows)) {
+            return new Result("", false, "paginition parameter should be passed");
+        }
+        int pageNo = Integer.parseInt(page);
+        int pageSize = Integer.parseInt(rows);
+        Query query = new Query();
+        Criteria criteria1 = Criteria.where(HistoryDO.Fields.jobId).is(id);
+        query.addCriteria(criteria1);
+        query.with(Sort.by(Sort.Order.desc(HistoryDO.Fields.utime)));
+        query.skip(pageSize * (pageNo - 1));
+        query.limit(pageSize);
+        List<HistoryDO> historyDOList = mongoTemplate.find(query, HistoryDO.class);
+        if (!historyDOList.isEmpty()) {
+            historyDOList = historyDOList.stream().map(historyDO -> {
+                String err = historyDO.getErr();
+                if (StringUtils.isBlank(err)) {
+                    historyDO.setErr("本次执行未出现异常情况");
+                }
+                return historyDO;
+            }).collect(Collectors.toList());
+        }
+        Query query2 = new Query();
+        query2.addCriteria(criteria1);
+        long count = mongoTemplate.count(query2, HistoryDO.class);
+
+        JSONObject result = new JSONObject();
+        result.put("rows", historyDOList);
+        result.put("records", count);
+        return Result.of(result);
     }
 
-    @GetMapping(value = "/queryHis/show/{id}")
+    /*@GetMapping(value = "/queryHis/show/{id}")
     public Result<Object> listHisShow(@PathVariable("id") String id) {
 
         Query query = new Query();
@@ -264,40 +313,126 @@ public class ScheduleJobController {
             return new Result("", false, "数据不存在");
         }
         return Result.of(htmlDO.getHtml());
-    }
+    }*/
 
-
-    @GetMapping(value = "/queryHis/export/{id}")
-    public void listHisExport(@PathVariable("id") String id, HttpServletResponse response)
-            throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+    @GetMapping(value = "/queryHis/show/{id}")
+    public Result<Object> listHisShowV2(@PathVariable("id") String id) {
 
         Query query = new Query();
-        Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.id).is(id);
+        Criteria criteria1 = Criteria.where(HistoryDO.Fields.id).is(id);
         query.addCriteria(criteria1);
-        CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
+        HistoryDO historyDO = mongoTemplate.findOne(query, HistoryDO.class);
+        if (null == historyDO) {
+            return new Result<>("", false, "本条执行记录不存在或已删除");
+        }
+        Integer status = historyDO.getStatus();
+        if (2 != status) {
+            return new Result<>("", false, "本条执行记录不存在执行结果,可能执行失败或正在执行过程中");
+        }
+        Long jobId = historyDO.getJobId();
+        ScheduleJobVo jobVo = jobService.get(jobId).getData();
+        String method = jobVo.getMethodName();
+        // html源码表查询
+        if ("seleniumCrawlHtmlAndSave".equals(method)) {
+            // 源码爬取
+            Query querySrc = new Query();
+            Criteria criteriaSrc = Criteria.where(HtmlDO.Fields.hisId).is(id);
+            Criteria criteriaSrc2 = Criteria.where(HtmlDO.Fields.jobId).is(jobId);
+            querySrc.addCriteria(criteriaSrc.andOperator(criteriaSrc2));
+            HtmlDO htmlDOResult = mongoTemplate.findOne(querySrc, HtmlDO.class);
+            if (null == htmlDOResult) {
+                return new Result<>("", false, "本条执行结果不存在或已经被管理员删除");
+            }
+            return Result.of(htmlDOResult.getHtml());
+        } else if ("commonCrawlV2".equals(method)) {
+            // xpath规则爬取
+            Query querySrc = new Query();
+            Criteria criteriaSrc = Criteria.where(CommonHtmlDO.Fields.hisId).is(id);
+            Criteria criteriaSrc2 = Criteria.where(CommonHtmlDO.Fields.jobId).is(jobId);
+            querySrc.addCriteria(criteriaSrc.andOperator(criteriaSrc2));
+            CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(querySrc, CommonHtmlDO.class);
+            if (null == commonHtmlDO) {
+                return new Result<>("", false, "本条执行结果不存在或已经被管理员删除");
+            }
+            List<JSONObject> content = commonHtmlDO.getContent();
+            if (null == content || content.isEmpty()) {
+                return new Result<>("", false, "本次执行依据传入传入的xpath规则未抓到任何数据,请检查规则");
+            }
+            return Result.of(commonHtmlDO.getContent());
+        } else if ("templateCrawl".equals(method)) {
+            // 模板爬取
+            Query querySrc = new Query();
+            Criteria criteriaSrc = Criteria.where(CommonHtmlDO.Fields.hisId).is(id);
+            Criteria criteriaSrc2 = Criteria.where(CommonHtmlDO.Fields.jobId).is(jobId);
+            querySrc.addCriteria(criteriaSrc.andOperator(criteriaSrc2));
+            CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(querySrc, CommonHtmlDO.class);
+            if (null == commonHtmlDO) {
+                return new Result<>("", false, "本条执行结果不存在或已经被管理员删除");
+            }
+            List<JSONObject> content = commonHtmlDO.getContent();
+            if (null == content || content.isEmpty()) {
+                return new Result<>("", false, "本次执行依据传入传入的xpath规则未抓到任何数据,请检查规则");
+            }
+            return Result.of(commonHtmlDO.getContent());
+        }
 
-        if (commonHtmlDO != null) {
+        return Result.of("本次执行未抓取到任何数据");
+    }
+
+//    @GetMapping(value = "/queryHis/export/{id}")
+//    public void listHisExport(@PathVariable("id") String id, HttpServletResponse response)
+//            throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+//
+//        Query query = new Query();
+//        Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.id).is(id);
+//        query.addCriteria(criteria1);
+//        CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
+//
+//        if (commonHtmlDO != null) {
+//            ExcelExport excelExport = new ExcelExport(response, "导出结果", "导出结果");
+//            List<JSONObject> jsonArr = commonHtmlDO.getContent();
+//            JSONObject newJson = jsonArr.get(0);
+//            Set<String> head = newJson.keySet();
+//            List<String> newList = Lists.newArrayList(head);
+//            excelExport.writeExcel(newList.toArray(new String[head.size()]),
+//                    newList.toArray(new String[head.size()]), jsonArr);
+//            return;
+//        }
+//        Query query2 = new Query();
+//        Criteria criteria2 = Criteria.where(HtmlDO.Fields.id).is(id);
+//        query2.addCriteria(criteria2);
+//        HtmlDO htmlDO = mongoTemplate.findOne(query2, HtmlDO.class);
+//        if (null == htmlDO) {
+//            response.getWriter().write("there's no data for this job");
+//            return;
+//        }
+//        response.setContentType("application/txt");// 设置文本内省
+//        response.setCharacterEncoding("utf-8");// 设置字符编码
+//        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("导出结果", "UTF-8") + ".txt"); // 设置响应头
+//        response.getWriter().write(htmlDO.getHtml());
+//    }
+
+    @GetMapping(value = "/queryHis/export/{id}")
+    public void listHisExportV2(@PathVariable("id") String id, HttpServletResponse response)
+            throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+
+        Result<Object> resultData = listHisShowV2(id);
+        Object data = resultData.getData();
+        if (data instanceof List) {
             ExcelExport excelExport = new ExcelExport(response, "导出结果", "导出结果");
-            List<JSONObject> jsonArr = commonHtmlDO.getContent();
+            List<JSONObject> jsonArr = (List<JSONObject>)data;
             JSONObject newJson = jsonArr.get(0);
             Set<String> head = newJson.keySet();
             List<String> newList = Lists.newArrayList(head);
             excelExport.writeExcel(newList.toArray(new String[head.size()]),
                     newList.toArray(new String[head.size()]), jsonArr);
             return;
+        }else if (data instanceof String) {
+            response.setContentType("application/txt");// 设置文本内省
+            response.setCharacterEncoding("utf-8");// 设置字符编码
+            response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("导出结果", "UTF-8") + ".txt"); // 设置响应头
+            response.getWriter().write(String.valueOf(data));
         }
-        Query query2 = new Query();
-        Criteria criteria2 = Criteria.where(HtmlDO.Fields.id).is(id);
-        query2.addCriteria(criteria2);
-        HtmlDO htmlDO = mongoTemplate.findOne(query2, HtmlDO.class);
-        if (null == htmlDO) {
-            response.getWriter().write("there's no data for this job");
-            return;
-        }
-        response.setContentType("application/txt");// 设置文本内省
-        response.setCharacterEncoding("utf-8");// 设置字符编码
-        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("导出结果", "UTF-8") + ".txt"); // 设置响应头
-        response.getWriter().write(htmlDO.getHtml());
     }
 
     @GetMapping(value = "/export/{id}")
@@ -309,7 +444,7 @@ public class ScheduleJobController {
         JSONArray json = JSONArray.parseArray(dataMap);
         if (json.size() > 1) {
             Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.jobId).is(id);
-            Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is("temp");
+            Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is(jobVo.getJobType());
             query.addCriteria(criteria1.andOperator(criteria2));
             CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(query, CommonHtmlDO.class);
             ExcelExport excelExport = new ExcelExport(response, "导出结果", "导出结果");

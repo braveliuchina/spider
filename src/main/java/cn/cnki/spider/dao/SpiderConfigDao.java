@@ -10,5 +10,7 @@ public interface SpiderConfigDao {
 
 	SpiderConfig getConfigByCode(String code);
 
+	SpiderConfig getConfigById(Long id);
+
 	List<SpiderConfig> getConfigListByCode(String code);
 }

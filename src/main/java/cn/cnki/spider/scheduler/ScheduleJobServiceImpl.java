@@ -1,5 +1,6 @@
 package cn.cnki.spider.scheduler;
 
+import cn.cnki.spider.common.pojo.HistoryDO;
 import cn.cnki.spider.common.pojo.PageInfo;
 import cn.cnki.spider.common.pojo.Result;
 import cn.cnki.spider.common.repository.CommonRepository;
@@ -9,11 +10,13 @@ import cn.cnki.spider.sys.sysuser.vo.SysUserVo;
 import cn.cnki.spider.util.CommonForkJoinPool;
 import cn.cnki.spider.util.SpringUtil;
 import cn.cnki.spider.util.SqlUtil;
+import cn.hutool.json.JSONObject;
 import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.SchedulerException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,16 +39,20 @@ public class ScheduleJobServiceImpl
 
     private final ScheduleJobRepository scheduleJobRepository;
 
+    private final MongoTemplate mongoTemplate;
+
     private final QuartzService quartzService;
 
     private final CommonForkJoinPool forkJoinPool = new CommonForkJoinPool(16, "crawlPool");
 
     public ScheduleJobServiceImpl(ScheduleJobRepository scheduleJobRepository,
                                   QuartzService quartzService,
-                                  CommonRepository<ScheduleJob, Long> commonRepository) {
+                                  CommonRepository<ScheduleJob, Long> commonRepository,
+                                  MongoTemplate mongoTemplate) {
         super(commonRepository);
         this.scheduleJobRepository = scheduleJobRepository;
         this.quartzService = quartzService;
+        this.mongoTemplate = mongoTemplate;
     }
 
     @Override
@@ -126,9 +133,24 @@ public class ScheduleJobServiceImpl
             throw new Exception("there is no job with this id");
         }
         ScheduleJob job = jobOptional.get();
+        String jobType = job.getJobType();
+        if ("scheduler".equals(jobType)) {
+            // 定时任务调用启用接口
+            start(id);
+            return;
+        }
         job.setUtime(System.currentTimeMillis());
         job.setJobStatus("1");
         scheduleJobRepository.saveAndFlush(job);
+        // 保存执行记录
+        HistoryDO historyDO = new HistoryDO();
+        historyDO.setJobId(job.getId());
+        historyDO.setStatus(1);
+        Long now = System.currentTimeMillis();
+        historyDO.setCtime(now);
+        historyDO.setUtime(now);
+        HistoryDO historyDO1 = mongoTemplate.save(historyDO);
+        String hisId = historyDO1.getId();
         //获取对应的Bean
         Object object = SpringUtil.getBean(job.getBeanClass());
         try {
@@ -136,7 +158,7 @@ public class ScheduleJobServiceImpl
             Method[] methods = object.getClass().getDeclaredMethods();
             String methodName = job.getMethodName();
             for (int i=0;i< methods.length;i++) {
-                String methodNameIter =methods[i].getName();
+                String methodNameIter = methods[i].getName();
                 if (!methodName.equals(methodNameIter)) {
                     continue;
                 }
@@ -146,14 +168,29 @@ public class ScheduleJobServiceImpl
                     methods[i].invoke(object);
                     return;
                 }
+//                if ("templateCrawl".equals(methodName)) {
+//
+//                    String jobDataJsonString = job.getJobDataMap();
+//                    JSONArray json = JSONArray.parseArray(jobDataJsonString);
+//                    if (json.size() < 2 ) {
+//                        log.error("爬取失败");
+//                        return;
+//                    }
+//
+//                    int finalI = i;
+//                    forkJoinPool.submit(() -> methods[finalI]
+//                            .invoke(object, new Long[] {Long.parseLong(String.valueOf(json.get(1)))}));
+//                    return;
+//                }
                 Object[] actualParameters = new Object[parameters.length] ;
                 String jobDataJsonString = job.getJobDataMap();
                 JSONArray json = JSONArray.parseArray(jobDataJsonString);
 
                 actualParameters[0] = job.getId();
-                actualParameters[1] = "temp";
-                int start = 2;
-                for (int j = 0; j < parameters.length - 2; j++) {
+                actualParameters[1] = jobType;
+                actualParameters[2] = hisId;
+                int start = 3;
+                for (int j = 0; j < parameters.length - start; j++) {
                     actualParameters[start + j] = json.get(j);
                 }
                 int finalI = i;

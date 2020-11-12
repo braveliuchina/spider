@@ -23,9 +23,12 @@ public class CommonHtmlDO extends CommonManagerProperty {
 
     private long jobId;
 
+    // 执行记录Id
+    private String hisId;
+
     private List<JSONObject> content;
 
-    private String err = "运行过程中无异常信息";
+    private String err;
 
     private long ctime;
 

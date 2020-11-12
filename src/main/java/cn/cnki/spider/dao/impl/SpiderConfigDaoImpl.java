@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SpiderConfigDaoImpl implements SpiderConfigDao {
 
-//	private final JdbcTemplate jdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
 
 	@Override
 	public SpiderConfig getConfig(String name) {
@@ -37,6 +37,17 @@ public class SpiderConfigDaoImpl implements SpiderConfigDao {
 		SpiderConfig config = new SpiderConfig();
 		config.setSite(new JSONObject().toJSONString());
 		return new SpiderConfig();
+	}
+
+	@Override
+	public SpiderConfig getConfigById(Long id) {
+		String sql = "select * from TEST_NEWS_协议表 where id = '" + id + "'";
+		log.info("sql is :{}", sql);
+		List<SpiderConfig> configs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(SpiderConfig.class));
+		if (configs.isEmpty()) {
+			return null;
+		}
+		return configs.get(1);
 	}
 
 	@Override

@@ -21,9 +21,11 @@ public class HtmlDO {
 
     private String type;
 
+    private String hisId;
+
     private String html;
 
-    private String err = "运行过程中无异常信息";
+    private String err;
 
     private long ctime;
 
