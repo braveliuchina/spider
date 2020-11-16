@@ -1,5 +1,6 @@
 package cn.cnki.spider.spider;
 
+import cn.cnki.spider.common.pojo.ArticleDO;
 import cn.cnki.spider.dao.SpiderConfigDao;
 import cn.cnki.spider.entity.Content;
 import cn.cnki.spider.entity.SpiderArticle;
@@ -27,8 +28,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Data
-//@Component
-public class AbstractNewspaperProcessor implements PageProcessor {
+public class AbstractCloudNewspaperProcessor implements PageProcessor {
 
     private final SpiderConfigDao spiderConfigDao;
 
@@ -50,9 +50,16 @@ public class AbstractNewspaperProcessor implements PageProcessor {
 
     private String code;
 
-    private List<SpiderArticle> articles;
+    // 任务相关
+    private Long jobId;
 
-    public AbstractNewspaperProcessor(SpiderConfigDao spiderConfigDao) {
+    private String hisId;
+
+    private Long templateId;
+
+    private List<ArticleDO> articles;
+
+    public AbstractCloudNewspaperProcessor(SpiderConfigDao spiderConfigDao) {
         this.spiderConfigDao = spiderConfigDao;
     }
 
@@ -97,7 +104,7 @@ public class AbstractNewspaperProcessor implements PageProcessor {
         return imgPrefixUsePrefix ? prefix : pageUrl.substring(0, pageUrl.lastIndexOf("/")) + "/";
     }
 
-    private void buildArticleByKey(String key, List<String> ignore, Map<String, Content> ruleMap, SpiderArticle article,
+    private void buildArticleByKey(String key, List<String> ignore, Map<String, Content> ruleMap, ArticleDO article,
                                    Page page, Selectable node, String pageNoIndex) {
         if (null != ignore && !ignore.isEmpty() && ignore.contains(key)) {
             return;
@@ -267,7 +274,7 @@ public class AbstractNewspaperProcessor implements PageProcessor {
         }
         return item;
     }
-    private void buildArticleContent(SpiderArticle article, Content contentArticle, Page page) {
+    private void buildArticleContent(ArticleDO article, Content contentArticle, Page page) {
         String content = article.getContent();
         String imgs = article.getImage();
         // 只有图片没有内容的情况
@@ -325,7 +332,7 @@ public class AbstractNewspaperProcessor implements PageProcessor {
         article.setContentAll(content);
     }
 
-    private String buildImgContent(String content, String imgs, SpiderArticle article, Content contentArticle) {
+    private String buildImgContent(String content, String imgs, ArticleDO article, Content contentArticle) {
         boolean jpgConcatDate = contentArticle.isJpgConcatDate();
 
         if (StringUtils.isBlank(content)) {
@@ -356,19 +363,22 @@ public class AbstractNewspaperProcessor implements PageProcessor {
         boolean digest = contentArticle.isDigest();
         boolean isLink = contentArticle.isLinks();
         List<String> ignore = contentArticle.getIgnore();
-        String directory = contentArticle.getDirectory();
+//        String directory = contentArticle.getDirectory();
         String digestKey = contentArticle.getDigestKey();
         String metaPrefix = contentArticle.getMetaPrefix();
         String pageNoIndex = contentArticle.getPageNoIndex();
         boolean isXml = contentArticle.isXml();
 
-        List<SpiderArticle> spiderArticles = this.getArticles();
+        List<ArticleDO> spiderArticles = this.getArticles();
         if (null != spiderArticles && !spiderArticles.isEmpty()) {
             spiderArticles.forEach(article -> {
                 buildArticleContent(article, contentArticle, page);
+                article.setTemplateId(templateId);
+                article.setJobId(jobId);
+                article.setHisId(hisId);
             });
             page.putField("articles", spiderArticles);
-            page.putField("directory", directory);
+//            page.putField("directory", directory);
             return;
         }
         if (isXml) {
@@ -378,19 +388,22 @@ public class AbstractNewspaperProcessor implements PageProcessor {
             } else if ("html".equals(contentTypeArticle) && "xpath".equals(selectorArticle)) {
                 nodes = page.getHtml().xpath(ruleArticle).nodes();
             }
-            List<SpiderArticle> articles = Lists.newArrayList();
+            List<ArticleDO> articles = Lists.newArrayList();
             if (null == nodes) {
                 return;
             }
             for (Selectable node : nodes) {
-                SpiderArticle article = buildArticle(digestKey, ruleMap,
+                ArticleDO article = buildArticle(digestKey, ruleMap,
                         ignore, page, contentArticle, node, page, pageNoIndex);
                 if (null != article) {
+                    article.setTemplateId(templateId);
+                    article.setJobId(jobId);
+                    article.setHisId(hisId);
                     articles.add(article);
                 }
             }
             page.putField("articles", articles);
-            page.putField("directory", directory);
+//            page.putField("directory", directory);
             return;
         }
         // 是否持续抓取
@@ -416,17 +429,23 @@ public class AbstractNewspaperProcessor implements PageProcessor {
             return;
         }
         // 文章详情页信息抓取
-        SpiderArticle article = buildArticle(digestKey, ruleMap, ignore, page, contentArticle, null, page, pageNoIndex);
+        ArticleDO article = buildArticle(digestKey, ruleMap, ignore, page, contentArticle, null, page, pageNoIndex);
+        if (null == article) {
+            return;
+        }
+        article.setTemplateId(templateId);
+        article.setJobId(jobId);
+        article.setHisId(hisId);
         // 将变量塞入上下文
         page.putField("article", article);
-        page.putField("directory", directory);
+//        page.putField("directory", directory);
     }
 
-    private SpiderArticle buildArticle(String digestKey, Map<String, Content> ruleMap, List<String> ignore, Page page,
+    private ArticleDO buildArticle(String digestKey, Map<String, Content> ruleMap, List<String> ignore, Page page,
                                        Content contentArticle, Selectable node, Page pageNew, String pageNoIndex) {
         long millis = System.currentTimeMillis();
-        SpiderArticle article = SpiderArticle.builder().build();
-        article.setProtocalId(spiderConfig.getId());
+        ArticleDO article = new ArticleDO();
+        article.setTemplateId(templateId);
         article.setCtime(millis);
         article.setUtime(millis);
         for (String key : ruleMap.keySet()) {
@@ -443,7 +462,7 @@ public class AbstractNewspaperProcessor implements PageProcessor {
         return article;
     }
 
-    protected void buildDigestInfo(String digestKey, SpiderArticle article) {
+    protected void buildDigestInfo(String digestKey, ArticleDO article) {
         if (!"cfgId".equals(digestKey) && !"pageNo".equals(digestKey)) {
             return;
         }
@@ -905,7 +924,7 @@ public class AbstractNewspaperProcessor implements PageProcessor {
         this.setPageMap(pageMap);
     }
 
-    protected void buildArticle(SpiderArticle article, String key, List<String> valueList, String filterRegex,
+    protected void buildArticle(ArticleDO article, String key, List<String> valueList, String filterRegex,
                                 boolean joinAll, int index, String selector,
                                 String pageNoIndex, String imgPrefix, Content content, Page page) {
         if (null == valueList || valueList.isEmpty()) {
@@ -941,7 +960,7 @@ public class AbstractNewspaperProcessor implements PageProcessor {
 
     }
 
-    protected void buildArticle(SpiderArticle article, String key, String value, String rule,
+    protected void buildArticle(ArticleDO article, String key, String value, String rule,
                                 String pageNoIndex, String imgPrefix, Content content) {
         value = filterBlankSpecialChar(value);
         if ("date".equals(key)) {

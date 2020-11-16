@@ -30,10 +30,6 @@ public interface CrawlServiceInterface {
 
     void seleniumCrawlHtmlAndSave(long jobId, String type, String hisId, String url);
 
-    void reddotUrlCrawl(String url, int size, String domain);
-
-    void reddotItemCrawl(List<ReddotUrl> reddotUrls, String domain);
-
     void commonCrawl(String url, List<String> xpathList);
 
     void commonCrawlV2(long jobId, String type, String hisId, String url, List<String> xpathList);

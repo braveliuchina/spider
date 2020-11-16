@@ -2,6 +2,7 @@ package cn.cnki.spider.config.security;
 
 import cn.cnki.spider.sys.sysauthority.service.SysAuthorityService;
 import cn.cnki.spider.sys.sysauthority.vo.SysAuthorityVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -96,13 +98,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addLogoutHandler(logoutHandlerConfig)
                 .logoutUrl("/logout/")
 //                .logoutSuccessUrl("/loginPage/")
-                .logoutSuccessHandler(new LogoutSuccessHandler() {
-                    @Override
-                    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                                Authentication authentication) throws IOException, ServletException {
-                        response.sendRedirect(contextPath + "/loginPage/");
-                    }
-                })
+//                .logoutSuccessHandler(new LogoutSuccessHandler() {
+//                    @Override
+//                    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
+//                                                Authentication authentication) throws IOException, ServletException {
+//                        log.error("Braveliu------------");
+//                        response.sendRedirect(contextPath + "/loginPage/");
+//                    }
+//                })
                 .permitAll()
                 .and();
         http

@@ -127,7 +127,7 @@ public class ChromeUtil {
 	 * @param driver
 	 * @param url
 	 */
-	public static void allow_flash(WebDriver driver, String url) {
+	public static void allow_flash84(WebDriver driver, String url) throws Exception{
 		url = _base_url(url);
 		driver.get(String.format("chrome://settings/content/siteDetails?site=%s", url));
 		WebElement webele_settings = _shadow_root(driver,
@@ -163,6 +163,50 @@ public class ChromeUtil {
 		WebElement permission4 = plugins4.findElement(By.id("permission"));
 		Select sel4 = new Select(permission4);
 		sel4.selectByValue("allow");
+	}
+
+	/**
+	 * chrome 86设置允许flash运行
+	 *
+	 * @param driver
+	 * @param url
+	 */
+	public static void allow_flash(WebDriver driver, String url) throws Exception {
+		url = _base_url(url);
+		driver.get(String.format("chrome://settings/content/siteDetails?site=%s", url));
+		WebElement webele_settings = _shadow_root(driver,
+				(((ChromeDriver) driver).findElementByTagName("settings-ui")));
+		WebElement webele_container = webele_settings.findElement(By.id("container"));
+		WebElement webele_main = _shadow_root(driver, webele_container.findElement(By.id("main")));
+		WebElement showing_subpage = _shadow_root(driver, webele_main.findElement(By.className("showing-subpage")));
+		WebElement advancedPage = showing_subpage.findElement(By.id("basicPage"));
+//        WebElement settings_section_page = _shadow_root(driver,advancedPage.findElement(By.tagName("settings-section")));
+		WebElement settings_privacy_page = _shadow_root(driver,
+				advancedPage.findElement(By.tagName("settings-privacy-page")));
+		WebElement pages = settings_privacy_page.findElement(By.id("pages"));
+		WebElement settings_subpage = pages.findElement(By.tagName("settings-subpage"));
+		WebElement site_details = _shadow_root(driver, settings_subpage.findElement(By.tagName("site-details")));
+		// flash
+		WebElement plugins = _shadow_root(driver, site_details.findElement(By.id("plugins")));
+		WebElement permission = plugins.findElement(By.id("permission"));
+		Select sel = new Select(permission);
+		sel.selectByValue("allow");
+//		// 自动下载
+//		WebElement plugins2 = _shadow_root(driver, site_details.findElement(By.id("automaticDownloads")));
+//		WebElement permission2 = plugins2.findElement(By.id("permission"));
+//		Select sel2 = new Select(permission2);
+//		sel2.selectByValue("allow");
+//
+//		// 自动下载
+//		WebElement plugins3 = _shadow_root(driver, site_details.findElement(By.id("mixed-script")));
+//		WebElement permission3 = plugins3.findElement(By.id("permission"));
+//		Select sel3 = new Select(permission3);
+//		sel3.selectByValue("allow");
+//
+//		WebElement plugins4 = _shadow_root(driver, site_details.findElement(By.id("nativeFileSystemWrite")));
+//		WebElement permission4 = plugins4.findElement(By.id("permission"));
+//		Select sel4 = new Select(permission4);
+//		sel4.selectByValue("allow");
 	}
 
 	public static Proxy buildSeleniumProxy(BrowserMobProxy browserMobProxy) {
@@ -206,7 +250,7 @@ public class ChromeUtil {
 		}
 	}
 
-	public WebDriver getDriver(String url, String harName) {
+	public WebDriver getDriver(String url, String harName) throws Exception {
 		if (null != this.getWebDriver() && !hasQuit(this.getWebDriver())) {
 			allow_flash(webDriver, url);
 			return this.getWebDriver();
@@ -251,17 +295,17 @@ public class ChromeUtil {
 		return webDriver;
 	}
 	
-	public WebDriver getDriver(String url) {
+	public WebDriver getDriver(String url) throws Exception {
 		return getDriver(url, "flashXml");
 	}
 
-	public List<String> doflashPageXmlPageRequest(String url) throws IOException {
+	public List<String> doflashPageXmlPageRequest(String url) throws Exception {
 
 		return doflashPageXmlPageRequest(url, "flashXml");
 
 	}
 	
-	public List<String> doflashPageXmlPageRequest(String url, String harName) throws IOException {
+	public List<String> doflashPageXmlPageRequest(String url, String harName) throws Exception {
 
 		WebDriver webDriver = getDriver(url, harName);
 		Actions actionOpenLinkInNewTab = new Actions(webDriver);
@@ -283,13 +327,13 @@ public class ChromeUtil {
 
 	}
 
-	public List<String> doflashPageXmlPageRequestV3(String url) throws IOException {
+	public List<String> doflashPageXmlPageRequestV3(String url) throws Exception {
 
 		return doflashPageXmlPageRequestV3(url, "flashXml"); 
 
 	}
 
-	public void mockLogin(String url, String harName, String userName, String password) throws IOException {
+	public void mockLogin(String url, String harName, String userName, String password) throws Exception {
 
 		WebDriver webDriver = getDriver(url);
 		webDriver.get(url);
@@ -319,13 +363,13 @@ public class ChromeUtil {
 
 	}
 
-	public List<String> doflashPageXmlPageRequestV3(String url, String harName) throws IOException {
+	public List<String> doflashPageXmlPageRequestV3(String url, String harName) throws Exception {
 
 		WebDriver webDriver = getDriver(url, harName);
 		webDriver.get(url);
 		// 等待已确保页面正常加载
 		try {
-			Thread.sleep(15 * 1000L);
+			Thread.sleep(35 * 1000L);
 //			// 网络代理抓取网络请求记录
 			Har har = browserMobProxy.getHar();
 			return fetchMultiCfg(har);
@@ -337,7 +381,7 @@ public class ChromeUtil {
 
 	}
 
-	public String doflashPageXmlPageRequestV2(String url) throws IOException {
+	public String doflashPageXmlPageRequestV2(String url) throws Exception {
 
 		WebDriver webDriver = getDriver(url);
 		Actions actionOpenLinkInNewTab = new Actions(webDriver);
@@ -383,7 +427,7 @@ public class ChromeUtil {
 		browserMobProxy.abort();
 	}
 
-	public List<String> buildForflashPageXmlPageSingleRequest(String url) throws IOException {
+	public List<String> buildForflashPageXmlPageSingleRequest(String url) throws Exception {
 
 		WebDriver webDriver = getDriver(url);
 		webDriver.get(url);

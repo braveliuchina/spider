@@ -1,15 +1,18 @@
 package cn.cnki.spider.scheduler;
 
+import cn.cnki.spider.common.pojo.PageCondition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class ScheduleJobVoNew {
+public class ScheduleJobVoNew extends PageCondition {
 
     private Long id;
 
@@ -78,6 +81,9 @@ public class ScheduleJobVoNew {
     private Integer enable;
     // 定时任务执行结果数量
     private Integer result;
+
+    // 任务执行次数
+    private Integer his;
     // 最近一次执行错误信息
     private String err;
 

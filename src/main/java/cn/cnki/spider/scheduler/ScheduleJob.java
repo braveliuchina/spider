@@ -60,8 +60,10 @@ public class ScheduleJob implements Serializable {
 	private String jobDesc;
 	// 定时任务是否启用
 	private Integer enable;
-	// 定时任务执行结果数量
+	// 任务执行成功数量
 	private Integer result;
+	// 任务执行次数
+	private Integer his;
 	// 最近一次执行错误信息
 	private String err;
 

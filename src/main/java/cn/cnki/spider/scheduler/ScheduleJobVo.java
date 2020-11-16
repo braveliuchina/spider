@@ -76,6 +76,9 @@ public class ScheduleJobVo extends PageCondition {
     private Integer enable;
     // 定时任务执行结果数量
     private Integer result;
+
+    // 任务执行次数
+    private Integer his;
     // 最近一次执行错误信息
     private String err;
 

@@ -1,28 +1,28 @@
 package cn.cnki.spider.common.service;
 
+import cn.cnki.spider.common.pojo.ArticleDO;
 import cn.cnki.spider.common.pojo.HistoryDO;
 import cn.cnki.spider.common.pojo.HtmlDO;
 import cn.cnki.spider.common.repository.CrawlHtmlRepository;
-import cn.cnki.spider.dao.AACSBDao;
-import cn.cnki.spider.dao.SpiderArticleDao;
 import cn.cnki.spider.dao.SpiderConfigDao;
 import cn.cnki.spider.entity.*;
-import cn.cnki.spider.pipeline.*;
+import cn.cnki.spider.pipeline.ArticleMongoDBBatchPageModelPipeline;
+import cn.cnki.spider.pipeline.CommonPageModelPipeline;
+import cn.cnki.spider.pipeline.MhtFilePipeline;
 import cn.cnki.spider.scheduler.ScheduleJob;
 import cn.cnki.spider.scheduler.ScheduleJobRepository;
-import cn.cnki.spider.spider.AbstractNewspaperProcessor;
+import cn.cnki.spider.spider.AbstractCloudNewspaperProcessor;
 import cn.cnki.spider.spider.CommonRepoProcessor;
-import cn.cnki.spider.spider.RedDotItemRepoProcessor;
-import cn.cnki.spider.spider.RedDotRepoProcessor;
 import cn.cnki.spider.util.ChromeUtil;
 import cn.cnki.spider.util.CommonForkJoinPool;
-import cn.cnki.spider.util.XmlDescriptorUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
@@ -36,9 +36,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -56,27 +53,21 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class CrawlService extends XmlServiceClass implements cn.cnki.spider.common.service.CrawlServiceInterface {
+@Data
+@RequiredArgsConstructor
+public class CrawlService implements cn.cnki.spider.common.service.CrawlServiceInterface {
 
-    private AbstractNewspaperProcessor processor;
+    private AbstractCloudNewspaperProcessor processor;
 
-    private final RedDotRepoProcessor redDotRepoProcessor;
+    private final ProcessorFactory processorFactory;
 
-    private final ArticleDBBatchPageModelPipeline dbPageModelPipeline;
-
-    private final ReddotUrlDBBatchPageModelPipeline reddotUrlDBBatchPageModelPipeline;
-
-    private final ReddotDBItemBatchPageModelPipeline reddotDBItemBatchPageModelPipeline;
-
-    private final RedDotItemRepoProcessor redDotItemRepoProcessor;
+    private final ArticleMongoDBBatchPageModelPipeline dbPageModelPipeline;
 
     private final CommonRepoProcessor commonRepoProcessor;
 
     private final CommonPageModelPipeline commonPageModelPipeline;
 
     private final ChromeUtil chromeUtil;
-
-    private final AACSBDao aacsbDao;
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -92,43 +83,6 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
 
     private final CommonForkJoinPool forkJoinPool = new CommonForkJoinPool(16, "crawlPool");
 
-    public CrawlService(ChromeUtil chromeUtil,
-                        ArticleDBBatchPageModelPipeline dBPageModelPipeline,
-                        SpiderArticleDao spiderArticleDao, XmlDescriptorUtil xmlDescriptor,
-                        RedDotRepoProcessor redDotRepoProcessor,
-                        ReddotUrlDBBatchPageModelPipeline reddotUrlDBBatchPageModelPipeline,
-                        RedDotItemRepoProcessor redDotItemRepoProcessor,
-                        ReddotDBItemBatchPageModelPipeline reddotDBItemBatchPageModelPipeline,
-                        CommonRepoProcessor commonRepoProcessor,
-                        CommonPageModelPipeline commonPageModelPipeline,
-                        CrawlHtmlRepository crawlHtmlRepository,
-                        MongoTemplate mongoTemplate,
-                        ScheduleJobRepository scheduleJobRepository,
-                        SpiderConfigDao spiderConfigDao,
-                        AACSBDao aacsbDao) {
-        super(spiderArticleDao, xmlDescriptor);
-        this.chromeUtil = chromeUtil;
-        this.dbPageModelPipeline = dBPageModelPipeline;
-        this.redDotRepoProcessor = redDotRepoProcessor;
-        this.reddotUrlDBBatchPageModelPipeline = reddotUrlDBBatchPageModelPipeline;
-        this.redDotItemRepoProcessor = redDotItemRepoProcessor;
-        this.reddotDBItemBatchPageModelPipeline = reddotDBItemBatchPageModelPipeline;
-        this.commonRepoProcessor = commonRepoProcessor;
-        this.commonPageModelPipeline = commonPageModelPipeline;
-        this.crawlHtmlRepository = crawlHtmlRepository;
-        this.mongoTemplate = mongoTemplate;
-        this.scheduleJobRepository = scheduleJobRepository;
-        this.spiderConfigDao = spiderConfigDao;
-        this.aacsbDao = aacsbDao;
-    }
-
-    public AbstractNewspaperProcessor getProcessor() {
-        return processor;
-    }
-
-    public void setProcessor(AbstractNewspaperProcessor processor) {
-        this.processor = processor;
-    }
 
     private void crawl(List<String> urls, int thread) {
         Spider detailSpider = Spider.create(processor);
@@ -136,12 +90,12 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
             return;
         }
         for (String url : urls) {
-            detailSpider.addUrl(url).addPipeline(new MhtFilePipeline("C:/spider")).addPipeline(dbPageModelPipeline)
+            detailSpider.addUrl(url).addPipeline(dbPageModelPipeline)
                     .thread(thread).run();
         }
     }
 
-    private void crawl(List<SpiderArticle> articles) throws Exception {
+    private void crawl(List<ArticleDO> articles) throws Exception {
         if (null == articles || articles.isEmpty()) {
             throw new Exception("article download list is empty");
         }
@@ -159,10 +113,8 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         if (null == config) {
             throw new Exception("处理异常,请联系管理员");
         }
-        long id = config.getId();
-        String dateStr = year + month + day;
 
-        buildXml(id, dateStr);
+
     }
 
     @Override
@@ -179,8 +131,6 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
             ids.add(config.getId());
         }
         String dateStr = year + month + day;
-
-        buildXml(ids, dateStr);
     }
 
     @Override
@@ -293,9 +243,9 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                 ArrayList<WebElement> cells = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
                 AACSB aacsb = new AACSB();
                 String accreditation = "";
-                for (int i = 0; i < cells.size() ; i++) {
+                for (int i = 0; i < cells.size(); i++) {
                     WebElement cell = cells.get(i);
-                    if (0==i) {
+                    if (0 == i) {
                         String university = cell.findElement(By.tagName("b")).getText();
                         String region = cell.findElement(By.tagName("span")).getText();
                         String school = cell.findElement(By.tagName("p")).getText();
@@ -304,19 +254,19 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                         aacsb.setAcademy(school);
                         continue;
                     }
-                    if (1==i) {
-                        try{
+                    if (1 == i) {
+                        try {
                             cell.findElement(By.tagName("img"));
                             accreditation = "Business";
                         } catch (org.openqa.selenium.NoSuchElementException e) {
                             continue;
                         }
                     }
-                    if (2==i) {
+                    if (2 == i) {
                         try {
                             cell.findElement(By.tagName("img"));
                             accreditation = StringUtils.isBlank(accreditation) ?
-                                    "Accounting": accreditation + ",Accounting";
+                                    "Accounting" : accreditation + ",Accounting";
                         } catch (org.openqa.selenium.NoSuchElementException e) {
                             continue;
                         }
@@ -325,9 +275,9 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                 }
                 results.add(aacsb);
             }
-            aacsbDao.batchInsert(results);
+//            aacsbDao.batchInsert(results);
             webDriver.quit();
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.warn("AACSB crawl exception err", e);
         }
     }
@@ -385,47 +335,6 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
     }
 
     @Override
-    public void reddotUrlCrawl(String url, int size, String domain) {
-        try {
-            List<String> urls = Lists.newArrayList();
-            for (int i = 1; i < size; i++) {
-                urls.add(url + i);
-            }
-
-            redDotRepoProcessor.setDomain(domain);
-            Spider detailSpider = Spider.create(redDotRepoProcessor);
-            if (null == urls || urls.isEmpty()) {
-                return;
-            }
-            for (String urlIter : urls) {
-                detailSpider.addUrl(urlIter).addPipeline(reddotUrlDBBatchPageModelPipeline)
-                        .thread(5).run();
-            }
-        }catch (Exception e) {
-            log.warn("reddot crawl exception err", e);
-        }
-    }
-
-    @Override
-    public void reddotItemCrawl(List<ReddotUrl> urls, String domain) {
-        redDotItemRepoProcessor.setDomain(domain);
-        Spider detailSpider = Spider.create(redDotItemRepoProcessor);
-        if (null == urls || urls.isEmpty()) {
-            return;
-        }
-//        HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
-//        httpClientDownloader.setProxyProvider(SimpleProxyProvider.from(new Proxy("49.70.99.48",9999)));
-//        detailSpider.setDownloader(httpClientDownloader);
-        for (ReddotUrl urlIter : urls) {
-
-            detailSpider.addUrl("https://www.red-dot.org" + urlIter.getUrl())
-                    .addPipeline(reddotDBItemBatchPageModelPipeline)
-                    .thread(1).run();
-        }
-
-    }
-
-    @Override
     public void commonCrawl(String url, List<String> xpathList) {
         log.info("url is {}, xpath list is {}", url, xpathList);
         if (StringUtils.isBlank(url) || null == xpathList || xpathList.isEmpty()) {
@@ -472,8 +381,9 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        String monthStr = String.valueOf(month);
+        String monthStr = String.valueOf(month+1);
         String dayStr = String.valueOf(day);
+        month += 1;
         if (month < 10) {
             monthStr = "0" + monthStr;
         }
@@ -481,6 +391,11 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
             dayStr = "0" + dayStr;
         }
         try {
+            AbstractCloudNewspaperProcessor processor = processorFactory.buildProcessor(config.getName());
+            processor.setJobId(jobId);
+            processor.setHisId(hisId);
+            processor.setTemplateId(templateId);
+            this.setProcessor(processor);
             crawlByDate(String.valueOf(year), monthStr, dayStr, code, name);
         } catch (Exception e) {
             log.error("爬取失败,{}", e);
@@ -500,21 +415,29 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
             }
         }
         ScheduleJob job = jobOptional.get();
-
+        Integer hisCount = job.getHis();
         // 异常情况
         if (StringUtils.isNotBlank(err)) {
             // 停止但执行失败
             job.setJobStatus("0");
+            err = err.substring(0, 1000);
             job.setErr(err);
+
         } else {
             // 停止但执行成功
             job.setJobStatus("2");
+            job.setErr("");
             Integer result = job.getResult();
             if (null == result) {
                 job.setResult(1);
             } else {
                 job.setResult(++result);
             }
+        }
+        if (null == hisCount) {
+            job.setHis(1);
+        } else {
+            job.setHis(++hisCount);
         }
         job.setUtime(System.currentTimeMillis());
         // 任务表
@@ -616,7 +539,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         return (Integer) pageId.get("issue");
     }
 
-    private SpiderArticle buildArticle(String cfgId, long porotocalId,
+    private ArticleDO buildArticle(String cfgId, long porotocalId,
                                        String dateStr, String pageNo, String pageName, String contentStr) {
         JSONObject json = JSON.parseObject(contentStr, JSONObject.class);
         if (!json.containsKey("response")) {
@@ -625,26 +548,27 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         AjaxRequestArticleContent content = JSON
                 .parseObject(JSON
                         .toJSONString(((JSONArray) json.get("response")).get(0)), AjaxRequestArticleContent.class);
-        SpiderArticle spiderArticle = new SpiderArticle();
-        spiderArticle.setProtocalId(porotocalId);
+        ArticleDO ArticleDO = new ArticleDO();
+        ArticleDO.setTemplateId(porotocalId);
         long now = System.currentTimeMillis();
-        spiderArticle.setCtime(now);
-        spiderArticle.setUtime(now);
-        spiderArticle.setCfgId(cfgId);
-        spiderArticle.setDate(dateStr);
-        spiderArticle.setPageNo(pageNo);
-        spiderArticle.setPageName(pageName);
-        spiderArticle.setTime(content.getDate());
-        spiderArticle.setTitle(content.getTitle());
-        spiderArticle.setIntroTitle(content.getIntroduction());
-        spiderArticle.setSubTitle(content.getSubtitle());
-        spiderArticle.setContent(content.getContent());
-        spiderArticle.setContentAll(content.getContent());
-        return spiderArticle;
+        ArticleDO.setCtime(now);
+        ArticleDO.setUtime(now);
+        ArticleDO.setCfgId(cfgId);
+        ArticleDO.setDate(dateStr);
+        ArticleDO.setPageNo(pageNo);
+        ArticleDO.setPageName(pageName);
+        ArticleDO.setTime(content.getDate());
+        ArticleDO.setTitle(content.getTitle());
+        ArticleDO.setIntroTitle(content.getIntroduction());
+        ArticleDO.setSubTitle(content.getSubtitle());
+        ArticleDO.setContent(content.getContent());
+        ArticleDO.setContentAll(content.getContent());
+        return ArticleDO;
     }
 
-    public SpiderConfig crawlByDateInnerMongoDB(String year, String month, String day,
-                                         String code, String configName) throws Exception {
+    public SpiderConfig crawlByDateInnerMongoDB(long jobId, String hisId,
+                                                String year, String month, String day,
+                                                String code, String configName) throws Exception {
         log.info("{}, {}  ...>>cron.... started", configName, year + month + day);
         processor.getSite();
         SpiderConfig config = processor.getSpiderConfig();
@@ -673,7 +597,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
             }
             String pageNameUrl = siteRule.getDiscoverPageNameUrl();
             String contentUrl = siteRule.getDiscoverArticleContentUrl();
-            List<SpiderArticle> articles = Lists.newArrayList();
+            List<ArticleDO> articles = Lists.newArrayList();
             for (String pageNo : articleIdListMap.keySet()) {
                 String url = buildUrl(pageNameUrl, year, month, day).replace("${pageNo}", pageNo);
                 String response = simplePlainGetRequest(url);
@@ -684,7 +608,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                 for (String articleId : articleIds) {
                     String newContentUrl = contentUrl.replace("${articleId}", articleId);
                     String contentResponse = simplePlainGetRequest(newContentUrl);
-                    SpiderArticle article = buildArticle(articleId, config.getId(), year + month + day,
+                    ArticleDO article = buildArticle(articleId, config.getId(), year + month + day,
                             pageNo, banName, contentResponse);
                     articles.add(article);
                 }
@@ -731,7 +655,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
             }
             String pageNameUrl = siteRule.getDiscoverPageNameUrl();
             String contentUrl = siteRule.getDiscoverArticleContentUrl();
-            List<SpiderArticle> articles = Lists.newArrayList();
+            List<ArticleDO> articles = Lists.newArrayList();
             for (String pageNo : articleIdListMap.keySet()) {
                 String url = buildUrl(pageNameUrl, year, month, day).replace("${pageNo}", pageNo);
                 String response = simplePlainGetRequest(url);
@@ -742,7 +666,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                 for (String articleId : articleIds) {
                     String newContentUrl = contentUrl.replace("${articleId}", articleId);
                     String contentResponse = simplePlainGetRequest(newContentUrl);
-                    SpiderArticle article = buildArticle(articleId, config.getId(), year + month + day,
+                    ArticleDO article = buildArticle(articleId, config.getId(), year + month + day,
                             pageNo, banName, contentResponse);
                     articles.add(article);
                 }
@@ -759,7 +683,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         return buildCommonTypeUrlAndCrawl(type, configName, siteRule, year, month, day, config);
     }
 
-    private void loginLogic(Site siteRule) throws IOException {
+    private void loginLogic(Site siteRule) throws Exception {
         String loginUrl = siteRule.getLoginUrl();
         String userName = siteRule.getUserName();
         String password = siteRule.getPassword();
@@ -892,7 +816,7 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
         AjaxContent ajaxContent = result.getInfo();
         List<AjaxBanContent> banList = ajaxContent.getBan();
         List<List<AjaxArticleContent>> articleListList = ajaxContent.getArticle();
-        List<SpiderArticle> articles = Lists.newArrayList();
+        List<ArticleDO> articles = Lists.newArrayList();
         long now = System.currentTimeMillis();
         for (int i = 0; i < articleListList.size(); i++) {
             List<AjaxArticleContent> ajaxArticleContentList = articleListList.get(i);
@@ -920,8 +844,8 @@ public class CrawlService extends XmlServiceClass implements cn.cnki.spider.comm
                     images = newImage;
                 }
                 jpg = prefix + jpg;
-                SpiderArticle article = new SpiderArticle();
-                article.setProtocalId(protocalId);
+                ArticleDO article = new ArticleDO();
+                article.setTemplateId(protocalId);
                 article.setDate(year + month + day);
                 article.setCfgId(cfgId);
                 article.setPageNo(pageNo);

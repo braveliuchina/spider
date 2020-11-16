@@ -72,7 +72,7 @@ public class CommonPageModelPipeline implements Pipeline {
 			}
 		}
 		ScheduleJob job = jobOptional.get();
-
+		Integer hisCount = job.getHis();
 		// 异常情况
 		if (StringUtils.isNotBlank(err)) {
 			// 停止但执行失败
@@ -81,12 +81,18 @@ public class CommonPageModelPipeline implements Pipeline {
 		} else {
 			// 停止但执行成功
 			job.setJobStatus("2");
+			job.setErr("");
 			Integer result = job.getResult();
 			if (null == result) {
 				job.setResult(1);
 			} else {
 				job.setResult(++result);
 			}
+		}
+		if (null == hisCount) {
+			job.setHis(1);
+		} else {
+			job.setHis(++hisCount);
 		}
 		job.setUtime(System.currentTimeMillis());
 		// 任务表

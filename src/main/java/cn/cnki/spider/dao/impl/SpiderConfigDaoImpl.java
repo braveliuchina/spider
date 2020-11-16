@@ -6,9 +6,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 
@@ -21,11 +23,18 @@ public class SpiderConfigDaoImpl implements SpiderConfigDao {
 
 	@Override
 	public SpiderConfig getConfig(String name) {
+		if (StringUtils.isEmpty(name)) {
+			return new SpiderConfig();
+		}
 		String sql = "select * from TEST_NEWS_协议表 where name = '" + name + "'";
 		log.info("sql is :{}", sql);
-//		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(SpiderConfig.class));
 		SpiderConfig config = new SpiderConfig();
-		config.setSite(new JSONObject().toJSONString());
+		try {
+			config = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(SpiderConfig.class));
+
+		} catch (EmptyResultDataAccessException e) {
+			log.error("查到的数据为空");
+		}
 		return config;
 	}
 
@@ -33,10 +42,14 @@ public class SpiderConfigDaoImpl implements SpiderConfigDao {
 	public SpiderConfig getConfigByCode(String code) {
 		String sql = "select * from TEST_NEWS_协议表 where code = '" + code + "'";
 		log.info("sql is :{}", sql);
-//		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(SpiderConfig.class));
-		SpiderConfig config = new SpiderConfig();
-		config.setSite(new JSONObject().toJSONString());
-		return new SpiderConfig();
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(SpiderConfig.class));
+	}
+
+	@Override
+	public List<SpiderConfig> getConfigListByCode(String code) {
+		String sql = "select * from TEST_NEWS_协议表 where code = '" + code + "'";
+		log.info("sql is :{}", sql);
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(SpiderConfig.class));
 	}
 
 	@Override
@@ -47,15 +60,7 @@ public class SpiderConfigDaoImpl implements SpiderConfigDao {
 		if (configs.isEmpty()) {
 			return null;
 		}
-		return configs.get(1);
-	}
-
-	@Override
-	public List<SpiderConfig> getConfigListByCode(String code) {
-		String sql = "select * from TEST_NEWS_协议表 where code = '" + code + "'";
-		log.info("sql is :{}", sql);
-//		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(SpiderConfig.class));
-		return Lists.newArrayList();
+		return configs.get(0);
 	}
 
 }

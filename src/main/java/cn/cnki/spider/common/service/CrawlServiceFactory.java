@@ -1,19 +1,13 @@
 package cn.cnki.spider.common.service;
 
 import cn.cnki.spider.common.repository.CrawlHtmlRepository;
-import cn.cnki.spider.dao.AACSBDao;
-import cn.cnki.spider.dao.SpiderArticleDao;
 import cn.cnki.spider.dao.SpiderConfigDao;
-import cn.cnki.spider.pipeline.ArticleDBBatchPageModelPipeline;
+import cn.cnki.spider.pipeline.ArticleMongoDBBatchPageModelPipeline;
 import cn.cnki.spider.pipeline.CommonPageModelPipeline;
-import cn.cnki.spider.pipeline.ReddotDBItemBatchPageModelPipeline;
-import cn.cnki.spider.pipeline.ReddotUrlDBBatchPageModelPipeline;
 import cn.cnki.spider.scheduler.ScheduleJobRepository;
-import cn.cnki.spider.spider.*;
-import cn.cnki.spider.spider.AbstractNewspaperProcessor;
-import cn.cnki.spider.spider.RedDotRepoProcessor;
+import cn.cnki.spider.spider.AbstractCloudNewspaperProcessor;
+import cn.cnki.spider.spider.CommonRepoProcessor;
 import cn.cnki.spider.util.ChromeUtil;
-import cn.cnki.spider.util.XmlDescriptorUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -24,49 +18,34 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CrawlServiceFactory {
 
-    private final ArticleDBBatchPageModelPipeline dbPageModelPipeline;
-
-    private final ChromeUtil chromeUtil;
-
-    private final SpiderArticleDao spiderArticleDao;
-
-    private final XmlDescriptorUtil xmlDescriptor;
-
-    private final AACSBDao aacsbDao;
-
-    private final RedDotRepoProcessor redDotRepoProcessor;
-
-    private final ReddotUrlDBBatchPageModelPipeline reddotUrlDBBatchPageModelPipeline;
-
-    private final RedDotItemRepoProcessor redDotItemRepoProcessor;
-
-    private final ReddotDBItemBatchPageModelPipeline reddotDBItemBatchPageModelPipeline;
+    private final ArticleMongoDBBatchPageModelPipeline dbPageModelPipeline;
 
     private final CommonRepoProcessor commonRepoProcessor;
 
     private final CommonPageModelPipeline commonPageModelPipeline;
 
-    private final CrawlHtmlRepository crawlHtmlRepository;
+    private final ChromeUtil chromeUtil;
 
-    private final ScheduleJobRepository scheduleJobRepository;
+    private final CrawlHtmlRepository crawlHtmlRepository;
 
     private final MongoTemplate mongoTemplate;
 
+    private final ScheduleJobRepository scheduleJobRepository;
+
+    private final ProcessorFactory processorFactory;
+
     private final SpiderConfigDao spiderConfigDao;
 
-    public cn.cnki.spider.common.service.CrawlService buildCrawlService(AbstractNewspaperProcessor processor) {
-        cn.cnki.spider.common.service.CrawlService service = new cn.cnki.spider.common.service.CrawlService(chromeUtil, dbPageModelPipeline,
-                spiderArticleDao, xmlDescriptor, redDotRepoProcessor,
-                reddotUrlDBBatchPageModelPipeline,
-                redDotItemRepoProcessor,
-                reddotDBItemBatchPageModelPipeline,
-                commonRepoProcessor,
-                commonPageModelPipeline,
-                crawlHtmlRepository,
-                mongoTemplate,
-                scheduleJobRepository,
-                spiderConfigDao,
-                aacsbDao);
+    public cn.cnki.spider.common.service.CrawlService buildCrawlService(AbstractCloudNewspaperProcessor processor) {
+        cn.cnki.spider.common.service.CrawlService service =
+                new cn.cnki.spider.common.service.CrawlService(processorFactory, dbPageModelPipeline,
+                        commonRepoProcessor,
+                        commonPageModelPipeline,
+                        chromeUtil,
+                        crawlHtmlRepository,
+                        mongoTemplate,
+                        scheduleJobRepository,
+                        spiderConfigDao);
         service.setProcessor(processor);
         return service;
     }

@@ -139,7 +139,7 @@ public class ScheduleJobController {
             if ("templateCrawl".equals(scheduleJobVoNew.getMethodName())) {
                 String jobDataMap = scheduleJobVoNew.getJobDataMap();
                 JSONArray templateJSON = JSONArray.parseArray(jobDataMap);
-                Long id = Long.parseLong(templateJSON.getString(1));
+                Long id = Long.parseLong(templateJSON.getString(0));
                 scheduleJobVoNew.setTemplateId(id);
                 scheduleJobVoNew.setCategory("按模板");
             }
@@ -151,9 +151,9 @@ public class ScheduleJobController {
             }
 
             String err = scheduleJobVoNew.getErr();
-            if (StringUtils.isBlank(err)) {
+            /*if (StringUtils.isBlank(err)) {
                 scheduleJobVoNew.setErr("暂无无异常信息");
-            }
+            }*/
             return scheduleJobVoNew;
         }).collect(Collectors.toList());
         jobNewPage.setRows(newVOS);
@@ -183,7 +183,45 @@ public class ScheduleJobController {
         JSONArray json = JSONArray.parseArray(dataMap);
         String methodName = jobVo.getMethodName();
 
-        if (json.size() > 1 || "templateCrawl".equals(methodName) ) {
+        if ("templateCrawl".equals(methodName)) {
+            Criteria criteria1 = Criteria.where(HistoryDO.Fields.jobId).is(id);
+            Criteria criteria2 = Criteria.where(HistoryDO.Fields.status).is(2);
+            query.addCriteria(criteria1.andOperator(criteria2));
+            query.with(Sort.by(Sort.Order.desc(HistoryDO.Fields.ctime)));
+            HistoryDO historyDO = mongoTemplate.findOne(query, HistoryDO.class);
+            if (null == historyDO) {
+                return new Result<>("", false, "最近一次的执行记录已被删除,请考虑重新执行");
+            }
+            String hisId = historyDO.getId();
+            Criteria criteria3 = Criteria.where(ArticleDO.Fields.jobId).is(id);
+            Criteria criteria4 = Criteria.where(ArticleDO.Fields.hisId).is(hisId);
+            Query query2 = new Query();
+            query2.addCriteria(criteria4.andOperator(criteria3));
+            query2.with(Sort.by(Sort.Order.desc(ArticleDO.Fields.ctime)));
+            List<ArticleDO> articleDOS = mongoTemplate.find(query2, ArticleDO.class);
+            if (articleDOS.isEmpty()) {
+                return new Result<>("", false, "最近一次的执行记录已被删除,请考虑重新执行");
+            }
+            List<JSONObject> result = articleDOS.stream().map(articleDO -> {
+                JSONObject newJson = new JSONObject();
+                newJson.put("date", articleDO.getDate());
+                newJson.put("pageNo", articleDO.getPageNo());
+                newJson.put("pageName", articleDO.getPageName());
+                newJson.put("introTitle", articleDO.getIntroTitle());
+                newJson.put("author", articleDO.getAuthor());
+                newJson.put("title", articleDO.getTitle());
+                newJson.put("subTitle", articleDO.getSubTitle());
+                newJson.put("source", articleDO.getSource());
+                newJson.put("zhuanBan", articleDO.getZhuanBan());
+                newJson.put("property", articleDO.getProperty());
+                newJson.put("content", articleDO.getContent());
+                newJson.put("image", articleDO.getImage());
+                newJson.put("ctime", articleDO.getCtime());
+                return newJson;
+            }).collect(Collectors.toList());
+            return Result.of(result);
+        }
+        if (json.size() > 1 ) {
             Criteria criteria1 = Criteria.where(CommonHtmlDO.Fields.jobId).is(id);
             Criteria criteria2 = Criteria.where(CommonHtmlDO.Fields.type).is(jobVo.getJobType());
             query.addCriteria(criteria1.andOperator(criteria2));
@@ -360,20 +398,34 @@ public class ScheduleJobController {
             }
             return Result.of(commonHtmlDO.getContent());
         } else if ("templateCrawl".equals(method)) {
-            // 模板爬取
-            Query querySrc = new Query();
-            Criteria criteriaSrc = Criteria.where(CommonHtmlDO.Fields.hisId).is(id);
-            Criteria criteriaSrc2 = Criteria.where(CommonHtmlDO.Fields.jobId).is(jobId);
-            querySrc.addCriteria(criteriaSrc.andOperator(criteriaSrc2));
-            CommonHtmlDO commonHtmlDO = mongoTemplate.findOne(querySrc, CommonHtmlDO.class);
-            if (null == commonHtmlDO) {
-                return new Result<>("", false, "本条执行结果不存在或已经被管理员删除");
-            }
-            List<JSONObject> content = commonHtmlDO.getContent();
-            if (null == content || content.isEmpty()) {
-                return new Result<>("", false, "本次执行依据传入传入的xpath规则未抓到任何数据,请检查规则");
-            }
-            return Result.of(commonHtmlDO.getContent());
+                String hisId = historyDO.getId();
+                Criteria criteria3 = Criteria.where(ArticleDO.Fields.jobId).is(jobId);
+                Criteria criteria4 = Criteria.where(ArticleDO.Fields.hisId).is(hisId);
+                Query query2 = new Query();
+                query2.addCriteria(criteria4.andOperator(criteria3));
+                query2.with(Sort.by(Sort.Order.desc(ArticleDO.Fields.ctime)));
+                List<ArticleDO> articleDOS = mongoTemplate.find(query2, ArticleDO.class);
+                if (articleDOS.isEmpty()) {
+                    return new Result<>("", false, "最近一次的执行记录已被删除,请考虑重新执行");
+                }
+            List<JSONObject> result = articleDOS.stream().map(articleDO -> {
+                JSONObject newJson = new JSONObject();
+                newJson.put("date", articleDO.getDate());
+                newJson.put("pageNo", articleDO.getPageNo());
+                newJson.put("pageName", articleDO.getPageName());
+                newJson.put("introTitle", articleDO.getIntroTitle());
+                newJson.put("author", articleDO.getAuthor());
+                newJson.put("title", articleDO.getTitle());
+                newJson.put("subTitle", articleDO.getSubTitle());
+                newJson.put("source", articleDO.getSource());
+                newJson.put("zhuanBan", articleDO.getZhuanBan());
+                newJson.put("property", articleDO.getProperty());
+                newJson.put("content", articleDO.getContent());
+                newJson.put("image", articleDO.getImage());
+                newJson.put("ctime", articleDO.getCtime());
+                return newJson;
+            }).collect(Collectors.toList());
+            return Result.of(result);
         }
 
         return Result.of("本次执行未抓取到任何数据");
@@ -438,7 +490,7 @@ public class ScheduleJobController {
     @GetMapping(value = "/export/{id}")
     public void export(@PathVariable("id") Long id, HttpServletResponse response) throws Exception {
 
-        Query query = new Query();
+        /*Query query = new Query();
         ScheduleJobVo jobVo = jobService.get(id).getData();
         String dataMap = jobVo.getJobDataMap();
         JSONArray json = JSONArray.parseArray(dataMap);
@@ -467,7 +519,25 @@ public class ScheduleJobController {
         response.setContentType("application/txt");// 设置文本内省
         response.setCharacterEncoding("utf-8");// 设置字符编码
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("导出结果", "UTF-8") + ".txt"); // 设置响应头
-        response.getWriter().write(htmlDO.getHtml());
+        response.getWriter().write(htmlDO.getHtml());*/
+
+        Result<Object> resultData = list(id);
+        Object data = resultData.getData();
+        if (data instanceof List) {
+            ExcelExport excelExport = new ExcelExport(response, "导出结果", "导出结果");
+            List<JSONObject> jsonArr = (List<JSONObject>)data;
+            JSONObject newJson = jsonArr.get(0);
+            Set<String> head = newJson.keySet();
+            List<String> newList = Lists.newArrayList(head);
+            excelExport.writeExcel(newList.toArray(new String[head.size()]),
+                    newList.toArray(new String[head.size()]), jsonArr);
+            return;
+        }else if (data instanceof String) {
+            response.setContentType("application/txt");// 设置文本内省
+            response.setCharacterEncoding("utf-8");// 设置字符编码
+            response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("导出结果", "UTF-8") + ".txt"); // 设置响应头
+            response.getWriter().write(String.valueOf(data));
+        }
     }
 
     @PostMapping("/add")
@@ -523,7 +593,7 @@ public class ScheduleJobController {
         return Result.of("job add successfully");
     }
 
-    @PostMapping("/add/v2")
+    /*@PostMapping("/add/v2")
     public Result<String> addV2(@RequestBody ScheduleJobVo jobVO) {
         String name = jobVO.getJobName();
         String jobDesc = jobVO.getJobDesc();
@@ -564,9 +634,9 @@ public class ScheduleJobController {
             return new Result("", false, e.getMessage());
         }
         return Result.of("job add successfully");
-    }
+    }*/
 
-    @PostMapping("/add/v3")
+    @PostMapping("/add/v2")
     public Result<String> addV2(@RequestBody ScheduleJobVoNew jobVO) {
         String name = jobVO.getJobName();
         String jobDesc = jobVO.getJobDesc();
@@ -591,7 +661,7 @@ public class ScheduleJobController {
                 job.setCronExpression("0 0 23 * * ?");
             }
             JSONArray jsonArray = new JSONArray();
-            jsonArray.add(url);
+            jsonArray.add(templateId);
             job.setJobDataMap(JSON.toJSONString(jsonArray));
             User user = SecurityUtil.getLoginUser();
             if (null == user) {
