@@ -4,15 +4,16 @@ import cn.cnki.spider.common.pojo.ArticleDO;
 import cn.cnki.spider.common.pojo.HistoryDO;
 import cn.cnki.spider.common.pojo.HtmlDO;
 import cn.cnki.spider.common.repository.CrawlHtmlRepository;
+import cn.cnki.spider.dao.RankingDao;
 import cn.cnki.spider.dao.SpiderConfigDao;
 import cn.cnki.spider.entity.*;
-import cn.cnki.spider.pipeline.ArticleMongoDBBatchPageModelPipeline;
-import cn.cnki.spider.pipeline.CommonPageModelPipeline;
-import cn.cnki.spider.pipeline.MhtFilePipeline;
+import cn.cnki.spider.pipeline.*;
 import cn.cnki.spider.scheduler.ScheduleJob;
 import cn.cnki.spider.scheduler.ScheduleJobRepository;
 import cn.cnki.spider.spider.AbstractCloudNewspaperProcessor;
 import cn.cnki.spider.spider.CommonRepoProcessor;
+import cn.cnki.spider.spider.RankingItemRepoProcessor;
+import cn.cnki.spider.spider.RankingRepoProcessor;
 import cn.cnki.spider.util.ChromeUtil;
 import cn.cnki.spider.util.CommonForkJoinPool;
 import com.alibaba.fastjson.JSON;
@@ -80,6 +81,16 @@ public class CrawlService implements cn.cnki.spider.common.service.CrawlServiceI
     private final ScheduleJobRepository scheduleJobRepository;
 
     private final SpiderConfigDao spiderConfigDao;
+
+    private final RankingRepoProcessor rankingRepoProcessor;
+
+    private final RankingUrlDBBatchPageModelPipeline rankingUrlDBBatchPageModelPipeline;
+
+    private final RankingItemRepoProcessor rankingItemRepoProcessor;
+
+    private final RankingDBItemBatchPageModelPipeline rankingDBItemBatchPageModelPipeline;
+
+    private final RankingDao rankingDao;
 
     private final CommonForkJoinPool forkJoinPool = new CommonForkJoinPool(16, "crawlPool");
 
@@ -402,6 +413,83 @@ public class CrawlService implements cn.cnki.spider.common.service.CrawlServiceI
             err = e.getMessage();
         }
         saveAndUpdateJobAndHis(jobId, err, hisId);
+    }
+
+    @Override
+    public void rankingUrlCrawl() {
+        /*Spider spider = Spider.create(rankingRepoProcessor);
+        spider.addUrl("http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/index.html").addPipeline(rankingUrlDBBatchPageModelPipeline)
+                .thread(1).run();*/
+
+        Spider spider = Spider.create(rankingRepoProcessor);
+        spider.addUrl("https://www.qschina.cn/en/subject-rankings-2020").addPipeline(rankingUrlDBBatchPageModelPipeline)
+                .thread(1).run();
+    }
+
+    @Override
+    public void rankingItemCrawl() {
+        List<ReddotUrl> reddotUrlList = rankingDao.listUndo();
+        for (int i = 0; i < reddotUrlList.size(); i ++) {
+            ReddotUrl url = reddotUrlList.get(i);
+            //2020
+            String s2020 = String
+                    .format("http://www.shanghairanking.com/Shanghairanking-Subject-Rankings/%s", url.getUrl());
+            rankingItemRepoProcessor.setYear("2020");
+            Spider spider = Spider.create(rankingItemRepoProcessor);
+            spider.addUrl(s2020).addPipeline(rankingDBItemBatchPageModelPipeline)
+                    .thread(1).run();
+
+        }
+
+    }
+
+    @Override
+    public void topuniversitiesSeleniumCrawl(String url) {
+        try {
+            File file = new File("C:/spider-app/spider-app/drivers/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+            WebDriver webDriver;
+            ChromeOptions options = new ChromeOptions();
+            webDriver = new ChromeDriver(options);
+            webDriver.manage().window().setSize(new Dimension(1300, 800));
+            webDriver.get(url);
+            // 等待已确保页面正常加载
+            Thread.sleep(20 * 1000L);
+            WebElement viewAll = webDriver
+                    .findElement(By.id("qs-rankings_length"))
+                    .findElement(By.className("jcf-select"));
+            viewAll.click();
+            WebElement trueViewAll = webDriver.findElement(By.className("jcf-select-drop-content")).findElements(By.tagName("li")).get(4);
+            trueViewAll.click();
+            Thread.sleep(5 * 1000L);
+            String year = "2020";
+            String subject2 = webDriver.findElement(By.className("jcf-select-subject-select")).findElement(By.className("jcf-select-text")).getText();
+            WebElement table_element = webDriver.findElement(By.id("qs-rankings"));
+            ArrayList<WebElement> rows = (ArrayList<WebElement>) table_element.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
+            List<RankingItem> results = Lists.newArrayList();
+            for (WebElement row : rows) {
+                ArrayList<WebElement> cells = (ArrayList<WebElement>) row.findElements(By.tagName("td"));
+                if (cells.size() != 6) {
+                    continue;
+                }
+                String rank = cells.get(0).getText();
+                String institution = cells.get(1).findElement(By.tagName("a")).getText();
+                String score = cells.get(2).getText();
+
+                RankingItem item = new RankingItem();
+                item.setYear(year);
+                item.setSubject(subject2);
+                item.setScore(score);
+                item.setRank(rank);
+                item.setInstitution(institution);
+                results.add(item);
+            }
+            rankingDao.itemBatchInsert(results);
+
+            webDriver.quit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private ScheduleJob saveAndUpdateJobAndHis(long jobId, String err, String hisId) {

@@ -35,4 +35,10 @@ public interface CrawlServiceInterface {
     void commonCrawlV2(long jobId, String type, String hisId, String url, List<String> xpathList);
 
     void templateCrawl(long jobId, String type, String hisId, long templateId);
+
+    void rankingUrlCrawl();
+
+    void rankingItemCrawl();
+
+    void topuniversitiesSeleniumCrawl(String url);
 }

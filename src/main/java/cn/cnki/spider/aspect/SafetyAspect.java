@@ -1,5 +1,7 @@
 package cn.cnki.spider.aspect;
 
+import cn.cnki.spider.sys.syssetting.pojo.SysSetting;
+import cn.cnki.spider.sys.syssetting.vo.SysSettingVo;
 import cn.cnki.spider.util.AesUtil;
 import cn.cnki.spider.util.ErrorUtil;
 import cn.cnki.spider.util.RsaUtil;
@@ -49,7 +51,8 @@ public class SafetyAspect {
        try {
 
            //判断api加密开关是否开启
-           if("N".equals(SysSettingUtil.getSysSetting().getSysApiEncrypt())){
+           SysSettingVo setting = SysSettingUtil.getSysSetting();
+           if(null == setting || "N".equals(SysSettingUtil.getSysSetting().getSysApiEncrypt())){
                return pjp.proceed(pjp.getArgs());
            }
 
