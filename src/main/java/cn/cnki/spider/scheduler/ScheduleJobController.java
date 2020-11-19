@@ -332,6 +332,19 @@ public class ScheduleJobController {
         return Result.of(result);
     }
 
+
+    @GetMapping(value = "/his/del/{id}")
+    public Result<Object> deleteHis(@PathVariable("id") String id, HttpServletRequest request) {
+        if (StringUtils.isBlank(id)) {
+            return new Result("", false, "his id should be passed");
+        }
+        Query query = new Query();
+        Criteria criteria = Criteria.where(HistoryDO.Fields.id).is(id);
+        query.addCriteria(criteria);
+        mongoTemplate.remove(query, HistoryDO.class);
+        return Result.of(id);
+    }
+
     /*@GetMapping(value = "/queryHis/show/{id}")
     public Result<Object> listHisShow(@PathVariable("id") String id) {
 

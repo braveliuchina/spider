@@ -43,8 +43,8 @@ public class Container {
 //                    .topuniversitiesSeleniumCrawl("https://www.qschina.cn" + urlList.get(i).getUrl());
 //        }
 
-        crawlService
-                .topuniversitiesSeleniumCrawl("https://www.qschina.cn/en/university-rankings/university-subject-rankings/2020/engineering-mechanical");
+//        crawlService
+//                .topuniversitiesSeleniumCrawl("https://www.qschina.cn/en/university-rankings/university-subject-rankings/2020/engineering-mechanical");
 
     }
 }
