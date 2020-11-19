@@ -141,6 +141,12 @@ public class ScheduleJobController {
                 JSONArray templateJSON = JSONArray.parseArray(jobDataMap);
                 Long id = Long.parseLong(templateJSON.getString(0));
                 scheduleJobVoNew.setTemplateId(id);
+                // 查到templateName 返回给前端展示
+                Result<TemplateVO> templateVOResult = templateService.get(id);
+                TemplateVO templateVO = templateVOResult.getData();
+                if (null != templateVO) {
+                    scheduleJobVoNew.setTemplateName(templateVO.getName());
+                }
                 scheduleJobVoNew.setCategory("按模板");
             }
             String newType = scheduleJobVoNew.getJobType();

@@ -91,6 +91,8 @@ public class ScheduleJobVoNew extends PageCondition {
 
     private Long templateId;
 
+    private String templateName;
+
     private boolean templateByDate;
 
     private boolean skipOnErr;

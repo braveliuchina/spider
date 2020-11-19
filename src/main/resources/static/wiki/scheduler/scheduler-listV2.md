@@ -42,10 +42,11 @@ GET
 |12 |err             |String          | 是          |  暂无异常信息                      |直接展示此字段即可 |
 |13 |jobType         |String          | 是          |  temp或scheduler                      |temp启动执行 scheduler定时执行|
 |14 |result          |int          | 是          |  1                      |是否有执行结果 如>1 查看结果和查看历史记录按钮都有|  
-|15 |strategyDesc    |int          | 是          |  执行一次                      |执行策略字段|
+|15 |strategyDesc    |String          | 是          |  执行一次                      |执行策略字段|
 |16 |enable          |int          | 否          |  1或null 或0                      |0或null未启用 1 启用 (针对定时任务,临时任务此字段不起作用,参照jobStatus字段)|
-|17 |login          |int          | 否          |  1或null 或0                      |0或null未启用 1 启用 (针对定时任务,临时任务此字段不起作用,参照jobStatus字段)|
-  
+|17 |loginName          |用户名          | 是          |  sa                      |用户名|
+|18 |templateName          |模板名称          | 否          |  山西日报                      |按模板 爬取类型一定返回的字段, 模板名称|  
+|19 |his             |int          |是            | 1 | 历史执行次数,注意: 可能为空,为空时 视为0|
 
 
 **八、返回示例**
@@ -58,69 +59,48 @@ JSON示例
             "pageSize": 2,
             "sidx": null,
             "sord": null,
-            "rows": [
-                {
-                    "page": 1,
-                    "rows": 10,
-                    "sidx": null,
-                    "sord": null,
-                    "id": 14,
-                    "jobName": "braveliu2",
-                    "jobType": "temp",
-                    "cronExpression": "0/2 * * * * ? 2030",
-                    "beanClass": "crawlService",
-                    "methodName": "commonCrawlV2",
-                    "jobStatus": "2",
-                    "jobDataMap": "[\"https://www.aacsb.edu/accreditation/accredited-schools\",[\"//div[@class='modContent']/table/tbody//tr//td/p/b/text()\",\"//div[@class='modContent']/table/tbody//tr//td/p/span/text()\",\"//div[@class='modContent']/table/tbody//tr//td/p/text()\"]]",
-                    "ctime": 1603875507719,
-                    "utime": 1603875507719,
-                    "jobDesc": null,
-                    "url": null,
-                    "xpathList": null,
-                    "pageable": {
-                        "sort": {
-                            "sorted": false,
-                            "unsorted": true,
-                            "empty": true
-                        },
-                        "offset": 0,
-                        "pageNumber": 0,
-                        "pageSize": 10,
-                        "unpaged": false,
-                        "paged": true
-                    }
-                },
-                {
-                    "page": 1,
-                    "rows": 10,
-                    "sidx": null,
-                    "sord": null,
-                    "id": 18,
-                    "jobName": "测试1",
-                    "jobType": "temp",
-                    "cronExpression": "0/2 * * * * ? 2030",
-                    "beanClass": "crawlService",
-                    "methodName": "commonCrawlV2",
-                    "jobStatus": null,
-                    "jobDataMap": "[\"https://www.baidu.com/\",[\"//div[@class='modContent']/table/tbody//tr//td/p/b/text()\",\"//div[@class='modContent']/table/tbody//tr//td/p/span/text()\"]]",
-                    "ctime": 1603951997167,
-                    "utime": 1603951997167,
-                    "jobDesc": null,
-                    "url": null,
-                    "xpathList": null,
-                    "pageable": {
-                        "sort": {
-                            "sorted": false,
-                            "unsorted": true,
-                            "empty": true
-                        },
-                        "offset": 0,
-                        "pageNumber": 0,
-                        "pageSize": 10,
-                        "unpaged": false,
-                        "paged": true
-                    }
-                }
+            "rows": [{
+                     "page": 1,
+                     "rows": 10,
+                     "sidx": null,
+                     "sord": null,
+                     "id": 42,
+                     "jobName": "太原日报模板抓取测试",
+                     "jobType": "temp",
+                     "category": "按模板",
+                     "loginName": "sa",
+                     "cronExpression": "0/2 * * * * ? 2030",
+                     "strategyDesc": "执行一次",
+                     "beanClass": "crawlService",
+                     "methodName": "templateCrawl",
+                     "jobStatus": "2",
+                     "jobDataMap": "[1]",
+                     "ctime": 1604979780754,
+                     "utime": 1605343633062,
+                     "jobDesc": "太原日报当前日期整份报纸临时抓取",
+                     "enable": 1,
+                     "result": 1,
+                     "his": 1,
+                     "err": "",
+                     "url": null,
+                     "templateId": 1,
+                     "templateName": "太原日报",
+                     "templateByDate": false,
+                     "skipOnErr": false,
+                     "xpathList": null,
+                     "pageable": {
+                         "sort": {
+                             "unsorted": true,
+                             "sorted": false,
+                             "empty": true
+                         },
+                         "offset": 0,
+                         "pageSize": 10,
+                         "pageNumber": 0,
+                         "paged": true,
+                         "unpaged": false
+                     }
+                 }
             ],
             "records": 4,
             "total": 2
