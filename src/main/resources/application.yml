@@ -17,6 +17,7 @@ spring:
   #修改thymeleaf访问根路径
   thymeleaf:
     prefix: classpath:/view/
+    cache: false
 
   #mvc接收参数时对日期进行格式化
   mvc:

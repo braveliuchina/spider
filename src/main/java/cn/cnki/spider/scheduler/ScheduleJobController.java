@@ -19,6 +19,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -901,4 +902,30 @@ public class ScheduleJobController {
         jobService.pauseAllJob();
         return Result.of("暂停所有定时任务成功");
     }
+
+    @GetMapping("html")
+    public ModelAndView html(HttpServletRequest request) {
+        String jobId = request.getParameter("jobId");
+        String hisId = request.getParameter("hisId");
+        if (StringUtils.isBlank(jobId) && StringUtils.isBlank(hisId)) {
+            return new ModelAndView("common/error/404.html");
+        }
+        if (StringUtils.isNotBlank(jobId)){
+            Long jobIdLong = Long.parseLong(jobId);
+            Result<Object> result = list(jobIdLong);
+            Object data = result.getData();
+            if (data instanceof String) {
+                return new ModelAndView("common.html", "htmlcontent", data);
+            }
+            return new ModelAndView("common/error/404.html");
+        }
+
+        Result<Object> result = listHisShowV2(hisId);
+        Object data = result.getData();
+        if (data instanceof String) {
+            return new ModelAndView("common.html", "htmlcontent", data);
+        }
+        return new ModelAndView("common/error/404.html");
+    }
+
 }
