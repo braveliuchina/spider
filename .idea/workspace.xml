@@ -19,11 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[modify]列表接口新增模板名称字段+wiki修改">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/common.html" afterDir="false" />
+    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[modify]html片段themeleaf替换逻辑">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/config/ErrorPageConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/SpiderApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/SpiderApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +162,8 @@
       <workItem from="1605584726561" duration="13286000" />
       <workItem from="1605602799624" duration="3924000" />
       <workItem from="1605753382933" duration="4468000" />
-      <workItem from="1606287954636" duration="7599000" />
+      <workItem from="1606287954636" duration="9386000" />
+      <workItem from="1606446644939" duration="3141000" />
     </task>
     <task id="LOCAL-00001" summary="[add]协议库查询接口 + mongo 存入html片段">
       <created>1603437920632</created>
@@ -430,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605757136515</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="[modify]html片段themeleaf替换逻辑">
+      <created>1606296747134</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1606296747134</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,7 +464,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[add]临时任务新增接口wiki" />
     <MESSAGE value="[add]cors跨域 + wiki web context修改" />
     <MESSAGE value="[add]临时执行任务接口" />
     <MESSAGE value="[add]列表wiki 更新" />
@@ -481,7 +488,8 @@
     <MESSAGE value="[add]世界大学排名" />
     <MESSAGE value="[add]单条历史记录删除接口" />
     <MESSAGE value="[modify]列表接口新增模板名称字段+wiki修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="[modify]列表接口新增模板名称字段+wiki修改" />
+    <MESSAGE value="[modify]html片段themeleaf替换逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="[modify]html片段themeleaf替换逻辑" />
   </component>
   <component name="WindowStateProjectService">
     <state x="724" y="52" key="#Auto_Import" timestamp="1604717404205">
@@ -597,10 +605,10 @@
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-689" y="651" key="VCS.ChangeListViewerDialog/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605256960243" />
-    <state x="-948" y="672" key="Vcs.Push.Dialog.v2" timestamp="1605757412434">
+    <state x="-948" y="672" key="Vcs.Push.Dialog.v2" timestamp="1606296751567">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-948" y="672" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1605757412434" />
+    <state x="-948" y="672" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1606296751567" />
     <state x="235" y="372" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605162833146" />
     <state width="548" height="948" key="XDebugger.FullValuePopup" timestamp="1605591345422">
       <screen x="-1080" y="0" width="1080" height="1880" />
@@ -610,10 +618,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="754" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1604889517198" />
-    <state x="-882" y="528" width="620" height="798" key="find.popup" timestamp="1606292189021">
+    <state x="-882" y="528" width="620" height="798" key="find.popup" timestamp="1606447193296">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-882" y="528" width="620" height="798" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1606292189021" />
+    <state x="-882" y="528" width="620" height="798" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1606447193296" />
     <state x="352" y="292" width="1103" height="532" key="find.popup/0.0.1920.1040/-1080.0.1080.1880@0.0.1920.1040" timestamp="1605170650837" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1602558189057">
       <screen x="-1080" y="0" width="1080" height="1880" />

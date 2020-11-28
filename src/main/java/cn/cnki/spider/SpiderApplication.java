@@ -178,7 +178,7 @@ class IndexController {
     @GetMapping("front-end")
     public void frontEnd(HttpServletResponse response){
         try {
-            response.sendRedirect(contextPath + "/index.html");
+            response.sendRedirect(contextPath + "/taskList");
         } catch (IOException e) {
             //输出到日志文件中
             log.error(ErrorUtil.errorInfoToString(e));
