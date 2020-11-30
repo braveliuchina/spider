@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Data
-@Component
+//@Component
 @AllArgsConstructor
 @NoArgsConstructor
 @ExtractBy(value = "//article", multi = true)

@@ -1,50 +1,124 @@
 package cn.cnki.spider.common.controller;
 
-import cn.cnki.spider.common.pojo.HtmlDO;
-import cn.cnki.spider.common.pojo.HtmlVo;
-import cn.cnki.spider.common.pojo.Result;
-import cn.cnki.spider.common.repository.CrawlHtmlRepository;
-import cn.cnki.spider.common.service.CrawlServiceInterface;
-import cn.cnki.spider.dao.RankingDao;
-import cn.cnki.spider.entity.ReddotUrl;
+import cn.cnki.spider.dao.CompanyDao;
+import cn.cnki.spider.entity.BaiduBaikeSpiderItem;
+import cn.cnki.spider.entity.CompanyDO;
+import cn.cnki.spider.pipeline.BaiduBaikePageModelPipeline;
+import cn.cnki.spider.spider.BaiduBaikeProcessor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.context.annotation.Bean;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
  * 爬虫Controller
  */
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class Container {
 
-    private final CrawlServiceInterface crawlService;
+    private final CompanyDao companyDao;
 
-    private final RankingDao rankingDao;
+    private final BaiduBaikeProcessor processor;
+
+    private final BaiduBaikePageModelPipeline baikePageModelPipeline;
+
+    private final MongoTemplate mongoTemplate;
 
     @Bean
-    public void crawlItem() {
+    public void crawlItem() throws UnsupportedEncodingException {
+        long number = 0L;
+        do {
+            List<CompanyDO> companyDOList = companyDao.listUndo(14000000, 14111488);
+            if (companyDOList.size() == 0) {
+                break;
+            }
 
-//        List<ReddotUrl> urlList = rankingDao.listUndo();
-//        for (int i = 0; i< urlList.size(); i++) {
-//            crawlService
-//                    .topuniversitiesSeleniumCrawl("https://www.qschina.cn" + urlList.get(i).getUrl());
-//        }
+//            CompanyDO companyDO1 = new CompanyDO();
+//            companyDO1.setUid("000FFA66-83F2-4753-9E68-668A44AF6C39");
+//            companyDO1.setCompanyName("上海伟星电机有限公司");
+//
+//            CompanyDO companyDO2 = new CompanyDO();
+//            companyDO2.setUid("000F732A-32D0-4C8A-B4FD-AC4E1A0D168C");
+//            companyDO2.setCompanyName("天津隆烨科技发展有限公司");
+//            List<CompanyDO> companyDOList = Lists.newArrayList(companyDO1, companyDO2);
+            log.info("开始处理--------------------------------------");
+            WebDriver webDriver = null;
+            try {
+                File file = new File("C:/spider-app/spider-app/drivers/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 
-//        crawlService
-//                .topuniversitiesSeleniumCrawl("https://www.qschina.cn/en/university-rankings/university-subject-rankings/2020/engineering-mechanical");
+                ChromeOptions options = new ChromeOptions();
+                webDriver = new ChromeDriver(options);
+                webDriver.manage().window().setSize(new Dimension(1300, 800));
 
+                for (CompanyDO companyDO : companyDOList) {
+//                Spider baikeSpider = Spider.create(processor);
+//                baikeSpider
+//                        .addUrl("https://baike.baidu.com/item/" + URLEncoder
+//                                .encode(companyDO.getCompanyName(), "UTF-8"))
+//                        .addPipeline(baikePageModelPipeline).thread(1).run();
+
+                    String url = "https://baike.baidu.com/item/" + URLEncoder
+                            .encode(companyDO.getCompanyName(), "UTF-8");
+                    webDriver.get(url);
+                    // 等待已确保页面正常加载
+//                    Thread.sleep(1000L);
+                    String html = webDriver.getPageSource();
+                    BaiduBaikeSpiderItem item = new BaiduBaikeSpiderItem();
+                    item.setUid(companyDO.getUid());
+                    item.setCompanyName(companyDO.getCompanyName());
+                    long now = System.currentTimeMillis();
+                    item.setCtime(now);
+                    item.setUtime(now);
+                    item.setUrl(url);
+                    if (html.contains("百度百科错误页")) {
+                        item.setExists(false);
+                    }
+
+                    item.setHtml(html);
+                    try {
+                        mongoTemplate.save(item);
+                    } catch (DuplicateKeyException e) {
+                    }
+
+                }
+
+            } catch (Exception e) {
+                log.warn("number: " + number + "crawl exception err, would not update src data", e);
+                return;
+            } finally {
+                if (null != webDriver) {
+                    webDriver.quit();
+                }
+            }
+//
+//            if (null == urls || urls.isEmpty()) {
+//                return;
+//            }
+//            for (String url : urls) {
+//                detailSpider.addUrl(url).addPipeline(dbPageModelPipeline)
+//                        .thread(thread).run();
+//            }
+            companyDao.update(companyDOList);
+            number = number + companyDOList.size();
+            log.info("-------------------" + number + "条数据处理完成---------------");
+            if (companyDOList.size() < 100) {
+                break;
+            }
+        } while (true);
     }
 }

@@ -144,7 +144,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     //配置filter
-    @Bean
+//    @Bean
     public DynamicallyUrlInterceptor dynamicallyUrlInterceptor(){
         //首次获取
         List<SysAuthorityVo> authorityVoList = sysAuthorityService.list(new SysAuthorityVo()).getData();

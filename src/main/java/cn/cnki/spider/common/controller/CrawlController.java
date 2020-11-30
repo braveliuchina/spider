@@ -19,7 +19,7 @@ import java.util.List;
  * 爬虫Controller
  */
 
-@RestController
+//@RestController
 @RequiredArgsConstructor
 @RequestMapping("crawl")
 public class CrawlController {

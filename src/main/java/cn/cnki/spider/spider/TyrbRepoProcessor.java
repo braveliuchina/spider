@@ -22,7 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Data
-@Component
+//@Component
 public class TyrbRepoProcessor implements PageProcessor {
 
 	private final SpiderConfigDao spiderConfigDao;

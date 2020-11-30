@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Data
-@Component
+//@Component
 public class RankingItemRepoProcessor implements PageProcessor {
 
     private String year;

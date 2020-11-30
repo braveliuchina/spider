@@ -49,10 +49,14 @@ spring:
 
   #数据库配置
   datasource:
-    url: jdbc:mysql://192.168.15.2:3307/分类中心?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://192.168.15.2:3307/分类中心?useUnicode=true&characterEncoding=UTF-8
+#    username: root
+#    password: 123456
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:sqlserver://192.168.15.3:1433;DatabaseName=CnkiIndustryPlat
+    username: sa
+    password: newspaper*2013
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   data:
     mongodb:

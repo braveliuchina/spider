@@ -1,5 +1,6 @@
 package cn.cnki.spider.spider;
 
+import cn.cnki.spider.entity.BaiduBaikeSpiderItem;
 import cn.cnki.spider.entity.CommonSpiderItem;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -13,14 +14,14 @@ import java.util.List;
 
 @Slf4j
 @Data
-//@Component
-public class CommonProcessor implements PageProcessor {
+@Component
+public class BaiduBaikeProcessor implements PageProcessor {
 
     private Site site;
 
-    private String rule;
+    private String uid;
 
-    private CommonSpiderItem item;
+    private String companyName;
 
     @Override
     public Site getSite() {
@@ -37,23 +38,23 @@ public class CommonProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-
-        List<String> resultList = page.getHtml().xpath("//ul[@class='conMItemList']/li//text()").all();
-
-        List<CommonSpiderItem> list = Lists.newArrayList();
-
+        BaiduBaikeSpiderItem item = new BaiduBaikeSpiderItem();
+        item.setUid(uid);
+        item.setCompanyName(companyName);
         long now = System.currentTimeMillis();
-        for (String result: resultList) {
-            CommonSpiderItem commonSpiderItem = new CommonSpiderItem();
-            commonSpiderItem.setXpathId(item.getXpathId());
-            commonSpiderItem.setTemp(1);
-            commonSpiderItem.setResult(result);
-            commonSpiderItem.setCtime(now);
-            commonSpiderItem.setUtime(now);
-            list.add(commonSpiderItem);
+        item.setCtime(now);
+        item.setUtime(now);
+        String url = page.getUrl().toString();
+        item.setUrl(url);
+        String html = page.getHtml().toString();
+        //
+        if (html.contains("百度百科错误页")) {
+            item.setExists(false);
         }
 
-        page.putField("resultList", list);
+        item.setHtml(html);
+
+        page.putField("result", item);
     }
 
 }

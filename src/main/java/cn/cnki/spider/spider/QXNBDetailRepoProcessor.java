@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Data
-@Component
+//@Component
 public class QXNBDetailRepoProcessor implements PageProcessor {
 
 	private final SpiderConfigDao spiderConfigDao;

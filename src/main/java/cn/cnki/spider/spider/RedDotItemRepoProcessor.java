@@ -13,7 +13,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import java.util.HashMap;
 
 @Data
-@Component
+//@Component
 public class RedDotItemRepoProcessor implements PageProcessor {
 
     private String domain;

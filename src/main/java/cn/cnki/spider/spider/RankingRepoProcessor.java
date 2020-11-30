@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Data
-@Component
+//@Component
 public class RankingRepoProcessor implements PageProcessor {
 
     private String domain;

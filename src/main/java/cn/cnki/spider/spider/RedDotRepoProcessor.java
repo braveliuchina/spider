@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Data
-@Component
+//@Component
 public class RedDotRepoProcessor implements PageProcessor {
 
     private String domain;

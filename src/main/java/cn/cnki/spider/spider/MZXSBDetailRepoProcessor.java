@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Data
-@Component
+//@Component
 public class MZXSBDetailRepoProcessor implements PageProcessor {
 
 	private final SpiderConfigDao spiderConfigDao;

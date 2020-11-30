@@ -15,7 +15,7 @@ import org.thymeleaf.util.StringUtils;
 import java.util.List;
 
 @Slf4j
-@Component
+//@Component
 @RequiredArgsConstructor
 public class SpiderConfigDaoImpl implements SpiderConfigDao {
 
