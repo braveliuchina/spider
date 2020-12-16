@@ -5,6 +5,7 @@ import cn.cnki.spider.entity.BaiduBaikeSpiderItem;
 import cn.cnki.spider.entity.CompanyDO;
 import cn.cnki.spider.pipeline.BaiduBaikePageModelPipeline;
 import cn.cnki.spider.spider.BaiduBaikeProcessor;
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Dimension;
@@ -40,9 +41,42 @@ public class Container {
 
     @Bean
     public void crawlItem() throws UnsupportedEncodingException {
+
+    }
+
+    private void doCSRankingInner(String url) {
+        WebDriver webDriver = null;
+        try {
+            File file = new File("C:/spider-app/spider-app/drivers/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+
+            ChromeOptions options = new ChromeOptions();
+            webDriver = new ChromeDriver(options);
+            webDriver.manage().window().setSize(new Dimension(1300, 800));
+            webDriver.get(url);
+        } catch (Exception e) {
+            log.warn("crawl exception err, would not update src data", e);
+        } finally {
+            if (null != webDriver) {
+                webDriver.quit();
+            }
+        }
+    }
+
+    private void doCSRankingCrawl() {
+        List<String> urls = Lists.newArrayList("http://csrankings.org/#/fromyear/1970/toyear/1980/index?none");
+
+        for (String url : urls) {
+            doCSRankingInner(url);
+        }
+
+
+    }
+
+    private void doBaiduBaikeCrawl() {
         long number = 0L;
         do {
-            List<CompanyDO> companyDOList = companyDao.listUndo(14000000, 14111488);
+            List<CompanyDO> companyDOList = companyDao.listUndo(5800000, 6000000);
             if (companyDOList.size() == 0) {
                 break;
             }
