@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-//@Component
+@Component
 @RequiredArgsConstructor
 public class CrawlServiceFactory {
 

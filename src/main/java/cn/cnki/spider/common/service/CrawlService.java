@@ -53,7 +53,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Slf4j
-//@Component
+@Component
 @Data
 @RequiredArgsConstructor
 public class CrawlService implements cn.cnki.spider.common.service.CrawlServiceInterface {
