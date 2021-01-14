@@ -37,5 +37,5 @@ public class Template implements Serializable {
 	 */
 	private Long utime;
 
-
+	private String display;
 }

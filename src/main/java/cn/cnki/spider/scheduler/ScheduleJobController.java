@@ -175,6 +175,7 @@ public class ScheduleJobController {
             return new Result("", false, "paginition parameter should be passed");
         }
         TemplateVO vo = new TemplateVO();
+        vo.setDisplay("1");
         vo.setPage(Integer.parseInt(page));
         vo.setRows(Integer.parseInt(rows));
         Result<PageInfo<TemplateVO>> pages = templateService.page(vo);

@@ -40,6 +40,8 @@ public class TemplateVO  extends PageCondition {
 	 * 更新时间
 	 */
 	private Long utime;
+	
+	private String display;
 
 
 }

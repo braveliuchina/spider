@@ -53,7 +53,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Component
+//@Component
 @Data
 @RequiredArgsConstructor
 public class CrawlService implements cn.cnki.spider.common.service.CrawlServiceInterface {
@@ -409,8 +409,9 @@ public class CrawlService implements cn.cnki.spider.common.service.CrawlServiceI
             this.setProcessor(processor);
             crawlByDate(String.valueOf(year), monthStr, dayStr, code, name);
         } catch (Exception e) {
-            log.error("爬取失败,{}", e);
+            log.error("爬取失败", e);
             err = e.getMessage();
+            log.error("错误原因, {}", err);
         }
         saveAndUpdateJobAndHis(jobId, err, hisId);
     }

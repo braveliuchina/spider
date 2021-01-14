@@ -171,7 +171,7 @@ public class ChromeUtil {
 	 * @param driver
 	 * @param url
 	 */
-	public static void allow_flash(WebDriver driver, String url) throws Exception {
+	public static void allow_flash86(WebDriver driver, String url) throws Exception {
 		url = _base_url(url);
 		driver.get(String.format("chrome://settings/content/siteDetails?site=%s", url));
 		WebElement webele_settings = _shadow_root(driver,
@@ -189,6 +189,45 @@ public class ChromeUtil {
 		// flash
 		WebElement plugins = _shadow_root(driver, site_details.findElement(By.id("plugins")));
 		WebElement permission = plugins.findElement(By.id("permission"));
+		Select sel = new Select(permission);
+		sel.selectByValue("allow");
+//		// 自动下载
+//		WebElement plugins2 = _shadow_root(driver, site_details.findElement(By.id("automaticDownloads")));
+//		WebElement permission2 = plugins2.findElement(By.id("permission"));
+//		Select sel2 = new Select(permission2);
+//		sel2.selectByValue("allow");
+//
+//		// 自动下载
+//		WebElement plugins3 = _shadow_root(driver, site_details.findElement(By.id("mixed-script")));
+//		WebElement permission3 = plugins3.findElement(By.id("permission"));
+//		Select sel3 = new Select(permission3);
+//		sel3.selectByValue("allow");
+//
+//		WebElement plugins4 = _shadow_root(driver, site_details.findElement(By.id("nativeFileSystemWrite")));
+//		WebElement permission4 = plugins4.findElement(By.id("permission"));
+//		Select sel4 = new Select(permission4);
+//		sel4.selectByValue("allow");
+	}
+
+	public static void allow_flash(WebDriver driver, String url) throws Exception {
+		url = _base_url(url);
+		driver.get(String.format("chrome://settings/content/siteDetails?site=%s", url));
+		WebElement webele_settings = _shadow_root(driver,
+				(((ChromeDriver) driver).findElementByTagName("settings-ui")));
+		WebElement webele_container = webele_settings.findElement(By.id("container"));
+		WebElement webele_main = _shadow_root(driver, webele_container.findElement(By.id("main")));
+		WebElement showing_subpage = _shadow_root(driver, webele_main.findElement(By.className("showing-subpage")));
+		WebElement advancedPage = showing_subpage.findElement(By.id("basicPage"));
+//        WebElement settings_section_page = _shadow_root(driver,advancedPage.findElement(By.tagName("settings-section")));
+		WebElement settings_privacy_page = _shadow_root(driver,
+				advancedPage.findElement(By.tagName("settings-privacy-page")));
+		WebElement pages = settings_privacy_page.findElement(By.id("pages"));
+		WebElement settings_subpage = pages.findElement(By.tagName("settings-subpage"));
+		WebElement site_details = _shadow_root(driver, settings_subpage.findElement(By.tagName("site-details")));
+		// flash
+		WebElement plugins = site_details.findElements(By.cssSelector("div.list-frame")).get(1);
+		WebElement plugin = _shadow_root(driver, plugins.findElement(By.xpath("site-details-permission[@label='Flash']")));
+		WebElement permission = plugin.findElement(By.id("permission"));
 		Select sel = new Select(permission);
 		sel.selectByValue("allow");
 //		// 自动下载
@@ -253,6 +292,7 @@ public class ChromeUtil {
 	public WebDriver getDriver(String url, String harName) throws Exception {
 		if (null != this.getWebDriver() && !hasQuit(this.getWebDriver())) {
 			allow_flash(webDriver, url);
+			Thread.sleep(10000L);
 			return this.getWebDriver();
 		}
 //		ClassPathResource classPathResource = new ClassPathResource("drivers/chromedriver.exe");
@@ -366,18 +406,28 @@ public class ChromeUtil {
 	public List<String> doflashPageXmlPageRequestV3(String url, String harName) throws Exception {
 
 		WebDriver webDriver = getDriver(url, harName);
-		webDriver.get(url);
+
 		// 等待已确保页面正常加载
 		try {
 			Thread.sleep(35 * 1000L);
 //			// 网络代理抓取网络请求记录
 			Har har = browserMobProxy.getHar();
-			return fetchMultiCfg(har);
+			List<String> result = fetchMultiCfg(har);
+			if (null == result || result.isEmpty()) {
+				webDriver.get(url);
+				Thread.sleep(105 * 1000L);
+				// 网络代理抓取网络请求记录
+				Har har2 = browserMobProxy.getHar();
+				return fetchMultiCfg(har2);
+			}
+			return result;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			webDriver.get(url);
+			Thread.sleep(105 * 1000L);
+			// 网络代理抓取网络请求记录
+			Har har = browserMobProxy.getHar();
+			return fetchMultiCfg(har);
 		}
-		return Lists.emptyList();
 
 	}
 
