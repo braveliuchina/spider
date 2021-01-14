@@ -19,20 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[modify]CSRanking">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_microsoft_sqlserver_mssql_jdbc_6_4_0_jre8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_microsoft_sqlserver_sqljdbc4_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/UniversityProjectsDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/dao/impl/UniversityProjectsDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/entity/UniversityProjects.java" afterDir="false" />
+    <list default="true" id="91b6f2d2-be71-4ee5-8661-02e581611db8" name="Default Changelist" comment="[modify]university projects">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/controller/Container.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlServiceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/common/service/CrawlServiceFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/ScheduleJobController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/Template.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/Template.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/TemplateVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/scheduler/TemplateVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/ChromeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/cnki/spider/util/ChromeUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="csranking" />
+        <entry key="$PROJECT_DIR$" value="university" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,7 +68,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/view" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/bak" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -102,6 +90,7 @@
       <recent name="cn.cnki.spider.pipeline" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\bak" />
       <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\view" />
       <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\static\wiki\scheduler" />
       <recent name="E:\IDE\workSpace\cnki\spider\src\main\resources\static\wiki\webworkflow" />
@@ -182,7 +171,7 @@
       <workItem from="1609806400283" duration="8991000" />
       <workItem from="1610442404159" duration="10118000" />
       <workItem from="1610509516577" duration="2048000" />
-      <workItem from="1610521879390" duration="21260000" />
+      <workItem from="1610521879390" duration="24037000" />
     </task>
     <task id="LOCAL-00001" summary="[add]协议库查询接口 + mongo 存入html片段">
       <created>1603437920632</created>
@@ -457,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606296747134</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="[modify]university projects">
+      <created>1610604529956</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1610604529956</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,7 +479,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="[add]cors跨域 + wiki web context修改" />
     <MESSAGE value="[add]临时执行任务接口" />
     <MESSAGE value="[add]列表wiki 更新" />
     <MESSAGE value="[add]任务修改 + 任务结果查询" />
@@ -508,7 +503,8 @@
     <MESSAGE value="[add]单条历史记录删除接口" />
     <MESSAGE value="[modify]列表接口新增模板名称字段+wiki修改" />
     <MESSAGE value="[modify]html片段themeleaf替换逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="[modify]html片段themeleaf替换逻辑" />
+    <MESSAGE value="[modify]university projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="[modify]university projects" />
   </component>
   <component name="WindowStateProjectService">
     <state x="724" y="52" key="#Auto_Import" timestamp="1604717404205">
